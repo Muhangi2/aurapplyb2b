@@ -22,6 +22,7 @@ import { Route as RSignupRouteImport } from './routes/r.signup'
 import { Route as ROnboardingRouteImport } from './routes/r.onboarding'
 import { Route as RDashboardRouteImport } from './routes/r.dashboard'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
+import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -88,6 +89,11 @@ const MatchesIdRoute = MatchesIdRouteImport.update({
   path: '/matches/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RJobsNewRoute = RJobsNewRouteImport.update({
+  id: '/r/jobs/new',
+  path: '/r/jobs/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
+  '/r/jobs/new': typeof RJobsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
+  '/r/jobs/new': typeof RJobsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
+  '/r/jobs/new': typeof RJobsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/signup'
+    | '/r/jobs/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/signup'
+    | '/r/jobs/new'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/signup'
+    | '/r/jobs/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   RDashboardRoute: typeof RDashboardRoute
   ROnboardingRoute: typeof ROnboardingRoute
   RSignupRoute: typeof RSignupRoute
+  RJobsNewRoute: typeof RJobsNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/jobs/new': {
+      id: '/r/jobs/new'
+      path: '/r/jobs/new'
+      fullPath: '/r/jobs/new'
+      preLoaderRoute: typeof RJobsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   RDashboardRoute: RDashboardRoute,
   ROnboardingRoute: ROnboardingRoute,
   RSignupRoute: RSignupRoute,
+  RJobsNewRoute: RJobsNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
