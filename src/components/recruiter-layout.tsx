@@ -1,11 +1,12 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
+import logoUrl from "@/assets/aurapply-logo.png";
 
 function Logo() {
   return (
     <Link to="/r/dashboard" className="flex items-center gap-2">
-      <span className="grid h-7 w-7 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">A</span>
+      <img src={logoUrl} alt="Aurapply" className="h-7 w-7" />
       <span className="font-semibold tracking-tight text-foreground">
         Aurapply <span className="text-muted-foreground font-normal">/ Recruiter</span>
       </span>

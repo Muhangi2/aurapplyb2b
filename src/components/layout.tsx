@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AudiencePicker } from "@/components/audience-picker";
 import { RecruiterNav } from "@/components/recruiter-layout";
+import logoUrl from "@/assets/aurapply-logo.png";
 
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2">
-      <span className="grid h-7 w-7 place-items-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">A</span>
+      <img src={logoUrl} alt="Aurapply" className="h-7 w-7" />
       <span className="font-semibold tracking-tight text-foreground">Aurapply</span>
     </Link>
   );
