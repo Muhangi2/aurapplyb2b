@@ -9,7 +9,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { PageShell } from "@/components/layout";
 
+type Search = { type?: "candidate" | "recruiter" };
+
 export const Route = createFileRoute("/signup")({
+  validateSearch: (s: Record<string, unknown>): Search => ({
+    type: s.type === "candidate" || s.type === "recruiter" ? (s.type as Search["type"]) : undefined,
+  }),
   component: SignUp,
 });
 
@@ -26,7 +31,51 @@ function SocialBtn({ provider }: { provider: "google" | "linkedin" }) {
   );
 }
 
+function Chooser() {
+  return (
+    <PageShell>
+      <div className="px-6 py-16">
+        <div className="mx-auto max-w-2xl">
+          <h1 className="text-3xl font-semibold tracking-tight text-center">Create your account</h1>
+          <p className="mt-2 text-sm text-muted-foreground text-center">Tell us how you will use Aurapply.</p>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <Link
+              to="/signup"
+              search={{ type: "candidate" }}
+              className="au-card p-6 text-left hover:border-primary transition group"
+            >
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">For candidates</div>
+              <div className="mt-2 text-lg font-semibold">I am looking for work</div>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Build one strong profile. Receive curated role matches with full reasoning. You stay in control of your data.
+              </p>
+              <div className="mt-6 text-sm text-primary group-hover:underline">Continue as candidate →</div>
+            </Link>
+            <Link
+              to="/r/signup"
+              className="au-card p-6 text-left hover:border-primary transition group"
+            >
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">For recruiters</div>
+              <div className="mt-2 text-lg font-semibold">I am hiring</div>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Post a role, receive AI-matched shortlists with full reasoning, and reach out directly.
+              </p>
+              <div className="mt-6 text-sm text-primary group-hover:underline">Continue as recruiter →</div>
+            </Link>
+          </div>
+
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Already have an account? <Link to="/signin" className="text-primary hover:underline">Sign in</Link>
+          </p>
+        </div>
+      </div>
+    </PageShell>
+  );
+}
+
 function SignUp() {
+  const { type } = Route.useSearch();
   const { user } = useAuth();
   const nav = useNavigate();
   const [email, setEmail] = useState("");
@@ -40,6 +89,8 @@ function SignUp() {
   useEffect(() => {
     if (user) nav({ to: "/onboarding" });
   }, [user, nav]);
+
+  if (!type) return <Chooser />;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -57,7 +108,7 @@ function SignUp() {
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/dashboard`,
-        data: { full_name: name },
+        data: { full_name: name, user_type: "candidate" },
       },
     });
     if (error) {
@@ -81,10 +132,9 @@ function SignUp() {
     <PageShell>
       <div className="px-6 py-16">
         <div className="mx-auto max-w-md">
-          <h1 className="text-3xl font-semibold tracking-tight text-center">Create your profile</h1>
-          <p className="mt-2 text-sm text-muted-foreground text-center">
-            Once. We will handle the rest.
-          </p>
+          <Link to="/signup" className="text-xs text-muted-foreground hover:text-foreground">← Choose a different account type</Link>
+          <h1 className="text-3xl font-semibold tracking-tight text-center mt-4">Create your candidate profile</h1>
+          <p className="mt-2 text-sm text-muted-foreground text-center">Once. We will handle the rest.</p>
 
           <div className="au-card p-6 mt-8 space-y-4">
             <div className="grid gap-3">
