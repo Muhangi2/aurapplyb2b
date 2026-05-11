@@ -19,6 +19,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RSignupRouteImport } from './routes/r.signup'
+import { Route as ROnboardingRouteImport } from './routes/r.onboarding'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 
 const SignupRoute = SignupRouteImport.update({
@@ -71,6 +72,11 @@ const RSignupRoute = RSignupRouteImport.update({
   path: '/r/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ROnboardingRoute = ROnboardingRouteImport.update({
+  id: '/r/onboarding',
+  path: '/r/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchesIdRoute = MatchesIdRouteImport.update({
   id: '/matches/$id',
   path: '/matches/$id',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/onboarding': typeof ROnboardingRoute
   '/r/signup': typeof RSignupRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/onboarding'
     | '/r/signup'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/onboarding'
     | '/r/signup'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/onboarding'
     | '/r/signup'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   MatchesIdRoute: typeof MatchesIdRoute
+  ROnboardingRoute: typeof ROnboardingRoute
   RSignupRoute: typeof RSignupRoute
 }
 
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/onboarding': {
+      id: '/r/onboarding'
+      path: '/r/onboarding'
+      fullPath: '/r/onboarding'
+      preLoaderRoute: typeof ROnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matches/$id': {
       id: '/matches/$id'
       path: '/matches/$id'
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   MatchesIdRoute: MatchesIdRoute,
+  ROnboardingRoute: ROnboardingRoute,
   RSignupRoute: RSignupRoute,
 }
 export const routeTree = rootRouteImport
