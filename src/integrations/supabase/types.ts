@@ -14,7 +14,282 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      consents: {
+        Row: {
+          consent_type: string
+          granted: boolean
+          granted_at: string
+          id: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          consent_type: string
+          granted?: boolean
+          granted_at?: string
+          id?: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          consent_type?: string
+          granted?: boolean
+          granted_at?: string
+          id?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      education: {
+        Row: {
+          created_at: string
+          degree: string | null
+          end_year: number | null
+          field: string | null
+          id: string
+          institution: string
+          start_year: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          degree?: string | null
+          end_year?: number | null
+          field?: string | null
+          id?: string
+          institution: string
+          start_year?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          degree?: string | null
+          end_year?: number | null
+          field?: string | null
+          id?: string
+          institution?: string
+          start_year?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      experiences: {
+        Row: {
+          company: string
+          created_at: string
+          description: string | null
+          end_date: string | null
+          id: string
+          is_current: boolean | null
+          role: string
+          start_date: string | null
+          user_id: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          role: string
+          start_date?: string | null
+          user_id: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          role?: string
+          start_date?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      languages: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          proficiency: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          proficiency: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          proficiency?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      matches: {
+        Row: {
+          company: string
+          declined: boolean | null
+          description: string | null
+          id: string
+          location: string
+          match_score: number
+          matched_at: string
+          reasoning: string[] | null
+          recruiter_email: string | null
+          recruiter_message: string | null
+          recruiter_name: string | null
+          role: string
+          saved: boolean | null
+          score_experience: number | null
+          score_language: number | null
+          score_location: number | null
+          score_skills: number | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          company: string
+          declined?: boolean | null
+          description?: string | null
+          id?: string
+          location: string
+          match_score: number
+          matched_at?: string
+          reasoning?: string[] | null
+          recruiter_email?: string | null
+          recruiter_message?: string | null
+          recruiter_name?: string | null
+          role: string
+          saved?: boolean | null
+          score_experience?: number | null
+          score_language?: number | null
+          score_location?: number | null
+          score_skills?: number | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          company?: string
+          declined?: boolean | null
+          description?: string | null
+          id?: string
+          location?: string
+          match_score?: number
+          matched_at?: string
+          reasoning?: string[] | null
+          recruiter_email?: string | null
+          recruiter_message?: string | null
+          recruiter_name?: string | null
+          role?: string
+          saved?: boolean | null
+          score_experience?: number | null
+          score_language?: number | null
+          score_location?: number | null
+          score_skills?: number | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          current_title: string | null
+          education_verified: boolean | null
+          email: string | null
+          email_verified: boolean | null
+          experience_verified: boolean | null
+          full_name: string | null
+          id: string
+          id_verified: boolean | null
+          job_types: string[] | null
+          notice_period: string | null
+          onboarding_complete: boolean | null
+          preferred_locations: string[] | null
+          salary_max: number | null
+          salary_min: number | null
+          updated_at: string
+          work_authorization: string | null
+          years_experience: number | null
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          current_title?: string | null
+          education_verified?: boolean | null
+          email?: string | null
+          email_verified?: boolean | null
+          experience_verified?: boolean | null
+          full_name?: string | null
+          id: string
+          id_verified?: boolean | null
+          job_types?: string[] | null
+          notice_period?: string | null
+          onboarding_complete?: boolean | null
+          preferred_locations?: string[] | null
+          salary_max?: number | null
+          salary_min?: number | null
+          updated_at?: string
+          work_authorization?: string | null
+          years_experience?: number | null
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          current_title?: string | null
+          education_verified?: boolean | null
+          email?: string | null
+          email_verified?: boolean | null
+          experience_verified?: boolean | null
+          full_name?: string | null
+          id?: string
+          id_verified?: boolean | null
+          job_types?: string[] | null
+          notice_period?: string | null
+          onboarding_complete?: boolean | null
+          preferred_locations?: string[] | null
+          salary_max?: number | null
+          salary_min?: number | null
+          updated_at?: string
+          work_authorization?: string | null
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
