@@ -12,9 +12,10 @@ function Logo() {
 }
 
 export function TopNav() {
-  const { user, signOut } = useAuth();
+  const { user, userType, signOut } = useAuth();
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const isRecruiter = userType === "recruiter";
 
   const linkCls = (href: string) =>
     `px-3 py-1.5 rounded-full text-sm transition ${

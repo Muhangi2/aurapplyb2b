@@ -19,14 +19,18 @@ const STATUS_LABELS: Record<string, { text: string; tone: string }> = {
 };
 
 function Dashboard() {
-  const { user, loading } = useAuth();
+  const { user, userType, loading } = useAuth();
   const nav = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [matches, setMatches] = useState<any[]>([]);
   const [completeness, setCompleteness] = useState(0);
   const [verifyOpen, setVerifyOpen] = useState(false);
 
-  useEffect(() => { if (!loading && !user) nav({ to: "/signin" }); }, [user, loading, nav]);
+  useEffect(() => {
+    if (loading) return;
+    if (!user) nav({ to: "/signin" });
+    else if (userType === "recruiter") nav({ to: "/r/dashboard" });
+  }, [user, userType, loading, nav]);
 
   useEffect(() => {
     if (!user) return;
