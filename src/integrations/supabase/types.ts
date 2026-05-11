@@ -14,6 +14,98 @@ export type Database = {
   }
   public: {
     Tables: {
+      batches: {
+        Row: {
+          batch_number: number
+          created_at: string
+          id: string
+          is_current: boolean
+          job_id: string
+          notes: string | null
+        }
+        Insert: {
+          batch_number?: number
+          created_at?: string
+          id?: string
+          is_current?: boolean
+          job_id: string
+          notes?: string | null
+        }
+        Update: {
+          batch_number?: number
+          created_at?: string
+          id?: string
+          is_current?: boolean
+          job_id?: string
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "batches_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      companies: {
+        Row: {
+          country: string | null
+          created_at: string
+          departments: string[] | null
+          description: string | null
+          hires_per_year: string | null
+          id: string
+          industry: string | null
+          locations: string[] | null
+          logo_url: string | null
+          name: string
+          onboarding_complete: boolean | null
+          owner_id: string
+          role_focus: string[] | null
+          size: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          departments?: string[] | null
+          description?: string | null
+          hires_per_year?: string | null
+          id?: string
+          industry?: string | null
+          locations?: string[] | null
+          logo_url?: string | null
+          name: string
+          onboarding_complete?: boolean | null
+          owner_id: string
+          role_focus?: string[] | null
+          size?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          departments?: string[] | null
+          description?: string | null
+          hires_per_year?: string | null
+          id?: string
+          industry?: string | null
+          locations?: string[] | null
+          logo_url?: string | null
+          name?: string
+          onboarding_complete?: boolean | null
+          owner_id?: string
+          role_focus?: string[] | null
+          size?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       consents: {
         Row: {
           consent_type: string
@@ -109,6 +201,107 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      jobs: {
+        Row: {
+          batch_size: number | null
+          company_id: string
+          created_at: string
+          created_by: string
+          currency: string | null
+          department: string | null
+          description: string | null
+          employment_type: string | null
+          hard_filters: Json | null
+          id: string
+          location_city: string | null
+          location_country: string | null
+          nice_skills: string[] | null
+          notice_period: string | null
+          posted_at: string
+          prioritize: Json | null
+          required_education: string | null
+          required_experience_years: number | null
+          required_languages: Json | null
+          required_skills: string[] | null
+          salary_max: number | null
+          salary_min: number | null
+          seniority: string | null
+          status: string
+          title: string
+          updated_at: string
+          work_authorization: string | null
+          work_modes: string[] | null
+        }
+        Insert: {
+          batch_size?: number | null
+          company_id: string
+          created_at?: string
+          created_by: string
+          currency?: string | null
+          department?: string | null
+          description?: string | null
+          employment_type?: string | null
+          hard_filters?: Json | null
+          id?: string
+          location_city?: string | null
+          location_country?: string | null
+          nice_skills?: string[] | null
+          notice_period?: string | null
+          posted_at?: string
+          prioritize?: Json | null
+          required_education?: string | null
+          required_experience_years?: number | null
+          required_languages?: Json | null
+          required_skills?: string[] | null
+          salary_max?: number | null
+          salary_min?: number | null
+          seniority?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          work_authorization?: string | null
+          work_modes?: string[] | null
+        }
+        Update: {
+          batch_size?: number | null
+          company_id?: string
+          created_at?: string
+          created_by?: string
+          currency?: string | null
+          department?: string | null
+          description?: string | null
+          employment_type?: string | null
+          hard_filters?: Json | null
+          id?: string
+          location_city?: string | null
+          location_country?: string | null
+          nice_skills?: string[] | null
+          notice_period?: string | null
+          posted_at?: string
+          prioritize?: Json | null
+          required_education?: string | null
+          required_experience_years?: number | null
+          required_languages?: Json | null
+          required_skills?: string[] | null
+          salary_max?: number | null
+          salary_min?: number | null
+          seniority?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          work_authorization?: string | null
+          work_modes?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       languages: {
         Row: {
@@ -220,6 +413,7 @@ export type Database = {
           salary_max: number | null
           salary_min: number | null
           updated_at: string
+          user_type: string
           work_authorization: string | null
           years_experience: number | null
         }
@@ -242,6 +436,7 @@ export type Database = {
           salary_max?: number | null
           salary_min?: number | null
           updated_at?: string
+          user_type?: string
           work_authorization?: string | null
           years_experience?: number | null
         }
@@ -264,10 +459,167 @@ export type Database = {
           salary_max?: number | null
           salary_min?: number | null
           updated_at?: string
+          user_type?: string
           work_authorization?: string | null
           years_experience?: number | null
         }
         Relationships: []
+      }
+      recruiter_actions: {
+        Row: {
+          action_type: string
+          company_id: string | null
+          created_at: string
+          id: string
+          job_id: string | null
+          match_id: string | null
+          payload: Json | null
+          user_id: string
+        }
+        Insert: {
+          action_type: string
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          match_id?: string | null
+          payload?: Json | null
+          user_id: string
+        }
+        Update: {
+          action_type?: string
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          match_id?: string | null
+          payload?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      recruiter_matches: {
+        Row: {
+          batch_id: string
+          candidate_anon_id: string
+          candidate_current_company: string | null
+          candidate_current_role: string | null
+          candidate_education: string | null
+          candidate_education_verified: boolean | null
+          candidate_experience_verified: boolean | null
+          candidate_first_name: string
+          candidate_full_name: string | null
+          candidate_id_verified: boolean | null
+          candidate_languages: Json | null
+          candidate_location: string | null
+          candidate_profile_updated_at: string | null
+          candidate_skills: string[] | null
+          candidate_summary: string | null
+          candidate_years_experience: number | null
+          contact_body: string | null
+          contact_subject: string | null
+          contacted_at: string | null
+          created_at: string
+          decline_note: string | null
+          decline_reason: string | null
+          detailed_reasoning: Json | null
+          id: string
+          job_id: string
+          match_score: number
+          reasoning: Json | null
+          saved: boolean | null
+          score_experience: number | null
+          score_language: number | null
+          score_location: number | null
+          score_skills: number | null
+          status: string
+        }
+        Insert: {
+          batch_id: string
+          candidate_anon_id: string
+          candidate_current_company?: string | null
+          candidate_current_role?: string | null
+          candidate_education?: string | null
+          candidate_education_verified?: boolean | null
+          candidate_experience_verified?: boolean | null
+          candidate_first_name: string
+          candidate_full_name?: string | null
+          candidate_id_verified?: boolean | null
+          candidate_languages?: Json | null
+          candidate_location?: string | null
+          candidate_profile_updated_at?: string | null
+          candidate_skills?: string[] | null
+          candidate_summary?: string | null
+          candidate_years_experience?: number | null
+          contact_body?: string | null
+          contact_subject?: string | null
+          contacted_at?: string | null
+          created_at?: string
+          decline_note?: string | null
+          decline_reason?: string | null
+          detailed_reasoning?: Json | null
+          id?: string
+          job_id: string
+          match_score: number
+          reasoning?: Json | null
+          saved?: boolean | null
+          score_experience?: number | null
+          score_language?: number | null
+          score_location?: number | null
+          score_skills?: number | null
+          status?: string
+        }
+        Update: {
+          batch_id?: string
+          candidate_anon_id?: string
+          candidate_current_company?: string | null
+          candidate_current_role?: string | null
+          candidate_education?: string | null
+          candidate_education_verified?: boolean | null
+          candidate_experience_verified?: boolean | null
+          candidate_first_name?: string
+          candidate_full_name?: string | null
+          candidate_id_verified?: boolean | null
+          candidate_languages?: Json | null
+          candidate_location?: string | null
+          candidate_profile_updated_at?: string | null
+          candidate_skills?: string[] | null
+          candidate_summary?: string | null
+          candidate_years_experience?: number | null
+          contact_body?: string | null
+          contact_subject?: string | null
+          contacted_at?: string | null
+          created_at?: string
+          decline_note?: string | null
+          decline_reason?: string | null
+          detailed_reasoning?: Json | null
+          id?: string
+          job_id?: string
+          match_score?: number
+          reasoning?: Json | null
+          saved?: boolean | null
+          score_experience?: number | null
+          score_language?: number | null
+          score_location?: number | null
+          score_skills?: number | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruiter_matches_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recruiter_matches_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       skills: {
         Row: {
@@ -290,12 +642,60 @@ export type Database = {
         }
         Relationships: []
       }
+      team_members: {
+        Row: {
+          company_id: string
+          created_at: string
+          email: string
+          id: string
+          invited_by: string | null
+          role: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          email: string
+          id?: string
+          invited_by?: string | null
+          role?: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          email?: string
+          id?: string
+          invited_by?: string | null
+          role?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_company_admin: {
+        Args: { _company_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_company_member: {
+        Args: { _company_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
