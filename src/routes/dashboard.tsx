@@ -19,7 +19,7 @@ const STATUS_LABELS: Record<string, { text: string; tone: string }> = {
 };
 
 function Dashboard() {
-  const { user, loading } = useAuth();
+  const { user, userType, loading } = useAuth();
   const nav = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [matches, setMatches] = useState<any[]>([]);
