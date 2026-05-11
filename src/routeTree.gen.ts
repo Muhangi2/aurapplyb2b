@@ -18,6 +18,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RSignupRouteImport } from './routes/r.signup'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 
 const SignupRoute = SignupRouteImport.update({
@@ -65,6 +66,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RSignupRoute = RSignupRouteImport.update({
+  id: '/r/signup',
+  path: '/r/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchesIdRoute = MatchesIdRouteImport.update({
   id: '/matches/$id',
   path: '/matches/$id',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/signup': typeof RSignupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/signup': typeof RSignupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/r/signup': typeof RSignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/signup'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/signup'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/matches/$id'
+    | '/r/signup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   MatchesIdRoute: typeof MatchesIdRoute
+  RSignupRoute: typeof RSignupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/signup': {
+      id: '/r/signup'
+      path: '/r/signup'
+      fullPath: '/r/signup'
+      preLoaderRoute: typeof RSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matches/$id': {
       id: '/matches/$id'
       path: '/matches/$id'
@@ -246,7 +266,18 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   MatchesIdRoute: MatchesIdRoute,
+  RSignupRoute: RSignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
