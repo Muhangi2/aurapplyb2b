@@ -9,16 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RecruitersRouteImport } from './routes/recruiters'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as IndividualsRouteImport } from './routes/individuals'
+import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ComplianceRouteImport } from './routes/compliance'
 import { Route as BusinessesRouteImport } from './routes/businesses'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RTeamRouteImport } from './routes/r.team'
 import { Route as RSignupRouteImport } from './routes/r.signup'
@@ -33,6 +39,11 @@ import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 import { Route as RJobsIdRouteImport } from './routes/r.jobs.$id'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -58,6 +69,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -73,14 +89,34 @@ const IndividualsRoute = IndividualsRouteImport.update({
   path: '/individuals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImprintRoute = ImprintRouteImport.update({
+  id: '/imprint',
+  path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComplianceRoute = ComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessesRoute = BusinessesRouteImport.update({
   id: '/businesses',
   path: '/businesses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -151,16 +187,22 @@ const RJobsIdRoute = RJobsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/businesses': typeof BusinessesRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/profile': typeof ProfileRoute
   '/recruiters': typeof RecruitersRoute
   '/settings': typeof SettingsRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -176,16 +218,22 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/businesses': typeof BusinessesRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/profile': typeof ProfileRoute
   '/recruiters': typeof RecruitersRoute
   '/settings': typeof SettingsRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -202,16 +250,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/businesses': typeof BusinessesRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/profile': typeof ProfileRoute
   '/recruiters': typeof RecruitersRoute
   '/settings': typeof SettingsRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -229,16 +283,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/businesses'
+    | '/compliance'
+    | '/contact'
     | '/dashboard'
+    | '/imprint'
     | '/individuals'
     | '/onboarding'
     | '/privacy'
+    | '/privacy-policy'
     | '/profile'
     | '/recruiters'
     | '/settings'
     | '/signin'
     | '/signup'
+    | '/terms'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -254,16 +314,22 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/businesses'
+    | '/compliance'
+    | '/contact'
     | '/dashboard'
+    | '/imprint'
     | '/individuals'
     | '/onboarding'
     | '/privacy'
+    | '/privacy-policy'
     | '/profile'
     | '/recruiters'
     | '/settings'
     | '/signin'
     | '/signup'
+    | '/terms'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -279,16 +345,22 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/businesses'
+    | '/compliance'
+    | '/contact'
     | '/dashboard'
+    | '/imprint'
     | '/individuals'
     | '/onboarding'
     | '/privacy'
+    | '/privacy-policy'
     | '/profile'
     | '/recruiters'
     | '/settings'
     | '/signin'
     | '/signup'
+    | '/terms'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -305,16 +377,22 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   BusinessesRoute: typeof BusinessesRoute
+  ComplianceRoute: typeof ComplianceRoute
+  ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
+  ImprintRoute: typeof ImprintRoute
   IndividualsRoute: typeof IndividualsRoute
   OnboardingRoute: typeof OnboardingRoute
   PrivacyRoute: typeof PrivacyRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProfileRoute: typeof ProfileRoute
   RecruitersRoute: typeof RecruitersRoute
   SettingsRoute: typeof SettingsRoute
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
+  TermsRoute: typeof TermsRoute
   MatchesIdRoute: typeof MatchesIdRoute
   RBillingRoute: typeof RBillingRoute
   RCandidatesRoute: typeof RCandidatesRoute
@@ -331,6 +409,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -366,6 +451,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -387,6 +479,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndividualsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -394,11 +493,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compliance': {
+      id: '/compliance'
+      path: '/compliance'
+      fullPath: '/compliance'
+      preLoaderRoute: typeof ComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/businesses': {
       id: '/businesses'
       path: '/businesses'
       fullPath: '/businesses'
       preLoaderRoute: typeof BusinessesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -497,16 +617,22 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   BusinessesRoute: BusinessesRoute,
+  ComplianceRoute: ComplianceRoute,
+  ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
+  ImprintRoute: ImprintRoute,
   IndividualsRoute: IndividualsRoute,
   OnboardingRoute: OnboardingRoute,
   PrivacyRoute: PrivacyRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProfileRoute: ProfileRoute,
   RecruitersRoute: RecruitersRoute,
   SettingsRoute: SettingsRoute,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
+  TermsRoute: TermsRoute,
   MatchesIdRoute: MatchesIdRoute,
   RBillingRoute: RBillingRoute,
   RCandidatesRoute: RCandidatesRoute,
@@ -523,13 +649,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
