@@ -90,7 +90,8 @@ function Step({ n, t, d }: { n: number; t: string; d: string }) {
 
 function Why({ icon: Icon, t, d }: { icon: React.ComponentType<IconProps>; t: string; d: string }) {
   return (
-    <div className="au-card p-6">
+    <div className="relative overflow-hidden au-card au-card-hover p-6">
+      <span className="au-accent-bar-reveal" aria-hidden />
       <Icon size={20} className="text-primary" />
       <div className="mt-4 font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
