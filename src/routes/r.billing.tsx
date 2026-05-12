@@ -4,7 +4,7 @@ import { useAuth } from "@/lib/auth";
 import { RecruiterShell } from "@/components/recruiter-layout";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Check } from "lucide-react";
+import { CheckmarkIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/r/billing")({ component: BillingPage });
 
@@ -42,7 +42,7 @@ function BillingPage() {
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 {t.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2"><Check className="h-4 w-4 text-success mt-0.5 shrink-0" /> <span>{f}</span></li>
+                  <li key={f} className="flex items-start gap-2"><CheckmarkIcon size={16} className="text-success mt-0.5 shrink-0" /> <span>{f}</span></li>
                 ))}
               </ul>
               <Button

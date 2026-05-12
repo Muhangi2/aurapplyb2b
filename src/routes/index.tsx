@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/layout";
-import { User, Building2, ArrowRight } from "lucide-react";
+import { ProfileIcon, CompanyIcon, ArrowRightIcon, type IconProps } from "@/components/icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,7 +21,7 @@ function AudienceCard({
   description,
 }: {
   to: "/individuals" | "/businesses";
-  icon: any;
+  icon: React.ComponentType<IconProps>;
   title: string;
   description: string;
 }) {
@@ -31,13 +31,13 @@ function AudienceCard({
       className="group relative au-card p-8 flex flex-col transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
     >
       <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-        <Icon className="h-5 w-5" strokeWidth={1.5} />
+        <Icon size={20} />
       </div>
       <div className="mt-6 text-xl font-semibold tracking-tight">{title}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
       <div className="mt-8 flex items-center justify-end">
         <span className="inline-flex items-center gap-1.5 text-sm text-primary opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0">
-          Continue <ArrowRight className="h-4 w-4" />
+          Continue <ArrowRightIcon size={16} />
         </span>
       </div>
     </Link>
@@ -62,13 +62,13 @@ function Landing() {
           <div className="mt-14 grid gap-5 md:grid-cols-2 text-left">
             <AudienceCard
               to="/individuals"
-              icon={User}
+              icon={ProfileIcon}
               title="For Individuals"
               description="Build one profile. Get matched to roles where you actually fit."
             />
             <AudienceCard
               to="/businesses"
-              icon={Building2}
+              icon={CompanyIcon}
               title="For Businesses"
               description="Post a role. Receive eight pre-matched, pre-verified candidates."
             />

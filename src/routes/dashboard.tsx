@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageShell } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Check, ShieldCheck, ArrowRight, Activity } from "lucide-react";
+import { CheckmarkIcon, ShieldIcon, ArrowRightIcon, AIProcessingIcon } from "@/components/icons";
 import { computeCompleteness, seedMatchesIfEmpty } from "@/lib/mock-matches";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
@@ -27,7 +27,7 @@ function ImpactItem({ title, hint, href }: { title: string; hint: string; href: 
         <div className="text-xs text-muted-foreground mt-0.5">{hint}</div>
       </div>
       <span className="text-xs text-primary inline-flex items-center gap-1 self-center">
-        Complete now <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+        Complete now <ArrowRightIcon size={12} className="transition-transform group-hover:translate-x-0.5" />
       </span>
     </Link>
   );
@@ -170,7 +170,7 @@ function Dashboard() {
                               <div className="h-full bg-primary" style={{ width: `${m.match_score}%` }} />
                             </div>
                             <div className="mt-2 text-xs text-primary inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
-                              View match <ArrowRight className="h-3 w-3" />
+                              View match <ArrowRightIcon size={12} />
                             </div>
                           </div>
                         </div>
@@ -200,7 +200,7 @@ function Dashboard() {
                 ].map((it) => (
                   <div key={it.k} className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
-                      <Check className={`h-3.5 w-3.5 ${it.v ? "text-success" : "text-muted-foreground/40"}`} />
+                      <CheckmarkIcon size={14} className={it.v ? "text-success" : "text-muted-foreground/40"} />
                       {it.k}
                     </span>
                     {!it.v && <Link to="/profile" className="text-xs text-primary hover:underline">Complete</Link>}
@@ -210,7 +210,7 @@ function Dashboard() {
             </div>
 
             <div className="au-card p-5">
-              <div className="text-sm font-medium flex items-center gap-2"><Activity className="h-4 w-4 text-muted-foreground" /> Recent activity</div>
+              <div className="text-sm font-medium flex items-center gap-2"><AIProcessingIcon size={16} className="text-muted-foreground" /> Recent activity</div>
               <ul className="mt-3 space-y-2.5 text-sm text-muted-foreground">
                 <li>Profile matched to {Math.min(3, activeMatches)} new roles this week.</li>
                 <li>A recruiter viewed your profile.</li>
@@ -219,7 +219,7 @@ function Dashboard() {
             </div>
 
             <div className="au-card p-5">
-              <div className="text-sm font-medium flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-muted-foreground" /> Tips to improve matching</div>
+              <div className="text-sm font-medium flex items-center gap-2"><ShieldIcon size={16} className="text-muted-foreground" /> Tips to improve matching</div>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 {completeness < 100
                   ? "Adding 5+ skills and 1 verified credential typically improves match quality by 25–40%."

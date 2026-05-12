@@ -11,7 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { PageShell } from "@/components/layout";
 import { toast } from "sonner";
-import { Plus, X, Check } from "lucide-react";
+import { CheckmarkIcon, CloseIcon, ForwardIcon } from "@/components/icons";
 import { seedMatchesIfEmpty } from "@/lib/mock-matches";
 
 export const Route = createFileRoute("/onboarding")({ component: Onboarding });
@@ -141,7 +141,7 @@ function Onboarding() {
         <div className="px-6 py-20">
           <div className="mx-auto max-w-lg au-card p-10 text-center">
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-success/15 text-success">
-              <Check className="h-7 w-7" />
+              <CheckmarkIcon size={28} />
             </div>
             <h1 className="mt-6 text-3xl font-semibold tracking-tight">Profile complete</h1>
             <p className="mt-2 text-muted-foreground">Your profile is ready. We are finding matches for you.</p>
@@ -207,7 +207,7 @@ function Onboarding() {
                   <div key={i} className="rounded-lg border border-border p-4 space-y-3 relative">
                     {experiences.length > 1 && (
                       <button onClick={() => setExperiences(experiences.filter((_, j) => j !== i))} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground">
-                        <X className="h-4 w-4" />
+                        <CloseIcon size={16} />
                       </button>
                     )}
                     <div className="grid grid-cols-2 gap-3">
@@ -232,7 +232,7 @@ function Onboarding() {
                   </div>
                 ))}
                 <Button variant="outline" type="button" onClick={() => setExperiences([...experiences, { company: "", role: "", start_date: "", end_date: "", is_current: false, description: "" }])}>
-                  <Plus className="h-4 w-4 mr-1" /> Add another role
+                  <ForwardIcon size={16} className="mr-1" /> Add another role
                 </Button>
               </div>
             )}
@@ -247,7 +247,7 @@ function Onboarding() {
                   <div key={i} className="rounded-lg border border-border p-4 space-y-3 relative">
                     {edus.length > 1 && (
                       <button onClick={() => setEdus(edus.filter((_, j) => j !== i))} className="absolute right-2 top-2 text-muted-foreground hover:text-foreground">
-                        <X className="h-4 w-4" />
+                        <CloseIcon size={16} />
                       </button>
                     )}
                     <div><Label>Institution</Label><Input value={e.institution} onChange={(ev) => { const c=[...edus]; c[i].institution=ev.target.value; setEdus(c); }} className="mt-1.5" /></div>
@@ -262,7 +262,7 @@ function Onboarding() {
                   </div>
                 ))}
                 <Button variant="outline" type="button" onClick={() => setEdus([...edus, { institution: "", degree: "", field: "", start_year: "", end_year: "" }])}>
-                  <Plus className="h-4 w-4 mr-1" /> Add another
+                  <ForwardIcon size={16} className="mr-1" /> Add another
                 </Button>
               </div>
             )}
@@ -279,7 +279,7 @@ function Onboarding() {
                     {skills.map((s) => (
                       <span key={s} className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 text-primary px-2 py-1 text-xs font-medium">
                         {s}
-                        <button onClick={() => setSkills(skills.filter((x) => x !== s))}><X className="h-3 w-3" /></button>
+                        <button onClick={() => setSkills(skills.filter((x) => x !== s))}><CloseIcon size={12} /></button>
                       </span>
                     ))}
                     <input
@@ -306,12 +306,12 @@ function Onboarding() {
                           <SelectTrigger><SelectValue /></SelectTrigger>
                           <SelectContent>{LANG_LEVELS.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}</SelectContent>
                         </Select>
-                        <Button variant="ghost" size="icon" onClick={() => setLanguages(languages.filter((_, j) => j !== i))} disabled={languages.length === 1}><X className="h-4 w-4" /></Button>
+                        <Button variant="ghost" size="icon" onClick={() => setLanguages(languages.filter((_, j) => j !== i))} disabled={languages.length === 1}><CloseIcon size={16} /></Button>
                       </div>
                     ))}
                   </div>
                   <Button variant="outline" type="button" className="mt-2" onClick={() => setLanguages([...languages, { name: "", proficiency: "Fluent" }])}>
-                    <Plus className="h-4 w-4 mr-1" /> Add language
+                    <ForwardIcon size={16} className="mr-1" /> Add language
                   </Button>
                 </div>
               </div>

@@ -13,7 +13,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { toast } from "sonner";
 import { RecruiterShell } from "@/components/recruiter-layout";
 import { generateBatchForJob, logRecruiterAction } from "@/lib/recruiter-mocks";
-import { CheckCircle2, AlertTriangle, ShieldCheck, Mail, X, Clock } from "lucide-react";
+import { VerifiedIcon, WarningIcon, ShieldIcon, ContactIcon, CloseIcon, InProgressIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/r/jobs/$id")({ component: JobDetail });
 
@@ -41,7 +41,7 @@ function StatusBadge({ s }: { s: string }) {
 function VerifBadge({ label }: { label: string }) {
   return (
     <span className="inline-flex items-center gap-1 text-[11px] text-success bg-success/10 px-2 py-0.5 rounded-full">
-      <ShieldCheck className="h-3 w-3" /> {label}
+      <ShieldIcon size={12} /> {label}
     </span>
   );
 }
@@ -60,7 +60,7 @@ function ScoreBar({ score }: { score: number }) {
 function ReasonRow({ kind, text }: { kind: "ok" | "warn"; text: string }) {
   return (
     <div className="flex items-start gap-2 text-sm">
-      {kind === "ok" ? <CheckCircle2 className="h-4 w-4 text-success mt-0.5 shrink-0" /> : <AlertTriangle className="h-4 w-4 text-warning mt-0.5 shrink-0" />}
+      {kind === "ok" ? <VerifiedIcon size={16} accentDot={false} className="text-success mt-0.5 shrink-0" /> : <WarningIcon size={16} className="text-warning mt-0.5 shrink-0" />}
       <span className={kind === "ok" ? "text-foreground" : "text-foreground"}>{text}</span>
     </div>
   );
@@ -125,7 +125,7 @@ function CandidateCard({
       )}
       {isContacted && (
         <div className="mt-5 text-xs text-muted-foreground flex items-center gap-2">
-          <Mail className="h-3.5 w-3.5" /> Outreach sent {m.contacted_at && new Date(m.contacted_at).toLocaleString()}
+          <ContactIcon size={14} /> Outreach sent {m.contacted_at && new Date(m.contacted_at).toLocaleString()}
         </div>
       )}
       {isDeclined && (
@@ -296,7 +296,7 @@ function JobDetail() {
               <TabsContent value="batch" className="mt-6">
                 {generating && matches.length === 0 ? (
                   <div className="au-card p-10 text-center">
-                    <Clock className="h-6 w-6 mx-auto text-muted-foreground" />
+                    <InProgressIcon size={24} className="mx-auto text-muted-foreground" />
                     <p className="mt-3 text-sm text-muted-foreground">Generating your first batch of matches…</p>
                   </div>
                 ) : matches.length === 0 ? (

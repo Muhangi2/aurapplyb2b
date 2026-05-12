@@ -7,7 +7,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Eye, ShieldCheck, Lock, Inbox, Check } from "lucide-react";
+import {
+  EyeIcon,
+  ShieldIcon,
+  LockIcon,
+  MessageIcon,
+  CheckmarkIcon,
+  VerifiedIcon,
+  type IconProps,
+} from "@/components/icons";
 
 export const Route = createFileRoute("/individuals")({
   head: () => ({
@@ -30,7 +38,7 @@ function ProfileMockup() {
           <div className="text-sm text-muted-foreground">Senior Product Manager</div>
         </div>
         <span className="inline-flex items-center gap-1 text-xs text-success bg-success/10 rounded-full px-2 py-0.5">
-          <Check className="h-3 w-3" /> Verified
+          <CheckmarkIcon size={12} /> Verified
         </span>
       </div>
       <div className="mt-5">
@@ -49,15 +57,15 @@ function ProfileMockup() {
       </div>
       <div className="mt-5 pt-5 border-t border-border grid grid-cols-3 gap-2 text-xs text-center">
         <div>
-          <Check className="h-3.5 w-3.5 text-success mx-auto" />
+          <VerifiedIcon size={16} className="text-success mx-auto" accentDot={false} />
           <div className="mt-1 text-muted-foreground">Identity</div>
         </div>
         <div>
-          <Check className="h-3.5 w-3.5 text-success mx-auto" />
+          <VerifiedIcon size={16} className="text-success mx-auto" accentDot={false} />
           <div className="mt-1 text-muted-foreground">Education</div>
         </div>
         <div>
-          <Check className="h-3.5 w-3.5 text-success mx-auto" />
+          <VerifiedIcon size={16} className="text-success mx-auto" accentDot={false} />
           <div className="mt-1 text-muted-foreground">Experience</div>
         </div>
       </div>
@@ -75,10 +83,10 @@ function Step({ n, t, d }: { n: number; t: string; d: string }) {
   );
 }
 
-function Why({ icon: Icon, t, d }: { icon: any; t: string; d: string }) {
+function Why({ icon: Icon, t, d }: { icon: React.ComponentType<IconProps>; t: string; d: string }) {
   return (
     <div className="au-card p-6">
-      <Icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+      <Icon size={20} className="text-primary" />
       <div className="mt-4 font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
     </div>
@@ -132,10 +140,10 @@ function Individuals() {
             Built around how hiring should work.
           </h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            <Why icon={Eye} t="Transparent matching" d="You see exactly why you were matched to a role, criterion by criterion. Skills, experience, location, language, salary fit. No black box, no mystery score." />
-            <Why icon={ShieldCheck} t="Verified credentials" d="We verify your identity, education, and work history through trusted EU providers. Verified profiles stand out, and recruiters trust them more. We handle the process, you get the credibility." />
-            <Why icon={Lock} t="Your data, your control" d="Revoke any consent at any time. Request human review of any AI decision. Export your data. Delete your account. Your rights under GDPR are built into the product, not buried in a policy." />
-            <Why icon={Inbox} t="No application fatigue" d="One profile, ongoing matching. You do not chase jobs, you do not submit fifty applications, you do not get ghosted. The right opportunities find you." />
+            <Why icon={EyeIcon} t="Transparent matching" d="You see exactly why you were matched to a role, criterion by criterion. Skills, experience, location, language, salary fit. No black box, no mystery score." />
+            <Why icon={ShieldIcon} t="Verified credentials" d="We verify your identity, education, and work history through trusted EU providers. Verified profiles stand out, and recruiters trust them more. We handle the process, you get the credibility." />
+            <Why icon={LockIcon} t="Your data, your control" d="Revoke any consent at any time. Request human review of any AI decision. Export your data. Delete your account. Your rights under GDPR are built into the product, not buried in a policy." />
+            <Why icon={MessageIcon} t="No application fatigue" d="One profile, ongoing matching. You do not chase jobs, you do not submit fifty applications, you do not get ghosted. The right opportunities find you." />
           </div>
         </div>
       </section>

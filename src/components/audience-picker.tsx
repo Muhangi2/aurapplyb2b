@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Briefcase, Users, ArrowRight } from "lucide-react";
+import { ProfileIcon, CompanyIcon, ArrowRightIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 export function AudiencePicker({
@@ -16,7 +16,7 @@ export function AudiencePicker({
       {/* Candidate card */}
       <div className="au-card p-7 flex flex-col">
         <div className="grid h-11 w-11 place-items-center rounded-lg bg-primary/10 text-primary">
-          <Briefcase className="h-5 w-5" />
+          <ProfileIcon size={20} />
         </div>
         <div className="mt-5 text-xl font-semibold tracking-tight">I&apos;m looking for work</div>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -25,7 +25,7 @@ export function AudiencePicker({
         <div className="mt-6 flex items-center gap-4">
           <Button asChild size="lg" onClick={onSelect}>
             <Link to="/signup">
-              Create candidate profile <ArrowRight className="ml-1 h-4 w-4" />
+              Create candidate profile <ArrowRightIcon size={16} className="ml-1" />
             </Link>
           </Button>
           {candidateSecondary && (
@@ -43,7 +43,7 @@ export function AudiencePicker({
       {/* Recruiter card */}
       <div className="au-card p-7 flex flex-col">
         <div className="grid h-11 w-11 place-items-center rounded-lg bg-primary/10 text-primary">
-          <Users className="h-5 w-5" />
+          <CompanyIcon size={20} />
         </div>
         <div className="mt-5 text-xl font-semibold tracking-tight">I&apos;m hiring</div>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -52,7 +52,7 @@ export function AudiencePicker({
         <div className="mt-6 flex items-center gap-4">
           <Button asChild size="lg" onClick={onSelect}>
             <Link to="/r/signup">
-              Post a job <ArrowRight className="ml-1 h-4 w-4" />
+              Post a job <ArrowRightIcon size={16} className="ml-1" />
             </Link>
           </Button>
           {recruiterSecondary && (

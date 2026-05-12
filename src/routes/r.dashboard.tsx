@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { ArrowRight, ShieldCheck, Activity, FileCheck2 } from "lucide-react";
+import { ArrowRightIcon, ShieldIcon, AIProcessingIcon, DocumentIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/r/dashboard")({ component: RecruiterDashboard });
 
@@ -162,7 +162,7 @@ function RecruiterDashboard() {
                       {dayssince(j.posted_at)}d ago
                     </div>
                     <div className="col-span-1 text-right">
-                      <ArrowRight className="h-4 w-4 text-muted-foreground inline group-hover:text-primary transition" />
+                      <ArrowRightIcon size={16} className="text-muted-foreground inline group-hover:text-primary transition" />
                     </div>
                   </Link>
                 ))}
@@ -192,7 +192,7 @@ function RecruiterDashboard() {
           </div>
 
           <div className="au-card p-5">
-            <div className="text-sm font-medium flex items-center gap-2"><Activity className="h-4 w-4 text-muted-foreground" /> Team activity</div>
+            <div className="text-sm font-medium flex items-center gap-2"><AIProcessingIcon size={16} className="text-muted-foreground" /> Team activity</div>
             <ul className="mt-3 space-y-2.5 text-sm text-muted-foreground">
               <li>You posted a role this week.</li>
               <li>1 teammate reviewed candidates today.</li>
@@ -202,7 +202,7 @@ function RecruiterDashboard() {
           </div>
 
           <div className="au-card p-5">
-            <div className="text-sm font-medium flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-success" /> Compliance status</div>
+            <div className="text-sm font-medium flex items-center gap-2"><ShieldIcon size={16} className="text-success" /> Compliance status</div>
             <ul className="mt-3 space-y-2.5 text-sm">
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">Audit trail</span>
@@ -218,7 +218,7 @@ function RecruiterDashboard() {
               </li>
             </ul>
             <a href="#" className="mt-3 inline-flex items-center gap-1 text-xs text-primary hover:underline">
-              <FileCheck2 className="h-3 w-3" /> View compliance documentation
+              <DocumentIcon size={12} /> View compliance documentation
             </a>
           </div>
         </div>

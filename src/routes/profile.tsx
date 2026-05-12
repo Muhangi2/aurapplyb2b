@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { Pencil, X, Plus } from "lucide-react";
+import { EditIcon, CloseIcon } from "@/components/icons";
 import { toast } from "sonner";
 import { computeCompleteness } from "@/lib/mock-matches";
 
@@ -24,7 +24,7 @@ function Section({ title, editing, onEdit, onSave, onCancel, children }: any) {
             <Button size="sm" onClick={onSave}>Save</Button>
           </div>
         ) : (
-          <Button size="sm" variant="ghost" onClick={onEdit}><Pencil className="h-4 w-4 mr-1" /> Edit</Button>
+          <Button size="sm" variant="ghost" onClick={onEdit}><EditIcon size={16} className="mr-1" /> Edit</Button>
         )}
       </div>
       {children}
@@ -150,7 +150,7 @@ function Profile() {
                 {skills.map((s) => (
                   <span key={s.id} className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 text-primary px-2 py-1 text-xs font-medium">
                     {s.name}
-                    {editing === "skills" && <button onClick={() => delSkill(s.id)}><X className="h-3 w-3" /></button>}
+                    {editing === "skills" && <button onClick={() => delSkill(s.id)}><CloseIcon size={12} /></button>}
                   </span>
                 ))}
               </div>
