@@ -41,6 +41,19 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* Extended accent palette */
+  --color-indigo: var(--indigo);
+  --color-sky: var(--sky);
+  --color-emerald: var(--emerald);
+  --color-amber: var(--amber);
+  --color-coral: var(--coral);
+  --color-violet: var(--violet);
+
+  /* Neutral surface ladder */
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-inset: var(--surface-inset);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
