@@ -123,44 +123,36 @@ export function TopNav() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-12 grid gap-8 md:grid-cols-4">
-        <div>
-          <Logo />
-          <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            EU-compliant AI hiring. Built in Europe.
-          </p>
-          <div className="mt-4 text-xs text-muted-foreground">EN</div>
-        </div>
+    <footer className="mt-24 bg-surface-alt">
+      <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-2">
         <div className="text-sm">
           <div className="font-medium mb-3 text-foreground">Product</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/individuals" className="hover:text-foreground">For Individuals</Link></li>
-            <li><Link to="/businesses" className="hover:text-foreground">For Businesses</Link></li>
-            <li><Link to="/documentation" className="hover:text-foreground">Documentation</Link></li>
-            <li><Link to="/compliance" className="hover:text-foreground">Compliance</Link></li>
+            <li><Link to="/individuals" className="hover:text-primary transition-colors">For Individuals</Link></li>
+            <li><Link to="/businesses" className="hover:text-primary transition-colors">For Hiring Teams</Link></li>
+            <li><Link to="/documentation" className="hover:text-primary transition-colors">Documentation</Link></li>
+            <li><Link to="/documentation/how-matching-works" className="hover:text-primary transition-colors">How matching works</Link></li>
           </ul>
         </div>
         <div className="text-sm">
           <div className="font-medium mb-3 text-foreground">Company</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
-            <li><Link to="/privacy-policy" className="hover:text-foreground">Privacy</Link></li>
-            <li><Link to="/terms" className="hover:text-foreground">Terms</Link></li>
-            <li><Link to="/imprint" className="hover:text-foreground">Imprint</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
-          </ul>
-        </div>
-        <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Sign in</div>
-          <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/signin" className="hover:text-foreground">Sign in as individual</Link></li>
-            <li><Link to="/r/signin" className="hover:text-foreground">Sign in as business</Link></li>
+            <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
+            <li><Link to="/documentation/eu-ai-act-compliance" className="hover:text-primary transition-colors">Compliance</Link></li>
+            <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link></li>
+            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms</Link></li>
+            <li><Link to="/imprint" className="hover:text-primary transition-colors">Imprint</Link></li>
+            <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+            <li><Link to="/r/signin" className="hover:text-primary transition-colors">Hiring team sign-in</Link></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Aurapply. All rights reserved.
+      <div className="border-t border-border">
+        <div className="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between gap-4 text-xs text-muted-foreground">
+          <Logo />
+          <div className="hidden sm:block">Built in Europe. Data stays in Europe.</div>
+          <div>© {new Date().getFullYear()} Aurapply</div>
+        </div>
       </div>
     </footer>
   );
