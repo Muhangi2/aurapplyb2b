@@ -90,6 +90,9 @@ function PublicNav() {
           <Link to="/businesses" hash="pricing" className={linkCls(false)}>
             Pricing
           </Link>
+          <Link to="/documentation" className={linkCls(path.startsWith("/documentation"))}>
+            Documentation
+          </Link>
           <Link to="/compliance" className={linkCls(path === "/compliance")}>
             Compliance
           </Link>
@@ -146,6 +149,7 @@ export function Footer() {
           <ul className="space-y-2 text-muted-foreground">
             <li><Link to="/individuals" className="hover:text-foreground">For Individuals</Link></li>
             <li><Link to="/businesses" className="hover:text-foreground">For Businesses</Link></li>
+            <li><Link to="/documentation" className="hover:text-foreground">Documentation</Link></li>
             <li><Link to="/compliance" className="hover:text-foreground">Compliance</Link></li>
           </ul>
         </div>
