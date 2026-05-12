@@ -50,7 +50,7 @@ function BusinessSignIn() {
             </form>
           </div>
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            New to Aurapply? <Link to="/businesses/request" className="text-primary hover:underline">Request access</Link>
+            New to Aurapply? <Link to="/businesses/contact" className="text-primary hover:underline">Request access</Link>
           </p>
           <p className="mt-3 text-center text-xs text-muted-foreground">
             Looking for an individual account? <Link to="/signin" className="text-primary hover:underline">Sign in here</Link>

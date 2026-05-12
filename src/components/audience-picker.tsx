@@ -51,7 +51,7 @@ export function AudiencePicker({
         </p>
         <div className="mt-6 flex items-center gap-4">
           <Button asChild size="lg" onClick={onSelect}>
-            <Link to="/businesses/request">
+            <Link to="/businesses/contact">
               Request access <ArrowRightIcon size={16} className="ml-1" />
             </Link>
           </Button>
