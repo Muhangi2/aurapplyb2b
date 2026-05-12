@@ -45,14 +45,14 @@ export function AudiencePicker({
         <div className="grid h-11 w-11 place-items-center rounded-lg bg-primary/10 text-primary">
           <CompanyIcon size={20} />
         </div>
-        <div className="mt-5 text-xl font-semibold tracking-tight">I&apos;m hiring</div>
+        <div className="mt-5 text-xl font-semibold tracking-tight">For Businesses</div>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-          Post a role. Receive a shortlist of 8 pre-matched candidates with full reasoning. Contact the ones you want.
+          Post a role, receive a curated shortlist of pre-matched candidates, pay only when you hire.
         </p>
         <div className="mt-6 flex items-center gap-4">
           <Button asChild size="lg" onClick={onSelect}>
-            <Link to="/r/signup">
-              Post a job <ArrowRightIcon size={16} className="ml-1" />
+            <Link to="/businesses/request">
+              Request access <ArrowRightIcon size={16} className="ml-1" />
             </Link>
           </Button>
           {recruiterSecondary && (

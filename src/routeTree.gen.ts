@@ -32,12 +32,15 @@ import { Route as RSigninRouteImport } from './routes/r.signin'
 import { Route as RSettingsRouteImport } from './routes/r.settings'
 import { Route as ROnboardingRouteImport } from './routes/r.onboarding'
 import { Route as RDashboardRouteImport } from './routes/r.dashboard'
+import { Route as RComplianceRouteImport } from './routes/r.compliance'
 import { Route as RCompanyRouteImport } from './routes/r.company'
 import { Route as RCandidatesRouteImport } from './routes/r.candidates'
 import { Route as RBillingRouteImport } from './routes/r.billing'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
+import { Route as BusinessesRequestRouteImport } from './routes/businesses_.request'
 import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 import { Route as RJobsIdRouteImport } from './routes/r.jobs.$id'
+import { Route as BusinessesRequestReceivedRouteImport } from './routes/businesses_.request_.received'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -154,6 +157,11 @@ const RDashboardRoute = RDashboardRouteImport.update({
   path: '/r/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RComplianceRoute = RComplianceRouteImport.update({
+  id: '/r/compliance',
+  path: '/r/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RCompanyRoute = RCompanyRouteImport.update({
   id: '/r/company',
   path: '/r/company',
@@ -174,6 +182,11 @@ const MatchesIdRoute = MatchesIdRouteImport.update({
   path: '/matches/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BusinessesRequestRoute = BusinessesRequestRouteImport.update({
+  id: '/businesses_/request',
+  path: '/businesses/request',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RJobsNewRoute = RJobsNewRouteImport.update({
   id: '/r/jobs/new',
   path: '/r/jobs/new',
@@ -184,6 +197,12 @@ const RJobsIdRoute = RJobsIdRouteImport.update({
   path: '/r/jobs/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BusinessesRequestReceivedRoute =
+  BusinessesRequestReceivedRouteImport.update({
+    id: '/businesses_/request_/received',
+    path: '/businesses/request/received',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -203,16 +222,19 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/businesses/request': typeof BusinessesRequestRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
+  '/businesses/request/received': typeof BusinessesRequestReceivedRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -234,16 +256,19 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/businesses/request': typeof BusinessesRequestRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
+  '/businesses/request/received': typeof BusinessesRequestReceivedRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -266,16 +291,19 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/businesses_/request': typeof BusinessesRequestRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
+  '/businesses_/request_/received': typeof BusinessesRequestReceivedRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -299,16 +327,19 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/businesses/request'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
+    | '/businesses/request/received'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   fileRoutesByTo: FileRoutesByTo
@@ -330,16 +361,19 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/businesses/request'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
+    | '/businesses/request/received'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   id:
@@ -361,16 +395,19 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/businesses_/request'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
+    | '/businesses_/request_/received'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   fileRoutesById: FileRoutesById
@@ -393,16 +430,19 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
+  BusinessesRequestRoute: typeof BusinessesRequestRoute
   MatchesIdRoute: typeof MatchesIdRoute
   RBillingRoute: typeof RBillingRoute
   RCandidatesRoute: typeof RCandidatesRoute
   RCompanyRoute: typeof RCompanyRoute
+  RComplianceRoute: typeof RComplianceRoute
   RDashboardRoute: typeof RDashboardRoute
   ROnboardingRoute: typeof ROnboardingRoute
   RSettingsRoute: typeof RSettingsRoute
   RSigninRoute: typeof RSigninRoute
   RSignupRoute: typeof RSignupRoute
   RTeamRoute: typeof RTeamRoute
+  BusinessesRequestReceivedRoute: typeof BusinessesRequestReceivedRoute
   RJobsIdRoute: typeof RJobsIdRoute
   RJobsNewRoute: typeof RJobsNewRoute
 }
@@ -570,6 +610,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/compliance': {
+      id: '/r/compliance'
+      path: '/r/compliance'
+      fullPath: '/r/compliance'
+      preLoaderRoute: typeof RComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/r/company': {
       id: '/r/company'
       path: '/r/company'
@@ -598,6 +645,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/businesses_/request': {
+      id: '/businesses_/request'
+      path: '/businesses/request'
+      fullPath: '/businesses/request'
+      preLoaderRoute: typeof BusinessesRequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/r/jobs/new': {
       id: '/r/jobs/new'
       path: '/r/jobs/new'
@@ -610,6 +664,13 @@ declare module '@tanstack/react-router' {
       path: '/r/jobs/$id'
       fullPath: '/r/jobs/$id'
       preLoaderRoute: typeof RJobsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/businesses_/request_/received': {
+      id: '/businesses_/request_/received'
+      path: '/businesses/request/received'
+      fullPath: '/businesses/request/received'
+      preLoaderRoute: typeof BusinessesRequestReceivedRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -633,16 +694,19 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
+  BusinessesRequestRoute: BusinessesRequestRoute,
   MatchesIdRoute: MatchesIdRoute,
   RBillingRoute: RBillingRoute,
   RCandidatesRoute: RCandidatesRoute,
   RCompanyRoute: RCompanyRoute,
+  RComplianceRoute: RComplianceRoute,
   RDashboardRoute: RDashboardRoute,
   ROnboardingRoute: ROnboardingRoute,
   RSettingsRoute: RSettingsRoute,
   RSigninRoute: RSigninRoute,
   RSignupRoute: RSignupRoute,
   RTeamRoute: RTeamRoute,
+  BusinessesRequestReceivedRoute: BusinessesRequestReceivedRoute,
   RJobsIdRoute: RJobsIdRoute,
   RJobsNewRoute: RJobsNewRoute,
 }

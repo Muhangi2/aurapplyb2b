@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      access_requests: {
+        Row: {
+          assigned_reviewer: string | null
+          biggest_challenge: string | null
+          company_name: string
+          company_size: string
+          country: string
+          created_at: string
+          full_name: string
+          heard_from: string | null
+          hires_per_year: string
+          id: string
+          internal_notes: string | null
+          preferred_times: string[] | null
+          role: string
+          roles_typically: string
+          sector: string
+          status: string
+          updated_at: string
+          work_email: string
+        }
+        Insert: {
+          assigned_reviewer?: string | null
+          biggest_challenge?: string | null
+          company_name: string
+          company_size: string
+          country: string
+          created_at?: string
+          full_name: string
+          heard_from?: string | null
+          hires_per_year: string
+          id?: string
+          internal_notes?: string | null
+          preferred_times?: string[] | null
+          role: string
+          roles_typically: string
+          sector: string
+          status?: string
+          updated_at?: string
+          work_email: string
+        }
+        Update: {
+          assigned_reviewer?: string | null
+          biggest_challenge?: string | null
+          company_name?: string
+          company_size?: string
+          country?: string
+          created_at?: string
+          full_name?: string
+          heard_from?: string | null
+          hires_per_year?: string
+          id?: string
+          internal_notes?: string | null
+          preferred_times?: string[] | null
+          role?: string
+          roles_typically?: string
+          sector?: string
+          status?: string
+          updated_at?: string
+          work_email?: string
+        }
+        Relationships: []
+      }
       batches: {
         Row: {
           batch_number: number

@@ -53,7 +53,7 @@ function Chooser() {
               <div className="mt-6 text-sm text-primary group-hover:underline">Continue as candidate →</div>
             </Link>
             <Link
-              to="/r/signup"
+              to="/businesses/request"
               className="au-card p-6 text-left hover:border-primary transition group"
             >
               <div className="text-xs uppercase tracking-wider text-muted-foreground">For recruiters</div>

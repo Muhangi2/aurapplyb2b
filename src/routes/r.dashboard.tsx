@@ -115,22 +115,61 @@ function RecruiterDashboard() {
         {/* Focus block */}
         <div className="mt-8">
           {!hasJobs ? (
-            <div className="au-card-elevated p-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Get started</div>
-                <h2 className="mt-2 text-xl font-semibold">Post your first role and get a shortlist in minutes.</h2>
-                <p className="mt-1.5 text-sm text-muted-foreground max-w-xl">
-                  Aurapply will return eight matched candidates with full reasoning. Anonymous until you decide to contact.
-                </p>
-                <div className="mt-6 flex items-center gap-5">
-                  <Button onClick={() => nav({ to: "/r/jobs/new" })}>Post a job</Button>
-                  <button onClick={() => { setSlide(0); setTourOpen(true); }} className="text-sm text-primary hover:underline">
-                    Take a quick product tour
-                  </button>
+            <div className="au-card-elevated p-8">
+              <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
+                <div>
+                  <div className="text-xs font-semibold tracking-[0.18em] text-primary">WELCOME</div>
+                  <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                    Welcome to Aurapply{firstName ? `, ${firstName}` : ""}.
+                  </h2>
+                  <p className="mt-2 text-muted-foreground max-w-xl">
+                    Your account is active. Your point of contact is here to help you get set up.
+                    Here is what to do next.
+                  </p>
+                </div>
+                <div className="hidden md:block">
+                  <EmptyJobsIllustration size={140} />
                 </div>
               </div>
-              <div className="hidden md:block">
-                <EmptyJobsIllustration size={180} />
+
+              <div className="mt-8 grid gap-3 md:grid-cols-3">
+                {[
+                  { n: "1", title: "Complete your company profile", status: "In progress", to: "/r/company" as const },
+                  { n: "2", title: "Post your first role", status: "Not started", to: "/r/jobs/new" as const },
+                  { n: "3", title: "Review the compliance documentation", status: "Not started", to: "/r/compliance" as const },
+                ].map((s) => (
+                  <Link
+                    key={s.n}
+                    to={s.to}
+                    className="au-card au-card-hover p-5 group flex flex-col"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-8 w-8 place-items-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
+                        {s.n}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{s.status}</span>
+                    </div>
+                    <div className="mt-3 font-medium leading-snug">{s.title}</div>
+                    <div className="mt-3 text-xs text-primary inline-flex items-center gap-1">
+                      Open <ArrowRightIcon size={12} />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <p className="mt-7 text-sm text-muted-foreground">
+                Need help? Your point of contact is reachable at{" "}
+                <a href="mailto:partners@aurapply.com" className="text-primary hover:underline">
+                  partners@aurapply.com
+                </a>
+                . We respond within a few hours during business days.
+              </p>
+
+              <div className="mt-6 flex items-center gap-5">
+                <Button onClick={() => nav({ to: "/r/jobs/new" })}>Post a job</Button>
+                <button onClick={() => { setSlide(0); setTourOpen(true); }} className="text-sm text-primary hover:underline">
+                  Take a quick product tour
+                </button>
               </div>
             </div>
           ) : (

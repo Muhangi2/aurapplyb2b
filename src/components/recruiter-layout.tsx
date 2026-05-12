@@ -19,6 +19,7 @@ const NAV: { to: string; label: string }[] = [
   { to: "/r/candidates", label: "Candidates" },
   { to: "/r/team", label: "Team" },
   { to: "/r/company", label: "Company" },
+  { to: "/r/compliance", label: "Compliance" },
   { to: "/r/billing", label: "Billing" },
   { to: "/r/settings", label: "Settings" },
 ];
