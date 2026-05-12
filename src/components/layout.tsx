@@ -3,12 +3,6 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { RecruiterNav } from "@/components/recruiter-layout";
 import logoUrl from "@/assets/aurapply-logo.png";
 
@@ -55,71 +49,59 @@ function CandidateNav() {
 }
 
 function PublicNav() {
-  const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const items: { to: string; label: string; match: (p: string) => boolean }[] = [
+    { to: "/about", label: "About", match: (p) => p === "/about" },
+    {
+      to: "/documentation/eu-ai-act-compliance",
+      label: "Compliance",
+      match: (p) => p === "/documentation/eu-ai-act-compliance",
+    },
+    { to: "/documentation", label: "Documentation", match: (p) => p === "/documentation" },
+    { to: "/contact", label: "Contact", match: (p) => p === "/contact" },
+  ];
 
   const linkCls = (active: boolean) =>
-    `px-3 py-1.5 rounded-md text-sm transition ${
-      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+    `px-3 py-1.5 rounded-full text-sm transition-colors ${
+      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-primary"
     }`;
 
-  const productActive =
-    path === "/individuals" || path === "/businesses" || path === "/recruiters";
-
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
+    <header
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrolled ? "py-2" : "py-0"
+      }`}
+    >
+      <nav
+        className={`mx-auto flex items-center justify-between transition-all duration-300 ${
+          scrolled
+            ? "max-w-5xl mx-auto px-5 h-12 au-nav"
+            : "max-w-6xl px-6 h-14 border-b border-border bg-background/85 backdrop-blur"
+        }`}
+      >
         <Logo />
         <div className="hidden md:flex items-center gap-1">
-          <DropdownMenu>
-            <DropdownMenuTrigger className={linkCls(productActive)}>
-              Product
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-56">
-              <DropdownMenuItem onClick={() => nav({ to: "/individuals" })}>
-                For Individuals
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/businesses" })}>
-                For Businesses
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/recruiters" })}>
-                For Recruiters
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Link to="/businesses" hash="pricing" className={linkCls(false)}>
-            Pricing
+          {items.map((item) => (
+            <Link key={item.to} to={item.to} className={linkCls(item.match(path))}>
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            to="/signin"
+            className="ml-2 px-3 py-1.5 rounded-full text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Sign in
           </Link>
-          <Link to="/documentation" className={linkCls(path.startsWith("/documentation"))}>
-            Documentation
-          </Link>
-          <Link to="/compliance" className={linkCls(path === "/compliance")}>
-            Compliance
-          </Link>
-          <Link to="/about" className={linkCls(path === "/about")}>
-            About
-          </Link>
-          <Link to="/contact" className={linkCls(path === "/contact")}>
-            Contact
-          </Link>
-        </div>
-        <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">Sign in</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem onClick={() => nav({ to: "/signin" })}>
-                Sign in as individual
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/r/signin" })}>
-                Sign in as business
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Button size="sm" onClick={() => nav({ to: "/signup" })}>
-            Get started
-          </Button>
         </div>
       </nav>
     </header>
@@ -135,44 +117,36 @@ export function TopNav() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-12 grid gap-8 md:grid-cols-4">
-        <div>
-          <Logo />
-          <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            EU-compliant AI hiring. Built in Europe.
-          </p>
-          <div className="mt-4 text-xs text-muted-foreground">EN</div>
-        </div>
+    <footer className="mt-24 bg-surface-alt">
+      <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-2">
         <div className="text-sm">
           <div className="font-medium mb-3 text-foreground">Product</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/individuals" className="hover:text-foreground">For Individuals</Link></li>
-            <li><Link to="/businesses" className="hover:text-foreground">For Businesses</Link></li>
-            <li><Link to="/documentation" className="hover:text-foreground">Documentation</Link></li>
-            <li><Link to="/compliance" className="hover:text-foreground">Compliance</Link></li>
+            <li><Link to="/individuals" className="hover:text-primary transition-colors">For Individuals</Link></li>
+            <li><Link to="/businesses" className="hover:text-primary transition-colors">For Hiring Teams</Link></li>
+            <li><Link to="/documentation" className="hover:text-primary transition-colors">Documentation</Link></li>
+            <li><Link to="/documentation/how-matching-works" className="hover:text-primary transition-colors">How matching works</Link></li>
           </ul>
         </div>
         <div className="text-sm">
           <div className="font-medium mb-3 text-foreground">Company</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
-            <li><Link to="/privacy-policy" className="hover:text-foreground">Privacy</Link></li>
-            <li><Link to="/terms" className="hover:text-foreground">Terms</Link></li>
-            <li><Link to="/imprint" className="hover:text-foreground">Imprint</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
-          </ul>
-        </div>
-        <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Sign in</div>
-          <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/signin" className="hover:text-foreground">Sign in as individual</Link></li>
-            <li><Link to="/r/signin" className="hover:text-foreground">Sign in as business</Link></li>
+            <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
+            <li><Link to="/documentation/eu-ai-act-compliance" className="hover:text-primary transition-colors">Compliance</Link></li>
+            <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link></li>
+            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms</Link></li>
+            <li><Link to="/imprint" className="hover:text-primary transition-colors">Imprint</Link></li>
+            <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+            <li><Link to="/r/signin" className="hover:text-primary transition-colors">Hiring team sign-in</Link></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Aurapply. All rights reserved.
+      <div className="border-t border-border">
+        <div className="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between gap-4 text-xs text-muted-foreground">
+          <Logo />
+          <div className="hidden sm:block">Built in Europe. Data stays in Europe.</div>
+          <div>© {new Date().getFullYear()} Aurapply</div>
+        </div>
       </div>
     </footer>
   );
