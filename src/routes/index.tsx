@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/layout";
-import { ProfileIcon, CompanyIcon, ArrowRightIcon, type IconProps } from "@/components/icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,37 +12,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Landing,
 });
-
-function AudienceCard({
-  to,
-  icon: Icon,
-  title,
-  description,
-}: {
-  to: "/individuals" | "/businesses";
-  icon: React.ComponentType<IconProps>;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Link
-      to={to}
-      className="group relative overflow-hidden au-card au-card-hover au-shimmer p-8 flex flex-col"
-    >
-      <span className="au-accent-bar-reveal" aria-hidden />
-      <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-        <Icon size={20} />
-      </div>
-      <div className="mt-6 text-xl font-semibold tracking-tight">{title}</div>
-      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
-      <div className="mt-8 flex items-center justify-end">
-        <span className="inline-flex items-center gap-1.5 text-sm text-primary transition-transform duration-200 ease-out group-hover:translate-x-1">
-          Continue <ArrowRightIcon size={16} />
-        </span>
-      </div>
-    </Link>
-  );
-}
 
 const TRUSTED_BY = [
   "Acme Labs",
