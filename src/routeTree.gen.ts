@@ -20,6 +20,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as IndividualsRouteImport } from './routes/individuals'
 import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as DocumentationRouteImport } from './routes/documentation'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ComplianceRouteImport } from './routes/compliance'
@@ -37,6 +38,7 @@ import { Route as RCompanyRouteImport } from './routes/r.company'
 import { Route as RCandidatesRouteImport } from './routes/r.candidates'
 import { Route as RBillingRouteImport } from './routes/r.billing'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
+import { Route as DocumentationSlugRouteImport } from './routes/documentation_.$slug'
 import { Route as BusinessesContactRouteImport } from './routes/businesses_.contact'
 import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 import { Route as RJobsIdRouteImport } from './routes/r.jobs.$id'
@@ -95,6 +97,11 @@ const IndividualsRoute = IndividualsRouteImport.update({
 const ImprintRoute = ImprintRouteImport.update({
   id: '/imprint',
   path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentationRoute = DocumentationRouteImport.update({
+  id: '/documentation',
+  path: '/documentation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -182,6 +189,11 @@ const MatchesIdRoute = MatchesIdRouteImport.update({
   path: '/matches/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentationSlugRoute = DocumentationSlugRouteImport.update({
+  id: '/documentation_/$slug',
+  path: '/documentation/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessesContactRoute = BusinessesContactRouteImport.update({
   id: '/businesses_/contact',
   path: '/businesses/contact',
@@ -210,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/compliance': typeof ComplianceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/documentation': typeof DocumentationRoute
   '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
@@ -222,6 +235,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/businesses/contact': typeof BusinessesContactRoute
+  '/documentation/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -244,6 +258,7 @@ export interface FileRoutesByTo {
   '/compliance': typeof ComplianceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/documentation': typeof DocumentationRoute
   '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
@@ -256,6 +271,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/businesses/contact': typeof BusinessesContactRoute
+  '/documentation/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -279,6 +295,7 @@ export interface FileRoutesById {
   '/compliance': typeof ComplianceRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/documentation': typeof DocumentationRoute
   '/imprint': typeof ImprintRoute
   '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
@@ -291,6 +308,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/businesses_/contact': typeof BusinessesContactRoute
+  '/documentation_/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -315,6 +333,7 @@ export interface FileRouteTypes {
     | '/compliance'
     | '/contact'
     | '/dashboard'
+    | '/documentation'
     | '/imprint'
     | '/individuals'
     | '/onboarding'
@@ -327,6 +346,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/businesses/contact'
+    | '/documentation/$slug'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -349,6 +369,7 @@ export interface FileRouteTypes {
     | '/compliance'
     | '/contact'
     | '/dashboard'
+    | '/documentation'
     | '/imprint'
     | '/individuals'
     | '/onboarding'
@@ -361,6 +382,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/businesses/contact'
+    | '/documentation/$slug'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -383,6 +405,7 @@ export interface FileRouteTypes {
     | '/compliance'
     | '/contact'
     | '/dashboard'
+    | '/documentation'
     | '/imprint'
     | '/individuals'
     | '/onboarding'
@@ -395,6 +418,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/businesses_/contact'
+    | '/documentation_/$slug'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -418,6 +442,7 @@ export interface RootRouteChildren {
   ComplianceRoute: typeof ComplianceRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
+  DocumentationRoute: typeof DocumentationRoute
   ImprintRoute: typeof ImprintRoute
   IndividualsRoute: typeof IndividualsRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -430,6 +455,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
   BusinessesContactRoute: typeof BusinessesContactRoute
+  DocumentationSlugRoute: typeof DocumentationSlugRoute
   MatchesIdRoute: typeof MatchesIdRoute
   RBillingRoute: typeof RBillingRoute
   RCandidatesRoute: typeof RCandidatesRoute
@@ -523,6 +549,13 @@ declare module '@tanstack/react-router' {
       path: '/imprint'
       fullPath: '/imprint'
       preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentation': {
+      id: '/documentation'
+      path: '/documentation'
+      fullPath: '/documentation'
+      preLoaderRoute: typeof DocumentationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -644,6 +677,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documentation_/$slug': {
+      id: '/documentation_/$slug'
+      path: '/documentation/$slug'
+      fullPath: '/documentation/$slug'
+      preLoaderRoute: typeof DocumentationSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/businesses_/contact': {
       id: '/businesses_/contact'
       path: '/businesses/contact'
@@ -682,6 +722,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComplianceRoute: ComplianceRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
+  DocumentationRoute: DocumentationRoute,
   ImprintRoute: ImprintRoute,
   IndividualsRoute: IndividualsRoute,
   OnboardingRoute: OnboardingRoute,
@@ -694,6 +735,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
   BusinessesContactRoute: BusinessesContactRoute,
+  DocumentationSlugRoute: DocumentationSlugRoute,
   MatchesIdRoute: MatchesIdRoute,
   RBillingRoute: RBillingRoute,
   RCandidatesRoute: RCandidatesRoute,
