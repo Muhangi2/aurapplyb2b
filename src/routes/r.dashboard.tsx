@@ -12,6 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ArrowRightIcon, ShieldIcon, AIProcessingIcon, DocumentIcon } from "@/components/icons";
+import { BrandConstellation, EmptyJobsIllustration } from "@/components/illustrations";
 
 export const Route = createFileRoute("/r/dashboard")({ component: RecruiterDashboard });
 
