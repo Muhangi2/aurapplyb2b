@@ -193,7 +193,7 @@ function Individuals() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Build your profile. Be found.</h2>
           <div className="mt-10">
-            <Button asChild size="lg" className="px-8"><Link to="/signup">Create your profile</Link></Button>
+            <Button asChild size="lg" className="au-cta-gradient px-8 border-0"><Link to="/signup">Create your profile</Link></Button>
           </div>
           <p className="mt-5 text-sm text-muted-foreground">No applications. No fees. No surveillance.</p>
         </div>
