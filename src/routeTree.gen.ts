@@ -37,10 +37,10 @@ import { Route as RCompanyRouteImport } from './routes/r.company'
 import { Route as RCandidatesRouteImport } from './routes/r.candidates'
 import { Route as RBillingRouteImport } from './routes/r.billing'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
-import { Route as BusinessesRequestRouteImport } from './routes/businesses_.request'
+import { Route as BusinessesContactRouteImport } from './routes/businesses_.contact'
 import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 import { Route as RJobsIdRouteImport } from './routes/r.jobs.$id'
-import { Route as BusinessesRequestReceivedRouteImport } from './routes/businesses_.request_.received'
+import { Route as BusinessesContactSentRouteImport } from './routes/businesses_.contact_.sent'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -182,9 +182,9 @@ const MatchesIdRoute = MatchesIdRouteImport.update({
   path: '/matches/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BusinessesRequestRoute = BusinessesRequestRouteImport.update({
-  id: '/businesses_/request',
-  path: '/businesses/request',
+const BusinessesContactRoute = BusinessesContactRouteImport.update({
+  id: '/businesses_/contact',
+  path: '/businesses/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RJobsNewRoute = RJobsNewRouteImport.update({
@@ -197,12 +197,11 @@ const RJobsIdRoute = RJobsIdRouteImport.update({
   path: '/r/jobs/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BusinessesRequestReceivedRoute =
-  BusinessesRequestReceivedRouteImport.update({
-    id: '/businesses_/request_/received',
-    path: '/businesses/request/received',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+const BusinessesContactSentRoute = BusinessesContactSentRouteImport.update({
+  id: '/businesses_/contact_/sent',
+  path: '/businesses/contact/sent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -222,7 +221,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/businesses/request': typeof BusinessesRequestRoute
+  '/businesses/contact': typeof BusinessesContactRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -234,7 +233,7 @@ export interface FileRoutesByFullPath {
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
-  '/businesses/request/received': typeof BusinessesRequestReceivedRoute
+  '/businesses/contact/sent': typeof BusinessesContactSentRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -256,7 +255,7 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/businesses/request': typeof BusinessesRequestRoute
+  '/businesses/contact': typeof BusinessesContactRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -268,7 +267,7 @@ export interface FileRoutesByTo {
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
-  '/businesses/request/received': typeof BusinessesRequestReceivedRoute
+  '/businesses/contact/sent': typeof BusinessesContactSentRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -291,7 +290,7 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/businesses_/request': typeof BusinessesRequestRoute
+  '/businesses_/contact': typeof BusinessesContactRoute
   '/matches/$id': typeof MatchesIdRoute
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
@@ -303,7 +302,7 @@ export interface FileRoutesById {
   '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
-  '/businesses_/request_/received': typeof BusinessesRequestReceivedRoute
+  '/businesses_/contact_/sent': typeof BusinessesContactSentRoute
   '/r/jobs/$id': typeof RJobsIdRoute
   '/r/jobs/new': typeof RJobsNewRoute
 }
@@ -327,7 +326,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
-    | '/businesses/request'
+    | '/businesses/contact'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -339,7 +338,7 @@ export interface FileRouteTypes {
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
-    | '/businesses/request/received'
+    | '/businesses/contact/sent'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   fileRoutesByTo: FileRoutesByTo
@@ -361,7 +360,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
-    | '/businesses/request'
+    | '/businesses/contact'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -373,7 +372,7 @@ export interface FileRouteTypes {
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
-    | '/businesses/request/received'
+    | '/businesses/contact/sent'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   id:
@@ -395,7 +394,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
-    | '/businesses_/request'
+    | '/businesses_/contact'
     | '/matches/$id'
     | '/r/billing'
     | '/r/candidates'
@@ -407,7 +406,7 @@ export interface FileRouteTypes {
     | '/r/signin'
     | '/r/signup'
     | '/r/team'
-    | '/businesses_/request_/received'
+    | '/businesses_/contact_/sent'
     | '/r/jobs/$id'
     | '/r/jobs/new'
   fileRoutesById: FileRoutesById
@@ -430,7 +429,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
-  BusinessesRequestRoute: typeof BusinessesRequestRoute
+  BusinessesContactRoute: typeof BusinessesContactRoute
   MatchesIdRoute: typeof MatchesIdRoute
   RBillingRoute: typeof RBillingRoute
   RCandidatesRoute: typeof RCandidatesRoute
@@ -442,7 +441,7 @@ export interface RootRouteChildren {
   RSigninRoute: typeof RSigninRoute
   RSignupRoute: typeof RSignupRoute
   RTeamRoute: typeof RTeamRoute
-  BusinessesRequestReceivedRoute: typeof BusinessesRequestReceivedRoute
+  BusinessesContactSentRoute: typeof BusinessesContactSentRoute
   RJobsIdRoute: typeof RJobsIdRoute
   RJobsNewRoute: typeof RJobsNewRoute
 }
@@ -645,11 +644,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/businesses_/request': {
-      id: '/businesses_/request'
-      path: '/businesses/request'
-      fullPath: '/businesses/request'
-      preLoaderRoute: typeof BusinessesRequestRouteImport
+    '/businesses_/contact': {
+      id: '/businesses_/contact'
+      path: '/businesses/contact'
+      fullPath: '/businesses/contact'
+      preLoaderRoute: typeof BusinessesContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/r/jobs/new': {
@@ -666,11 +665,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RJobsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/businesses_/request_/received': {
-      id: '/businesses_/request_/received'
-      path: '/businesses/request/received'
-      fullPath: '/businesses/request/received'
-      preLoaderRoute: typeof BusinessesRequestReceivedRouteImport
+    '/businesses_/contact_/sent': {
+      id: '/businesses_/contact_/sent'
+      path: '/businesses/contact/sent'
+      fullPath: '/businesses/contact/sent'
+      preLoaderRoute: typeof BusinessesContactSentRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -694,7 +693,7 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
-  BusinessesRequestRoute: BusinessesRequestRoute,
+  BusinessesContactRoute: BusinessesContactRoute,
   MatchesIdRoute: MatchesIdRoute,
   RBillingRoute: RBillingRoute,
   RCandidatesRoute: RCandidatesRoute,
@@ -706,7 +705,7 @@ const rootRouteChildren: RootRouteChildren = {
   RSigninRoute: RSigninRoute,
   RSignupRoute: RSignupRoute,
   RTeamRoute: RTeamRoute,
-  BusinessesRequestReceivedRoute: BusinessesRequestReceivedRoute,
+  BusinessesContactSentRoute: BusinessesContactSentRoute,
   RJobsIdRoute: RJobsIdRoute,
   RJobsNewRoute: RJobsNewRoute,
 }

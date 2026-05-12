@@ -20,7 +20,7 @@ function SignupRedirect() {
         </p>
         <div className="mt-7 flex items-center justify-center gap-5 flex-wrap">
           <Button asChild size="lg">
-            <Link to="/businesses/request">Request access</Link>
+            <Link to="/businesses/contact">Start a conversation</Link>
           </Button>
           <Link to="/r/signin" className="text-sm text-muted-foreground hover:text-foreground">
             Already have an account? Sign in

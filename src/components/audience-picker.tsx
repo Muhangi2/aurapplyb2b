@@ -51,8 +51,8 @@ export function AudiencePicker({
         </p>
         <div className="mt-6 flex items-center gap-4">
           <Button asChild size="lg" onClick={onSelect}>
-            <Link to="/businesses/request">
-              Request access <ArrowRightIcon size={16} className="ml-1" />
+            <Link to="/businesses/contact">
+              Start a conversation <ArrowRightIcon size={16} className="ml-1" />
             </Link>
           </Button>
           {recruiterSecondary && (

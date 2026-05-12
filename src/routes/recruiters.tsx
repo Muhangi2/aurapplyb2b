@@ -38,7 +38,7 @@ function RecruitersPage() {
             Post a role. Receive eight pre-matched, pre-verified candidates with the reasoning behind each match. Reach out from one place.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild><Link to="/businesses/request">Request access</Link></Button>
+            <Button asChild><Link to="/businesses/contact">Start a conversation</Link></Button>
             <Button asChild variant="outline"><Link to="/businesses">See pricing</Link></Button>
           </div>
         </div>
