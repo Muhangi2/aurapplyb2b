@@ -60,19 +60,22 @@ function Landing() {
             Aurapply replaces blind applications and noisy sourcing with a single, transparent matching layer. Built for Europe.
           </p>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 text-left">
-            <AudienceCard
-              to="/individuals"
-              icon={ProfileIcon}
-              title="For Individuals"
-              description="Build one profile. Get matched to roles where you actually fit."
-            />
-            <AudienceCard
-              to="/businesses"
-              icon={CompanyIcon}
-              title="For Businesses"
-              description="Post a role. Receive eight pre-matched, pre-verified candidates."
-            />
+          <div className="relative mt-14">
+            <span className="au-hero-glow" aria-hidden />
+            <div className="relative grid gap-5 md:grid-cols-2 text-left">
+              <AudienceCard
+                to="/individuals"
+                icon={ProfileIcon}
+                title="For Individuals"
+                description="Build one profile. Get matched to roles where you actually fit."
+              />
+              <AudienceCard
+                to="/businesses"
+                icon={CompanyIcon}
+                title="For Businesses"
+                description="Post a role. Receive eight pre-matched, pre-verified candidates."
+              />
+            </div>
           </div>
 
           <p className="mt-10 text-sm text-muted-foreground max-w-xl mx-auto">
