@@ -110,8 +110,13 @@ function Dashboard() {
           {/* Focus block */}
           <div className="mt-8">
             {profileIncomplete ? (
-              <div className="au-card p-7">
-                <div className="flex items-start justify-between gap-4">
+              <div className="au-card-elevated p-7 relative overflow-hidden">
+                <BrandConstellation
+                  variant="incomplete"
+                  size={120}
+                  className="absolute -top-2 -right-2 opacity-90"
+                />
+                <div className="relative flex items-start justify-between gap-4">
                   <div>
                     <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Next step</div>
                     <h2 className="mt-2 text-xl font-semibold">Finish your profile to start matching well.</h2>
@@ -134,15 +139,10 @@ function Dashboard() {
                 </div>
               </div>
             ) : activeMatches === 0 ? (
-              <div className="au-card p-8 text-center">
-                <div className="mx-auto h-10 w-10 grid place-items-center rounded-full bg-primary/10">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-                  </span>
-                </div>
-                <h2 className="mt-5 text-xl font-semibold">Your profile is live.</h2>
-                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
+              <div className="au-card-elevated p-10">
+                <EmptyMatchesIllustration size={160} />
+                <h2 className="mt-6 text-xl font-semibold text-center">Your profile is live.</h2>
+                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto text-center">
                   We are matching it against new roles as they are posted. You will get an email and a dashboard notification the moment your first match comes in.
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-5">
