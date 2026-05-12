@@ -88,10 +88,10 @@ function Step({ n, t, d }: { n: number; t: string; d: string }) {
   );
 }
 
-function Why({ icon: Icon, t, d }: { icon: any; t: string; d: string }) {
+function Why({ icon: Icon, t, d }: { icon: React.ComponentType<IconProps>; t: string; d: string }) {
   return (
     <div className="au-card p-6">
-      <Icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+      <Icon size={20} className="text-primary" />
       <div className="mt-4 font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
     </div>
