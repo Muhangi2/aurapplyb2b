@@ -78,63 +78,65 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.034 264);
 
-  --primary: oklch(0.43 0.18 264);            /* #1E40AF royal blue */
+  --primary: oklch(0.58 0.24 295);            /* vibrant violet */
   --primary-foreground: oklch(0.99 0 0);
-  --primary-dark: oklch(0.39 0.17 265);       /* #1E3A8A deep navy */
+  --primary-dark: oklch(0.5 0.24 300);
 
-  --secondary: oklch(0.97 0.005 247);
+  --secondary: oklch(0.97 0.012 60);
   --secondary-foreground: oklch(0.21 0.034 264);
-  --muted: oklch(0.97 0.005 247);
-  --muted-foreground: oklch(0.49 0.026 257);  /* #475569 slate */
-  --accent: oklch(0.96 0.012 247);
+  --muted: oklch(0.97 0.012 60);
+  --muted-foreground: oklch(0.49 0.026 280);
+  --accent: oklch(0.96 0.018 50);
   --accent-foreground: oklch(0.21 0.034 264);
 
-  --destructive: oklch(0.65 0.21 27);         /* #EF4444 */
+  --destructive: oklch(0.65 0.21 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --success: oklch(0.7 0.16 162);             /* #10B981 emerald */
-  --warning: oklch(0.78 0.16 75);             /* #F59E0B amber */
+  --success: oklch(0.7 0.16 162);
+  --warning: oklch(0.78 0.16 75);
 
-  /* Extended accent palette — use sparingly, max one per section */
-  --indigo: oklch(0.51 0.21 280);             /* #4F46E5 secondary brand */
-  --sky: oklch(0.7 0.14 232);                 /* #0EA5E9 trust / verification */
-  --emerald: oklch(0.7 0.16 162);             /* #10B981 success / strong match */
-  --amber: oklch(0.78 0.16 75);               /* #F59E0B partial / pending */
-  --coral: oklch(0.7 0.18 45);                /* #F97316 energy moments */
-  --violet: oklch(0.6 0.21 295);              /* #8B5CF6 AI / premium */
+  /* Extended accent palette — hireez-style vibrant set */
+  --indigo: oklch(0.55 0.23 270);
+  --sky: oklch(0.7 0.15 232);
+  --emerald: oklch(0.7 0.16 162);
+  --amber: oklch(0.78 0.16 75);
+  --coral: oklch(0.72 0.2 35);                /* warm coral */
+  --violet: oklch(0.6 0.24 295);
+  --pink: oklch(0.72 0.22 350);
 
-  --border: oklch(0.92 0.008 247);            /* #E2E8F0 cool grey */
-  --input: oklch(0.92 0.008 247);
-  --ring: oklch(0.43 0.18 264);
+  --border: oklch(0.92 0.012 60);
+  --input: oklch(0.92 0.012 60);
+  --ring: oklch(0.58 0.24 295);
 
-  --chart-1: oklch(0.43 0.18 264);
+  --chart-1: oklch(0.58 0.24 295);
   --chart-2: oklch(0.7 0.16 162);
   --chart-3: oklch(0.78 0.16 75);
-  --chart-4: oklch(0.65 0.21 27);
-  --chart-5: oklch(0.39 0.17 265);
+  --chart-4: oklch(0.72 0.2 35);
+  --chart-5: oklch(0.55 0.23 270);
 
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.21 0.034 264);
-  --sidebar-primary: oklch(0.43 0.18 264);
+  --sidebar-primary: oklch(0.58 0.24 295);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.97 0.005 247);
+  --sidebar-accent: oklch(0.97 0.012 60);
   --sidebar-accent-foreground: oklch(0.21 0.034 264);
-  --sidebar-border: oklch(0.92 0.008 247);
-  --sidebar-ring: oklch(0.43 0.18 264);
+  --sidebar-border: oklch(0.92 0.012 60);
+  --sidebar-ring: oklch(0.58 0.24 295);
 
-  /* Shadow ladder — soft → card → elevated → nav */
-  --shadow-soft: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.04);
-  --shadow-card: 0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.04);
-  --shadow-card-hover: 0 4px 6px rgba(15,23,42,0.05), 0 10px 20px rgba(15,23,42,0.06);
-  --shadow-elevated: 0 8px 16px rgba(15,23,42,0.06), 0 16px 40px rgba(15,23,42,0.08);
-  --shadow-nav: 0 4px 24px rgba(15,23,42,0.06);
+  /* Shadow ladder — soft & warm */
+  --shadow-soft: 0 1px 2px rgba(60,30,80,0.04), 0 1px 3px rgba(60,30,80,0.04);
+  --shadow-card: 0 1px 2px rgba(60,30,80,0.05), 0 4px 14px rgba(60,30,80,0.06);
+  --shadow-card-hover: 0 6px 18px rgba(120,60,180,0.10), 0 12px 28px rgba(60,30,80,0.08);
+  --shadow-elevated: 0 10px 24px rgba(60,30,80,0.08), 0 24px 60px rgba(60,30,80,0.10);
+  --shadow-nav: 0 4px 24px rgba(60,30,80,0.06);
 
-  /* Brand gradients — directional, never washes */
-  --gradient-brand: linear-gradient(135deg, #1E40AF 0%, #4F46E5 100%);
-  --gradient-brand-soft: linear-gradient(135deg, rgba(30,64,175,0.10) 0%, rgba(79,70,229,0.06) 60%, rgba(14,165,233,0) 100%);
-  --gradient-accent-bar: linear-gradient(90deg, #1E40AF 0%, #4F46E5 50%, #0EA5E9 100%);
-  --gradient-cta: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%);
-  --gradient-success: linear-gradient(135deg, #1E40AF 0%, #10B981 100%);
-  --gradient-ai: linear-gradient(135deg, #1E40AF 0%, #8B5CF6 100%);
+  /* Brand gradients — hireez-style: coral → pink → violet → blue */
+  --gradient-brand: linear-gradient(120deg, #F97316 0%, #EC4899 35%, #8B5CF6 70%, #6366F1 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(249,115,22,0.10) 0%, rgba(236,72,153,0.08) 50%, rgba(139,92,246,0.06) 100%);
+  --gradient-accent-bar: linear-gradient(90deg, #F97316 0%, #EC4899 50%, #8B5CF6 100%);
+  --gradient-cta: linear-gradient(120deg, #EC4899 0%, #8B5CF6 100%);
+  --gradient-success: linear-gradient(135deg, #8B5CF6 0%, #10B981 100%);
+  --gradient-ai: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+  --gradient-promo: linear-gradient(90deg, #6D28D9 0%, #6366F1 50%, #818CF8 100%);
 }
 
 .dark {
