@@ -6,6 +6,12 @@ import { PageShell } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { CheckmarkIcon, ShieldIcon, ArrowRightIcon, AIProcessingIcon } from "@/components/icons";
+import {
+  BrandConstellation,
+  CompanyMark,
+  EmptyMatchesIllustration,
+  MatchStrengthBar,
+} from "@/components/illustrations";
 import { computeCompleteness, seedMatchesIfEmpty } from "@/lib/mock-matches";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
@@ -103,8 +109,13 @@ function Dashboard() {
           {/* Focus block */}
           <div className="mt-8">
             {profileIncomplete ? (
-              <div className="au-card p-7">
-                <div className="flex items-start justify-between gap-4">
+              <div className="au-card-elevated p-7 relative overflow-hidden">
+                <BrandConstellation
+                  variant="incomplete"
+                  size={120}
+                  className="absolute -top-2 -right-2 opacity-90"
+                />
+                <div className="relative flex items-start justify-between gap-4">
                   <div>
                     <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Next step</div>
                     <h2 className="mt-2 text-xl font-semibold">Finish your profile to start matching well.</h2>
@@ -127,15 +138,10 @@ function Dashboard() {
                 </div>
               </div>
             ) : activeMatches === 0 ? (
-              <div className="au-card p-8 text-center">
-                <div className="mx-auto h-10 w-10 grid place-items-center rounded-full bg-primary/10">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-                  </span>
-                </div>
-                <h2 className="mt-5 text-xl font-semibold">Your profile is live.</h2>
-                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
+              <div className="au-card-elevated p-10">
+                <EmptyMatchesIllustration size={160} />
+                <h2 className="mt-6 text-xl font-semibold text-center">Your profile is live.</h2>
+                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto text-center">
                   We are matching it against new roles as they are posted. You will get an email and a dashboard notification the moment your first match comes in.
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-5">
@@ -153,10 +159,11 @@ function Dashboard() {
                   {matches.slice(0, 5).map((m) => {
                     const s = STATUS_LABELS[m.status] || STATUS_LABELS.viewing;
                     return (
-                      <Link key={m.id} to="/matches/$id" params={{ id: m.id }} className="au-card p-5 hover:border-primary/40 transition group">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
+                      <Link key={m.id} to="/matches/$id" params={{ id: m.id }} className="au-card au-card-hover p-5 group">
+                        <div className="flex items-start gap-4">
+                          <CompanyMark name={m.company} size={40} />
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-semibold">{m.company}</span>
                               <span className={`rounded-full px-2 py-0.5 text-xs ${s.tone}`}>{s.text}</span>
                             </div>
@@ -166,9 +173,7 @@ function Dashboard() {
                           </div>
                           <div className="text-right shrink-0">
                             <div className="text-2xl font-semibold tabular-nums">{m.match_score}%</div>
-                            <div className="mt-1 h-1.5 w-24 rounded-full bg-muted overflow-hidden">
-                              <div className="h-full bg-primary" style={{ width: `${m.match_score}%` }} />
-                            </div>
+                            <MatchStrengthBar value={m.match_score} className="mt-1.5" width={96} />
                             <div className="mt-2 text-xs text-primary inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
                               View match <ArrowRightIcon size={12} />
                             </div>

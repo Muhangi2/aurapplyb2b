@@ -12,6 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ArrowRightIcon, ShieldIcon, AIProcessingIcon, DocumentIcon } from "@/components/icons";
+import { BrandConstellation, EmptyJobsIllustration } from "@/components/illustrations";
 
 export const Route = createFileRoute("/r/dashboard")({ component: RecruiterDashboard });
 
@@ -114,21 +115,31 @@ function RecruiterDashboard() {
         {/* Focus block */}
         <div className="mt-8">
           {!hasJobs ? (
-            <div className="au-card p-8">
-              <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Get started</div>
-              <h2 className="mt-2 text-xl font-semibold">Post your first role and get a shortlist in minutes.</h2>
-              <p className="mt-1.5 text-sm text-muted-foreground max-w-xl">
-                Aurapply will return eight matched candidates with full reasoning. Anonymous until you decide to contact.
-              </p>
-              <div className="mt-6 flex items-center gap-5">
-                <Button onClick={() => nav({ to: "/r/jobs/new" })}>Post a job</Button>
-                <button onClick={() => { setSlide(0); setTourOpen(true); }} className="text-sm text-primary hover:underline">
-                  Take a quick product tour
-                </button>
+            <div className="au-card-elevated p-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Get started</div>
+                <h2 className="mt-2 text-xl font-semibold">Post your first role and get a shortlist in minutes.</h2>
+                <p className="mt-1.5 text-sm text-muted-foreground max-w-xl">
+                  Aurapply will return eight matched candidates with full reasoning. Anonymous until you decide to contact.
+                </p>
+                <div className="mt-6 flex items-center gap-5">
+                  <Button onClick={() => nav({ to: "/r/jobs/new" })}>Post a job</Button>
+                  <button onClick={() => { setSlide(0); setTourOpen(true); }} className="text-sm text-primary hover:underline">
+                    Take a quick product tour
+                  </button>
+                </div>
+              </div>
+              <div className="hidden md:block">
+                <EmptyJobsIllustration size={180} />
               </div>
             </div>
           ) : (
-            <div className="au-card p-6">
+            <div className="au-card-elevated p-6 relative overflow-hidden">
+              <BrandConstellation
+                variant={activeJobs.length > 0 ? "active" : "structured"}
+                size={96}
+                className="absolute -top-1 -right-1 opacity-90"
+              />
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold">Active roles</h2>
                 <span className="text-xs text-muted-foreground">{activeJobs.length} of {jobs.length}</span>
