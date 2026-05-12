@@ -152,6 +152,14 @@ export function Footer() {
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <div className="au-promo text-xs md:text-sm">
+        <div className="mx-auto max-w-6xl px-6 py-2.5 flex items-center justify-center gap-3 text-center">
+          <span className="opacity-90">New — Aurapply launches in EU markets.</span>
+          <Link to="/individuals" className="font-medium underline-offset-2 hover:underline">
+            Read more →
+          </Link>
+        </div>
+      </div>
       <TopNav />
       <main className="flex-1">{children}</main>
       <Footer />
