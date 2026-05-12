@@ -299,5 +299,98 @@
   .au-promo {
     background: var(--gradient-promo);
     color: white;
+    background-size: 200% 100%;
+    animation: au-promo-pan 18s linear infinite;
   }
+
+  /* Animated gradient text — slow hue drift */
+  .au-gradient-text {
+    background-size: 200% 100%;
+    animation: au-gradient-pan 9s ease-in-out infinite;
+  }
+
+  /* Floating blob (used inside .au-hero-glow wrapper) */
+  .au-float-slow { animation: au-float 11s ease-in-out infinite; }
+  .au-float-slower { animation: au-float 16s ease-in-out infinite reverse; }
+
+  /* Soft pulsing dot */
+  .au-pulse-dot {
+    position: relative;
+  }
+  .au-pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    background: inherit;
+    opacity: 0.55;
+    animation: au-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Marquee row */
+  .au-marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .au-marquee-track {
+    display: flex;
+    gap: 3rem;
+    flex-shrink: 0;
+    min-width: 100%;
+    animation: au-marquee 32s linear infinite;
+  }
+  .au-marquee:hover .au-marquee-track { animation-play-state: paused; }
+
+  /* Subtle shimmer sweep on cards */
+  .au-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .au-shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: au-shimmer 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@keyframes au-gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes au-promo-pan {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+@keyframes au-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -16px, 0) scale(1.04); }
+}
+@keyframes au-ping {
+  0% { transform: scale(0.9); opacity: 0.55; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes au-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes au-shimmer {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au-gradient-text,
+  .au-promo,
+  .au-float-slow,
+  .au-float-slower,
+  .au-pulse-dot::after,
+  .au-marquee-track,
+  .au-shimmer::before { animation: none !important; }
 }
