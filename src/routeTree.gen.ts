@@ -32,6 +32,7 @@ import { Route as RSigninRouteImport } from './routes/r.signin'
 import { Route as RSettingsRouteImport } from './routes/r.settings'
 import { Route as ROnboardingRouteImport } from './routes/r.onboarding'
 import { Route as RDashboardRouteImport } from './routes/r.dashboard'
+import { Route as RComplianceRouteImport } from './routes/r.compliance'
 import { Route as RCompanyRouteImport } from './routes/r.company'
 import { Route as RCandidatesRouteImport } from './routes/r.candidates'
 import { Route as RBillingRouteImport } from './routes/r.billing'
@@ -156,6 +157,11 @@ const RDashboardRoute = RDashboardRouteImport.update({
   path: '/r/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RComplianceRoute = RComplianceRouteImport.update({
+  id: '/r/compliance',
+  path: '/r/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RCompanyRoute = RCompanyRouteImport.update({
   id: '/r/company',
   path: '/r/company',
@@ -221,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
@@ -254,6 +261,7 @@ export interface FileRoutesByTo {
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
@@ -288,6 +296,7 @@ export interface FileRoutesById {
   '/r/billing': typeof RBillingRoute
   '/r/candidates': typeof RCandidatesRoute
   '/r/company': typeof RCompanyRoute
+  '/r/compliance': typeof RComplianceRoute
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
@@ -323,6 +332,7 @@ export interface FileRouteTypes {
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
@@ -356,6 +366,7 @@ export interface FileRouteTypes {
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/r/billing'
     | '/r/candidates'
     | '/r/company'
+    | '/r/compliance'
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
@@ -422,6 +434,7 @@ export interface RootRouteChildren {
   RBillingRoute: typeof RBillingRoute
   RCandidatesRoute: typeof RCandidatesRoute
   RCompanyRoute: typeof RCompanyRoute
+  RComplianceRoute: typeof RComplianceRoute
   RDashboardRoute: typeof RDashboardRoute
   ROnboardingRoute: typeof ROnboardingRoute
   RSettingsRoute: typeof RSettingsRoute
@@ -595,6 +608,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/compliance': {
+      id: '/r/compliance'
+      path: '/r/compliance'
+      fullPath: '/r/compliance'
+      preLoaderRoute: typeof RComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/r/company': {
       id: '/r/company'
       path: '/r/company'
@@ -699,6 +719,7 @@ const rootRouteChildren: RootRouteChildren = {
   RBillingRoute: RBillingRoute,
   RCandidatesRoute: RCandidatesRoute,
   RCompanyRoute: RCompanyRoute,
+  RComplianceRoute: RComplianceRoute,
   RDashboardRoute: RDashboardRoute,
   ROnboardingRoute: ROnboardingRoute,
   RSettingsRoute: RSettingsRoute,
@@ -711,3 +732,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
