@@ -274,7 +274,7 @@ function Businesses() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Hire from your best-fit eight.</h2>
           <div className="mt-10">
-            <Button asChild size="lg" className="px-8"><Link to="/r/signup">Post your first job</Link></Button>
+            <Button asChild size="lg" className="au-cta-gradient px-8 border-0"><Link to="/r/signup">Post your first job</Link></Button>
           </div>
           <p className="mt-5 text-sm text-muted-foreground">Free trial of your first role. No card required.</p>
         </div>
