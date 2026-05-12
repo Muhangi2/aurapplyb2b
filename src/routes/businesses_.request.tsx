@@ -18,7 +18,7 @@ import {
 import { LockIcon, ScheduleIcon, ScaleIcon } from "@/components/icons";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/businesses/request")({
+export const Route = createFileRoute("/businesses_/request")({
   head: () => ({
     meta: [
       { title: "Request access — Aurapply for Recruiters" },
