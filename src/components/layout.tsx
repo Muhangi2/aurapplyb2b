@@ -3,12 +3,6 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { RecruiterNav } from "@/components/recruiter-layout";
 import logoUrl from "@/assets/aurapply-logo.png";
 
