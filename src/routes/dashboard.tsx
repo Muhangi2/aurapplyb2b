@@ -160,10 +160,11 @@ function Dashboard() {
                   {matches.slice(0, 5).map((m) => {
                     const s = STATUS_LABELS[m.status] || STATUS_LABELS.viewing;
                     return (
-                      <Link key={m.id} to="/matches/$id" params={{ id: m.id }} className="au-card p-5 hover:border-primary/40 transition group">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
+                      <Link key={m.id} to="/matches/$id" params={{ id: m.id }} className="au-card au-card-hover p-5 group">
+                        <div className="flex items-start gap-4">
+                          <CompanyMark name={m.company} size={40} />
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-semibold">{m.company}</span>
                               <span className={`rounded-full px-2 py-0.5 text-xs ${s.tone}`}>{s.text}</span>
                             </div>
@@ -173,9 +174,7 @@ function Dashboard() {
                           </div>
                           <div className="text-right shrink-0">
                             <div className="text-2xl font-semibold tabular-nums">{m.match_score}%</div>
-                            <div className="mt-1 h-1.5 w-24 rounded-full bg-muted overflow-hidden">
-                              <div className="h-full bg-primary" style={{ width: `${m.match_score}%` }} />
-                            </div>
+                            <MatchStrengthBar value={m.match_score} className="mt-1.5" width={96} />
                             <div className="mt-2 text-xs text-primary inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
                               View match <ArrowRightIcon size={12} />
                             </div>
