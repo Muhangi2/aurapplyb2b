@@ -164,7 +164,12 @@ function Businesses() {
             <p className="mt-4 text-xs text-muted-foreground">EU AI Act-ready. GDPR-compliant. Built for serious hiring.</p>
           </div>
           <div className="md:col-span-2">
-            <ShortlistMockup />
+            <div className="relative">
+              <div className="au-gradient-panel absolute inset-x-2 inset-y-6 md:inset-y-8" aria-hidden />
+              <div className="relative pt-6 pb-6 px-2">
+                <ShortlistMockup />
+              </div>
+            </div>
           </div>
         </div>
       </section>
