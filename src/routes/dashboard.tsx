@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageShell } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Check, ShieldCheck, ArrowRight, Activity } from "lucide-react";
+import { CheckmarkIcon, ShieldIcon, ArrowRightIcon, AIProcessingIcon } from "@/components/icons";
 import { computeCompleteness, seedMatchesIfEmpty } from "@/lib/mock-matches";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
