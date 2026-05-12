@@ -21,7 +21,7 @@ function AudienceCard({
   description,
 }: {
   to: "/individuals" | "/businesses";
-  icon: any;
+  icon: React.ComponentType<IconProps>;
   title: string;
   description: string;
 }) {
