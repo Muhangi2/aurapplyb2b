@@ -195,7 +195,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         <div className="au-promo text-xs md:text-sm">
           <div className="mx-auto max-w-6xl px-6 py-2.5 flex items-center justify-center gap-3 text-center relative">
             <span className="opacity-90">New. Aurapply launches in EU markets.</span>
-            <Link to="/individuals" className="font-medium underline-offset-2 hover:underline">
+            <Link to="/about" className="font-medium underline-offset-2 hover:underline">
               Read more →
             </Link>
             <button
