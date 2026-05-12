@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AudiencePicker } from "@/components/audience-picker";
 import { RecruiterNav } from "@/components/recruiter-layout";
 import logoUrl from "@/assets/aurapply-logo.png";
 
@@ -27,12 +24,12 @@ function CandidateNav() {
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const linkCls = (href: string) =>
-    `px-3 py-1.5 rounded-full text-sm transition ${
-      path === href ? "text-foreground bg-secondary" : "text-muted-foreground hover:text-foreground"
+    `px-3 py-1.5 rounded-md text-sm transition ${
+      path === href ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
     }`;
   return (
-    <div className="sticky top-4 z-40 px-4">
-      <nav className="au-nav mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
         <Logo />
         <div className="hidden md:flex items-center gap-1">
           <Link to="/dashboard" className={linkCls("/dashboard")}>Dashboard</Link>
@@ -51,64 +48,52 @@ function CandidateNav() {
           Sign out
         </Button>
       </nav>
-    </div>
+    </header>
   );
 }
 
 function PublicNav() {
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const onIndividuals = path === "/individuals";
+  const onBusinesses = path === "/businesses";
 
   const linkCls = (active: boolean) =>
-    `px-3 py-1.5 rounded-full text-sm transition ${
-      active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+    `px-3 py-1.5 rounded-md text-sm transition ${
+      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
     }`;
 
   return (
-    <>
-      <div className="sticky top-4 z-40 px-4">
-        <nav className="au-nav mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
-          <Logo />
-          <div className="hidden md:flex items-center gap-1">
-            <a href="/#candidates" className={linkCls(false)}>For candidates</a>
-            <a href="/#recruiters" className={linkCls(false)}>For recruiters</a>
-            <Link to="/recruiters" className={linkCls(path === "/recruiters")}>Pricing</Link>
-            <a href="#" className={linkCls(false)}>About</a>
-          </div>
-          <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">Sign in</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem onClick={() => nav({ to: "/signin" })}>
-                  Sign in as candidate
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => nav({ to: "/signin" })}>
-                  Sign in as recruiter
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Button size="sm" onClick={() => setPickerOpen(true)}>Get started</Button>
-          </div>
-        </nav>
-      </div>
-
-      <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
-        <DialogContent className="max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>Choose your path</DialogTitle>
-            <DialogDescription>
-              Aurapply works two ways. Pick the one that fits you.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="mt-2">
-            <AudiencePicker onSelect={() => setPickerOpen(false)} />
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
+        <Logo />
+        <div className="hidden md:flex items-center gap-1">
+          <Link to="/individuals" className={linkCls(onIndividuals)}>For Individuals</Link>
+          <Link to="/businesses" className={linkCls(onBusinesses)}>For Businesses</Link>
+        </div>
+        <div className="flex items-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">Sign in</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem onClick={() => nav({ to: "/signin" })}>
+                Sign in as individual
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => nav({ to: "/r/signin" })}>
+                Sign in as business
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {onIndividuals && (
+            <Button size="sm" onClick={() => nav({ to: "/signup" })}>Create profile</Button>
+          )}
+          {onBusinesses && (
+            <Button size="sm" onClick={() => nav({ to: "/r/signup" })}>Post a job</Button>
+          )}
+        </div>
+      </nav>
+    </header>
   );
 }
 
@@ -126,25 +111,17 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            EU-compliant AI recruitment. Built in Europe, for European hiring.
+            EU-compliant AI hiring. Built in Europe.
           </p>
+          <div className="mt-4 text-xs text-muted-foreground">EN</div>
         </div>
         <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Candidates</div>
+          <div className="font-medium mb-3 text-foreground">Product</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><a href="/#candidates" className="hover:text-foreground">How it works</a></li>
-            <li><Link to="/signup" className="hover:text-foreground">Verify your profile</Link></li>
-            <li><Link to="/privacy" className="hover:text-foreground">Privacy center</Link></li>
-            <li><a href="#" className="hover:text-foreground">Contact</a></li>
-          </ul>
-        </div>
-        <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Recruiters</div>
-          <ul className="space-y-2 text-muted-foreground">
-            <li><a href="/#recruiters" className="hover:text-foreground">How sourcing works</a></li>
-            <li><Link to="/recruiters" className="hover:text-foreground">Pricing</Link></li>
+            <li><Link to="/individuals" className="hover:text-foreground">For Individuals</Link></li>
+            <li><Link to="/businesses" className="hover:text-foreground">For Businesses</Link></li>
+            <li><Link to="/businesses" hash="pricing" className="hover:text-foreground">Pricing</Link></li>
             <li><a href="#" className="hover:text-foreground">Compliance</a></li>
-            <li><a href="#" className="hover:text-foreground">Contact</a></li>
           </ul>
         </div>
         <div className="text-sm">
@@ -154,7 +131,14 @@ export function Footer() {
             <li><a href="#" className="hover:text-foreground">Privacy</a></li>
             <li><a href="#" className="hover:text-foreground">Terms</a></li>
             <li><a href="#" className="hover:text-foreground">Imprint</a></li>
-            <li><a href="#" className="hover:text-foreground">Cookies</a></li>
+            <li><a href="#" className="hover:text-foreground">Contact</a></li>
+          </ul>
+        </div>
+        <div className="text-sm">
+          <div className="font-medium mb-3 text-foreground">Sign in</div>
+          <ul className="space-y-2 text-muted-foreground">
+            <li><Link to="/signin" className="hover:text-foreground">Sign in as individual</Link></li>
+            <li><Link to="/r/signin" className="hover:text-foreground">Sign in as business</Link></li>
           </ul>
         </div>
       </div>
