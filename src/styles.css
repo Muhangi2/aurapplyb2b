@@ -183,6 +183,32 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
+    transition: box-shadow 150ms ease-out, transform 150ms ease-out, border-color 150ms ease-out;
+  }
+  .au-card-hover:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+  .au-card-elevated {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-elevated);
+  }
+  .au-band {
+    background: var(--surface-alt);
+  }
+  .au-inset {
+    background: var(--surface-inset);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .au-accent-bar {
+    background: var(--gradient-accent-bar);
+    height: 4px;
+    width: 100%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
   .au-nav {
     background: color-mix(in oklab, var(--surface) 88%, transparent);
