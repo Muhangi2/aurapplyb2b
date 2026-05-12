@@ -85,7 +85,8 @@ function Step({ n, t, d }: { n: number; t: string; d: string }) {
 
 function Why({ icon: Icon, t, d }: { icon: React.ComponentType<IconProps>; t: string; d: string }) {
   return (
-    <div className="au-card p-6">
+    <div className="relative overflow-hidden au-card au-card-hover p-6">
+      <span className="au-accent-bar-reveal" aria-hidden />
       <Icon size={20} className="text-primary" />
       <div className="mt-4 font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
@@ -114,13 +115,18 @@ function Individuals() {
             <p className="mt-4 text-xs text-muted-foreground">Free for individuals. Always.</p>
           </div>
           <div className="md:col-span-2">
-            <ProfileMockup />
+            <div className="relative">
+              <div className="au-gradient-panel absolute inset-x-2 inset-y-6 md:inset-y-8" aria-hidden />
+              <div className="relative pt-6 pb-6 px-2">
+                <ProfileMockup />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
             Three steps. No more application black holes.
@@ -149,7 +155,7 @@ function Individuals() {
       </section>
 
       {/* Honest about AI */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl grid gap-12 md:grid-cols-2">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Honest about the AI.</h2>
           <div className="space-y-5 text-muted-foreground leading-relaxed">
@@ -187,7 +193,7 @@ function Individuals() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Build your profile. Be found.</h2>
           <div className="mt-10">
-            <Button asChild size="lg" className="px-8"><Link to="/signup">Create your profile</Link></Button>
+            <Button asChild size="lg" className="au-cta-gradient px-8 border-0"><Link to="/signup">Create your profile</Link></Button>
           </div>
           <p className="mt-5 text-sm text-muted-foreground">No applications. No fees. No surveillance.</p>
         </div>

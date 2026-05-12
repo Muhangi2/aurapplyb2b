@@ -28,15 +28,16 @@ function AudienceCard({
   return (
     <Link
       to={to}
-      className="group relative au-card p-8 flex flex-col transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+      className="group relative overflow-hidden au-card au-card-hover p-8 flex flex-col"
     >
+      <span className="au-accent-bar-reveal" aria-hidden />
       <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
         <Icon size={20} />
       </div>
       <div className="mt-6 text-xl font-semibold tracking-tight">{title}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
       <div className="mt-8 flex items-center justify-end">
-        <span className="inline-flex items-center gap-1.5 text-sm text-primary opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0">
+        <span className="inline-flex items-center gap-1.5 text-sm text-primary transition-transform duration-200 ease-out group-hover:translate-x-1">
           Continue <ArrowRightIcon size={16} />
         </span>
       </div>
@@ -59,19 +60,22 @@ function Landing() {
             Aurapply replaces blind applications and noisy sourcing with a single, transparent matching layer. Built for Europe.
           </p>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 text-left">
-            <AudienceCard
-              to="/individuals"
-              icon={ProfileIcon}
-              title="For Individuals"
-              description="Build one profile. Get matched to roles where you actually fit."
-            />
-            <AudienceCard
-              to="/businesses"
-              icon={CompanyIcon}
-              title="For Businesses"
-              description="Post a role. Receive eight pre-matched, pre-verified candidates."
-            />
+          <div className="relative mt-14">
+            <span className="au-hero-glow" aria-hidden />
+            <div className="relative grid gap-5 md:grid-cols-2 text-left">
+              <AudienceCard
+                to="/individuals"
+                icon={ProfileIcon}
+                title="For Individuals"
+                description="Build one profile. Get matched to roles where you actually fit."
+              />
+              <AudienceCard
+                to="/businesses"
+                icon={CompanyIcon}
+                title="For Businesses"
+                description="Post a role. Receive eight pre-matched, pre-verified candidates."
+              />
+            </div>
           </div>
 
           <p className="mt-10 text-sm text-muted-foreground max-w-xl mx-auto">
