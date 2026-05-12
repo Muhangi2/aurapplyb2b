@@ -5,7 +5,7 @@ import { CheckmarkIcon } from "@/components/icons";
 
 const search = z.object({ name: z.string().optional() });
 
-export const Route = createFileRoute("/businesses_/request/received")({
+export const Route = createFileRoute("/businesses_/request_/received")({
   validateSearch: (s) => search.parse(s),
   head: () => ({
     meta: [
