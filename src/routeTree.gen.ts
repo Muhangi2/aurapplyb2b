@@ -16,10 +16,13 @@ import { Route as RecruitersRouteImport } from './routes/recruiters'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as IndividualsRouteImport } from './routes/individuals'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BusinessesRouteImport } from './routes/businesses'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RTeamRouteImport } from './routes/r.team'
 import { Route as RSignupRouteImport } from './routes/r.signup'
+import { Route as RSigninRouteImport } from './routes/r.signin'
 import { Route as RSettingsRouteImport } from './routes/r.settings'
 import { Route as ROnboardingRouteImport } from './routes/r.onboarding'
 import { Route as RDashboardRouteImport } from './routes/r.dashboard'
@@ -65,9 +68,19 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndividualsRoute = IndividualsRouteImport.update({
+  id: '/individuals',
+  path: '/individuals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessesRoute = BusinessesRouteImport.update({
+  id: '/businesses',
+  path: '/businesses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +96,11 @@ const RTeamRoute = RTeamRouteImport.update({
 const RSignupRoute = RSignupRouteImport.update({
   id: '/r/signup',
   path: '/r/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RSigninRoute = RSigninRouteImport.update({
+  id: '/r/signin',
+  path: '/r/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RSettingsRoute = RSettingsRouteImport.update({
@@ -133,7 +151,9 @@ const RJobsIdRoute = RJobsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
   '/dashboard': typeof DashboardRoute
+  '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
@@ -148,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
+  '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
   '/r/jobs/$id': typeof RJobsIdRoute
@@ -155,7 +176,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
   '/dashboard': typeof DashboardRoute
+  '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
@@ -170,6 +193,7 @@ export interface FileRoutesByTo {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
+  '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
   '/r/jobs/$id': typeof RJobsIdRoute
@@ -178,7 +202,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
   '/dashboard': typeof DashboardRoute
+  '/individuals': typeof IndividualsRoute
   '/onboarding': typeof OnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
@@ -193,6 +219,7 @@ export interface FileRoutesById {
   '/r/dashboard': typeof RDashboardRoute
   '/r/onboarding': typeof ROnboardingRoute
   '/r/settings': typeof RSettingsRoute
+  '/r/signin': typeof RSigninRoute
   '/r/signup': typeof RSignupRoute
   '/r/team': typeof RTeamRoute
   '/r/jobs/$id': typeof RJobsIdRoute
@@ -202,7 +229,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/businesses'
     | '/dashboard'
+    | '/individuals'
     | '/onboarding'
     | '/privacy'
     | '/profile'
@@ -217,6 +246,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
+    | '/r/signin'
     | '/r/signup'
     | '/r/team'
     | '/r/jobs/$id'
@@ -224,7 +254,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/businesses'
     | '/dashboard'
+    | '/individuals'
     | '/onboarding'
     | '/privacy'
     | '/profile'
@@ -239,6 +271,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
+    | '/r/signin'
     | '/r/signup'
     | '/r/team'
     | '/r/jobs/$id'
@@ -246,7 +279,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/businesses'
     | '/dashboard'
+    | '/individuals'
     | '/onboarding'
     | '/privacy'
     | '/profile'
@@ -261,6 +296,7 @@ export interface FileRouteTypes {
     | '/r/dashboard'
     | '/r/onboarding'
     | '/r/settings'
+    | '/r/signin'
     | '/r/signup'
     | '/r/team'
     | '/r/jobs/$id'
@@ -269,7 +305,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BusinessesRoute: typeof BusinessesRoute
   DashboardRoute: typeof DashboardRoute
+  IndividualsRoute: typeof IndividualsRoute
   OnboardingRoute: typeof OnboardingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProfileRoute: typeof ProfileRoute
@@ -284,6 +322,7 @@ export interface RootRouteChildren {
   RDashboardRoute: typeof RDashboardRoute
   ROnboardingRoute: typeof ROnboardingRoute
   RSettingsRoute: typeof RSettingsRoute
+  RSigninRoute: typeof RSigninRoute
   RSignupRoute: typeof RSignupRoute
   RTeamRoute: typeof RTeamRoute
   RJobsIdRoute: typeof RJobsIdRoute
@@ -341,11 +380,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/individuals': {
+      id: '/individuals'
+      path: '/individuals'
+      fullPath: '/individuals'
+      preLoaderRoute: typeof IndividualsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/businesses': {
+      id: '/businesses'
+      path: '/businesses'
+      fullPath: '/businesses'
+      preLoaderRoute: typeof BusinessesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -367,6 +420,13 @@ declare module '@tanstack/react-router' {
       path: '/r/signup'
       fullPath: '/r/signup'
       preLoaderRoute: typeof RSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/r/signin': {
+      id: '/r/signin'
+      path: '/r/signin'
+      fullPath: '/r/signin'
+      preLoaderRoute: typeof RSigninRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/r/settings': {
@@ -437,7 +497,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BusinessesRoute: BusinessesRoute,
   DashboardRoute: DashboardRoute,
+  IndividualsRoute: IndividualsRoute,
   OnboardingRoute: OnboardingRoute,
   PrivacyRoute: PrivacyRoute,
   ProfileRoute: ProfileRoute,
@@ -452,6 +514,7 @@ const rootRouteChildren: RootRouteChildren = {
   RDashboardRoute: RDashboardRoute,
   ROnboardingRoute: ROnboardingRoute,
   RSettingsRoute: RSettingsRoute,
+  RSigninRoute: RSigninRoute,
   RSignupRoute: RSignupRoute,
   RTeamRoute: RTeamRoute,
   RJobsIdRoute: RJobsIdRoute,
