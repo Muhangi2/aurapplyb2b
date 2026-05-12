@@ -299,8 +299,6 @@
   .au-promo {
     background: var(--gradient-promo);
     color: white;
-    background-size: 200% 100%;
-    animation: au-promo-pan 18s linear infinite;
   }
 
   /* Animated gradient text — slow hue drift */
