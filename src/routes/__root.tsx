@@ -28,6 +28,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Build your profile once and let recruiters come to you. EU-compliant AI matching, transparent and candidate-first.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Aurapply — Stop applying. Start being matched." },
+      { name: "description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
+      { property: "og:description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
+      { name: "twitter:description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0b8ec3a0-240d-44fa-abe5-8577af14c5a3/id-preview-1a97ad06--92bc7cb2-7ddc-4bfc-a30c-f43f1905d26f.lovable.app-1778545583667.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0b8ec3a0-240d-44fa-abe5-8577af14c5a3/id-preview-1a97ad06--92bc7cb2-7ddc-4bfc-a30c-f43f1905d26f.lovable.app-1778545583667.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
