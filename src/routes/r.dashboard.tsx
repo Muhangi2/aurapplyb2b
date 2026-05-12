@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { ArrowRight, ShieldCheck, Activity, FileCheck2 } from "lucide-react";
+import { ArrowRightIcon, ShieldIcon, AIProcessingIcon, DocumentIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/r/dashboard")({ component: RecruiterDashboard });
 
