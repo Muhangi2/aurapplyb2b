@@ -169,7 +169,7 @@ function Businesses() {
       </section>
 
       {/* How sourcing works */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
             Three steps. From job posted to shortlist in minutes.
@@ -196,7 +196,7 @@ function Businesses() {
       </section>
 
       {/* Compliance */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl grid gap-12 md:grid-cols-2">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">EU AI Act, handled.</h2>
           <div className="space-y-5 text-muted-foreground leading-relaxed">
@@ -242,7 +242,7 @@ function Businesses() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Questions businesses ask.</h2>
           <Accordion type="single" collapsible className="mt-10">

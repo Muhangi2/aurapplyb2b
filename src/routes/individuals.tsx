@@ -155,7 +155,7 @@ function Individuals() {
       </section>
 
       {/* Honest about AI */}
-      <section className="px-6 py-20 bg-surface border-y border-border">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl grid gap-12 md:grid-cols-2">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Honest about the AI.</h2>
           <div className="space-y-5 text-muted-foreground leading-relaxed">
