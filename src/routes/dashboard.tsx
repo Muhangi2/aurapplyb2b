@@ -5,13 +5,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageShell } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { CheckmarkIcon, ShieldIcon, ArrowRightIcon, AIProcessingIcon, SparkleIcon } from "@/components/icons";
+import { CheckmarkIcon, ShieldIcon, ArrowRightIcon, AIProcessingIcon } from "@/components/icons";
 import {
   BrandConstellation,
   CompanyMark,
   EmptyMatchesIllustration,
   MatchStrengthBar,
-  MilestoneBurst,
 } from "@/components/illustrations";
 import { computeCompleteness, seedMatchesIfEmpty } from "@/lib/mock-matches";
 
