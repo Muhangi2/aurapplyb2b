@@ -7,7 +7,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Eye, ShieldCheck, Lock, Inbox, Check } from "lucide-react";
+import {
+  EyeIcon,
+  ShieldIcon,
+  LockIcon,
+  MessageIcon,
+  CheckmarkIcon,
+  VerifiedIcon,
+  type IconProps,
+} from "@/components/icons";
 
 export const Route = createFileRoute("/individuals")({
   head: () => ({
