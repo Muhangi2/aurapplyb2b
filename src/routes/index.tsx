@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/layout";
-import { User, Building2, ArrowRight } from "lucide-react";
+import { ProfileIcon, CompanyIcon, ArrowRightIcon, type IconProps } from "@/components/icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
