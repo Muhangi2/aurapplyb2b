@@ -65,14 +65,14 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  /* Aurapply brand */
-  --background: oklch(0.985 0 0);            /* #FAFAFA off-white page bg */
-  --surface: oklch(1 0 0);                    /* #FFFFFF cards / primary surface */
-  --surface-alt: oklch(0.965 0.005 247);      /* #F1F5F9 light grey section bands */
-  --surface-inset: oklch(0.965 0.005 247);    /* #F1F5F9 inset panels inside cards */
-  --foreground: oklch(0.21 0.034 264);        /* #0F172A near-black */
+  /* Aurapply brand — warm cream + vibrant gradient (hireez-inspired) */
+  --background: oklch(0.975 0.012 75);        /* warm cream page bg */
+  --surface: oklch(1 0 0);                    /* #FFFFFF cards */
+  --surface-alt: oklch(0.965 0.018 60);       /* peach-tinted band */
+  --surface-inset: oklch(0.97 0.012 75);      /* cream inset */
+  --foreground: oklch(0.21 0.034 264);        /* near-black */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.21 0.034 264);
   --popover: oklch(1 0 0);
