@@ -57,21 +57,48 @@ function CandidateNav() {
 function PublicNav() {
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const onIndividuals = path === "/individuals";
-  const onBusinesses = path === "/businesses";
 
   const linkCls = (active: boolean) =>
     `px-3 py-1.5 rounded-md text-sm transition ${
       active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
     }`;
 
+  const productActive =
+    path === "/individuals" || path === "/businesses" || path === "/recruiters";
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
         <Logo />
         <div className="hidden md:flex items-center gap-1">
-          <Link to="/individuals" className={linkCls(onIndividuals)}>For Individuals</Link>
-          <Link to="/businesses" className={linkCls(onBusinesses)}>For Businesses</Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger className={linkCls(productActive)}>
+              Product
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-56">
+              <DropdownMenuItem onClick={() => nav({ to: "/individuals" })}>
+                For Individuals
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => nav({ to: "/businesses" })}>
+                For Businesses
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => nav({ to: "/recruiters" })}>
+                For Recruiters
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Link to="/businesses" hash="pricing" className={linkCls(false)}>
+            Pricing
+          </Link>
+          <Link to="/compliance" className={linkCls(path === "/compliance")}>
+            Compliance
+          </Link>
+          <Link to="/about" className={linkCls(path === "/about")}>
+            About
+          </Link>
+          <Link to="/contact" className={linkCls(path === "/contact")}>
+            Contact
+          </Link>
         </div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
@@ -87,12 +114,9 @@ function PublicNav() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          {onIndividuals && (
-            <Button size="sm" onClick={() => nav({ to: "/signup" })}>Create profile</Button>
-          )}
-          {onBusinesses && (
-            <Button size="sm" onClick={() => nav({ to: "/r/signup" })}>Post a job</Button>
-          )}
+          <Button size="sm" onClick={() => nav({ to: "/signup" })}>
+            Get started
+          </Button>
         </div>
       </nav>
     </header>
