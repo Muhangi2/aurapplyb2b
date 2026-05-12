@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Briefcase, Users, ArrowRight } from "lucide-react";
+import { ProfileIcon, CompanyIcon, ArrowRightIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 export function AudiencePicker({
