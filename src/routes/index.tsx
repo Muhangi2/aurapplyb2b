@@ -50,11 +50,13 @@ function Landing() {
     <PageShell>
       <section className="px-6 min-h-[calc(100vh-3.5rem)] flex items-center">
         <div className="mx-auto max-w-5xl w-full py-20 text-center">
-          <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-coral to-violet" />
             EU-Compliant AI Hiring Platform
           </div>
-          <h1 className="mt-6 text-5xl md:text-6xl font-semibold tracking-tight text-foreground leading-[1.05]">
-            Better matching between<br />people and roles.
+          <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.02]">
+            <span className="au-gradient-text">Better matching</span><br />
+            <span className="text-foreground">between people and roles.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Aurapply replaces blind applications and noisy sourcing with a single, transparent matching layer. Built for Europe.
