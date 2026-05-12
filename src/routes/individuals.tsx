@@ -8,12 +8,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  EyeIcon,
-  ShieldIcon,
-  LockIcon,
-  MessageIcon,
-  CheckmarkIcon,
+  ReasoningIcon,
   VerifiedIcon,
+  ShieldIcon,
+  MatchStrengthIcon,
+  HumanReviewIcon,
+  CheckmarkIcon,
   type IconProps,
 } from "@/components/icons";
 
@@ -21,13 +21,28 @@ export const Route = createFileRoute("/individuals")({
   head: () => ({
     meta: [
       { title: "For Individuals — Aurapply" },
-      { name: "description", content: "Build one profile. Get matched to roles where you actually fit. Recruiters reach out directly." },
+      {
+        name: "description",
+        content:
+          "Build one professional profile. Aurapply's AI matches you to roles where you actually fit, and recruiters reach out directly. Free for individuals, always.",
+      },
       { property: "og:title", content: "For Individuals — Aurapply" },
-      { property: "og:description", content: "Stop applying. Start being matched. Free for individuals, always." },
+      {
+        property: "og:description",
+        content: "Stop applying. Start being matched. Free for individuals, always.",
+      },
     ],
   }),
   component: Individuals,
 });
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+      {children}
+    </div>
+  );
+}
 
 function ProfileMockup() {
   return (
@@ -35,7 +50,7 @@ function ProfileMockup() {
       <div className="flex items-start justify-between">
         <div>
           <div className="text-base font-semibold">Anna M.</div>
-          <div className="text-sm text-muted-foreground">Senior Product Manager</div>
+          <div className="text-sm text-muted-foreground">Senior Product Marketing Manager</div>
         </div>
         <span className="inline-flex items-center gap-1 text-xs text-success bg-success/10 rounded-full px-2 py-0.5">
           <CheckmarkIcon size={12} /> Verified
@@ -51,8 +66,13 @@ function ProfileMockup() {
         </div>
       </div>
       <div className="mt-5 flex flex-wrap gap-1.5">
-        {["Product Strategy", "B2B SaaS", "User Research", "SQL", "German"].map((t) => (
-          <span key={t} className="text-xs px-2 py-1 rounded-md bg-secondary text-secondary-foreground">{t}</span>
+        {["Product Marketing", "B2B SaaS", "German", "English"].map((t) => (
+          <span
+            key={t}
+            className="text-xs px-2 py-1 rounded-md bg-secondary text-secondary-foreground"
+          >
+            {t}
+          </span>
         ))}
       </div>
       <div className="mt-5 pt-5 border-t border-border grid grid-cols-3 gap-2 text-xs text-center">
@@ -76,19 +96,41 @@ function ProfileMockup() {
 function Step({ n, t, d }: { n: number; t: string; d: string }) {
   return (
     <div className="au-card p-6">
-      <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground text-sm font-medium">{n}</div>
+      <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground text-sm font-medium">
+        {String(n).padStart(2, "0")}
+      </div>
       <div className="mt-4 text-base font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
     </div>
   );
 }
 
-function Why({ icon: Icon, t, d }: { icon: React.ComponentType<IconProps>; t: string; d: string }) {
+function Why({
+  icon: Icon,
+  t,
+  d,
+  accentDot,
+}: {
+  icon: React.ComponentType<IconProps>;
+  t: string;
+  d: string;
+  accentDot?: boolean;
+}) {
   return (
     <div className="relative overflow-hidden au-card au-card-hover p-6">
       <span className="au-accent-bar-reveal" aria-hidden />
-      <Icon size={20} className="text-primary" />
+      <Icon size={22} className="text-primary" accentDot={accentDot} />
       <div className="mt-4 font-semibold">{t}</div>
+      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
+    </div>
+  );
+}
+
+function ProfileTip({ n, t, d }: { n: string; t: string; d: string }) {
+  return (
+    <div className="au-card p-6">
+      <div className="text-3xl font-semibold tracking-tight text-primary tabular-nums">{n}</div>
+      <div className="mt-3 text-base font-semibold">{t}</div>
       <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
     </div>
   );
@@ -101,18 +143,28 @@ function Individuals() {
       <section className="px-6 py-20">
         <div className="mx-auto max-w-6xl grid gap-12 md:grid-cols-5 items-center">
           <div className="md:col-span-3">
-            <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">For Individuals</div>
+            <Eyebrow>For Individuals</Eyebrow>
             <h1 className="mt-5 text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
               Stop applying. Start being matched.
             </h1>
             <p className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-xl">
-              Build your professional profile once, and Aurapply&apos;s AI matches you to roles where your skills, experience, and preferences actually fit. Recruiters reach out directly. You see exactly why you were matched.
+              Build your professional profile once. Aurapply&apos;s AI matches you to roles
+              where your skills, experience, and preferences actually fit, and recruiters reach
+              out to you. No more applications into the void, no more chasing jobs that are not
+              right.
             </p>
             <div className="mt-8 flex items-center gap-5">
-              <Button asChild size="lg"><Link to="/signup">Create your profile</Link></Button>
-              <Link to="/signin" className="text-sm text-muted-foreground hover:text-foreground">Sign in</Link>
+              <Button asChild size="lg">
+                <Link to="/signup">Create your profile</Link>
+              </Button>
+              <Link to="/signin" className="text-sm text-muted-foreground hover:text-foreground">
+                Sign in
+              </Link>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">Free for individuals. Always.</p>
+            <p className="mt-4 text-xs text-muted-foreground max-w-md">
+              Free for individuals, always. We are paid by the companies that hire through us,
+              never by candidates.
+            </p>
           </div>
           <div className="md:col-span-2">
             <div className="relative">
@@ -128,13 +180,30 @@ function Individuals() {
       {/* How it works */}
       <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
+          <Eyebrow>How it works</Eyebrow>
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
             Three steps. No more application black holes.
           </h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            Aurapply replaces the cycle of applying, waiting, and being ghosted with a simple
+            matching layer that works in the background.
+          </p>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            <Step n={1} t="Build a verified profile." d="Add your experience, skills, languages, and preferences. Verify your identity, education, and work history. Verified profiles get prioritized in shortlists, which means recruiters see you first." />
-            <Step n={2} t="AI matches you to roles that fit." d="When a recruiter posts a role, Aurapply's matching system scores your profile against the requirements. You appear in their shortlist when there is genuine fit. No spray-and-pray, no inflated job alerts." />
-            <Step n={3} t="Recruiters reach out directly." d="If a recruiter wants to talk, they message you with the role and details. You decide whether to engage. No more applying into a void; the right conversations come to you." />
+            <Step
+              n={1}
+              t="Build a verified profile."
+              d="Add your experience, skills, languages, and preferences. Verify your identity, education, and work history through our trusted EU partners. Verified profiles are prioritized in recruiter shortlists, which means you get seen first."
+            />
+            <Step
+              n={2}
+              t="AI matches you to roles that fit."
+              d="When a recruiter posts a role, Aurapply's matching engine scores every consenting profile against the requirements. If you fit, you appear in the recruiter's shortlist with full reasoning: which criteria you matched, which you partially matched, and what made you a strong fit. No black box."
+            />
+            <Step
+              n={3}
+              t="Recruiters reach out, you decide."
+              d="When a recruiter wants to talk, they contact you directly with the role and details. You decide whether to engage. No spam, no mass outreach, no chasing applications. The right conversations come to you."
+            />
           </div>
         </div>
       </section>
@@ -142,14 +211,32 @@ function Individuals() {
       {/* Why */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
+          <Eyebrow>Why Aurapply</Eyebrow>
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
             Built around how hiring should work.
           </h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            <Why icon={EyeIcon} t="Transparent matching" d="You see exactly why you were matched to a role, criterion by criterion. Skills, experience, location, language, salary fit. No black box, no mystery score." />
-            <Why icon={ShieldIcon} t="Verified credentials" d="We verify your identity, education, and work history through trusted EU providers. Verified profiles stand out, and recruiters trust them more. We handle the process, you get the credibility." />
-            <Why icon={LockIcon} t="Your data, your control" d="Revoke any consent at any time. Request human review of any AI decision. Export your data. Delete your account. Your rights under GDPR are built into the product, not buried in a policy." />
-            <Why icon={MessageIcon} t="No application fatigue" d="One profile, ongoing matching. You do not chase jobs, you do not submit fifty applications, you do not get ghosted. The right opportunities find you." />
+            <Why
+              icon={ReasoningIcon}
+              t="Transparent matching"
+              d="You see exactly why you were matched, criterion by criterion. Skills, experience, location, language, salary fit, all explained. If you were matched at 87%, you know what makes up the 87% and what makes up the missing 13%."
+            />
+            <Why
+              icon={VerifiedIcon}
+              accentDot
+              t="Verified credentials"
+              d="We verify your identity, education, and work history through trusted EU providers. Verified profiles get prioritized in recruiter shortlists. We handle the verification process, you get the credibility."
+            />
+            <Why
+              icon={ShieldIcon}
+              t="Your data, your control"
+              d="Revoke any consent at any time. Request human review of any AI decision. Export your data, correct it, or delete your account. Your rights under GDPR are built into the product, not buried in a policy."
+            />
+            <Why
+              icon={MatchStrengthIcon}
+              t="No application fatigue"
+              d="One profile, ongoing matching. You do not submit fifty applications, you do not get ghosted, you do not write the same cover letter ten times. The right opportunities find you, and you decide which ones to engage with."
+            />
           </div>
         </div>
       </section>
@@ -157,31 +244,106 @@ function Individuals() {
       {/* Honest about AI */}
       <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-6xl grid gap-12 md:grid-cols-2">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Honest about the AI.</h2>
+          <div>
+            <Eyebrow>Transparency</Eyebrow>
+            <h2 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">
+              Honest about the AI.
+            </h2>
+            <div className="mt-8">
+              <HumanReviewIcon size={64} className="text-primary" />
+            </div>
+          </div>
           <div className="space-y-5 text-muted-foreground leading-relaxed">
-            <p>Aurapply uses AI to match candidates to roles. We are required by EU law (the EU AI Act) to be transparent about this, and we agree with the requirement.</p>
-            <p>The AI scores how well your profile fits each role&apos;s requirements. It does not judge your personality, your tone, your communication style, or your face. It looks at structured criteria, and it explains its reasoning to both you and the recruiter.</p>
-            <p>If you disagree with how the AI handled your profile for a specific role, you can request human review. A real person on our team will look at the decision and respond to you.</p>
+            <p>
+              Aurapply uses AI to match candidates to roles. EU law requires us to be transparent
+              about this, and we agree with the requirement. So here is what the AI actually does
+              and does not do.
+            </p>
+            <p>
+              The AI scores how well your profile matches each role&apos;s stated requirements.
+              It looks at skills, experience, education, languages, location, work authorization,
+              and salary fit. It does not judge your personality, your tone of voice, your facial
+              expressions, your communication style, or anything else that would be guesswork.
+            </p>
+            <p>
+              If you disagree with how the AI handled your profile for a specific role, every
+              match has a &ldquo;Request human review&rdquo; button. A real reviewer on our team
+              will look at the decision and respond to you within a few business days. You can
+              also see, at any time, the full reasoning the AI used for any match you appeared
+              in.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Profile quality */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <Eyebrow>Profile quality</Eyebrow>
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
+            The profiles that get matched most.
+          </h2>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <ProfileTip
+              n="01"
+              t="Specific, not generic."
+              d="List concrete skills, technologies, and methodologies. ‘Led B2B SaaS product launches across DACH’ beats ‘experienced marketing professional.’ The AI matches on specifics."
+            />
+            <ProfileTip
+              n="02"
+              t="Up to date."
+              d="Profiles updated in the last 60 days are prioritized. Recently active candidates get matched first. Five minutes a month keeps your profile competitive."
+            />
+            <ProfileTip
+              n="03"
+              t="Verified where it matters."
+              d="Verified identity, education, and recent employment make a profile stand out. Verification is free and runs in the background, you do not need to do it all at once."
+            />
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="px-6 py-20">
+      <section className="px-6 py-20 au-band border-y border-border">
         <div className="mx-auto max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Questions individuals ask.</h2>
+          <Eyebrow>Questions</Eyebrow>
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">
+            Questions individuals ask.
+          </h2>
           <Accordion type="single" collapsible className="mt-10">
             {[
-              ["Is Aurapply free for individuals?", "Yes. Always. The platform is paid by the companies that hire through it."],
-              ["How long does the profile take to build?", "Around 15 minutes for the basics. Verification takes a few days depending on the document or institution, but it runs in the background."],
-              ["What happens to my data?", "Stored in the EU, encrypted, used only for matching and verification. You can export, correct, or delete it at any time. We never sell it."],
-              ["Can I see which companies have viewed my profile?", "Yes. Every match, view, and contact is logged in your dashboard."],
-              ["Can I be matched to roles in other countries?", "Yes, if your preferences include them. We support EU-wide matching, with work authorization filtering."],
-              ["What if I think the AI made a wrong decision?", "Use the 'Request human review' button on any match (or non-match). A real reviewer on our team will respond within a few business days."],
+              [
+                "Is Aurapply free for individuals?",
+                "Yes. Always. The platform is paid by the companies that hire through it. You will never be asked to pay for an account, for matches, for verification, or for any platform feature.",
+              ],
+              [
+                "How long does it take to build a profile?",
+                "Around 15 minutes for the basics: experience, skills, languages, preferences. Verification runs in the background and takes a few days depending on the document or institution. You do not need to wait for verification to be matched, but verified profiles do get prioritized.",
+              ],
+              [
+                "What happens to my data?",
+                "Stored in the EU, encrypted at rest and in transit, used only for matching and verification. You can export it, correct it, or delete it at any time. We never sell your data, we never share it with third parties for advertising, and recruiters only see your full profile after they decide to contact you.",
+              ],
+              [
+                "Can I see which companies have viewed my profile?",
+                "Yes. Every match, every profile view, and every recruiter contact is logged in your dashboard. You see the full picture of how the platform is working for you.",
+              ],
+              [
+                "Can I be matched to roles in other countries?",
+                "Yes, if your preferences include them. Aurapply supports EU-wide matching, with work authorization filtering so you only see roles you can actually take.",
+              ],
+              [
+                "What if I think the AI made a wrong decision about my profile?",
+                "Use the ‘Request human review’ button on any match (or non-match) where you think the AI got it wrong. A real reviewer on our team will look at the decision, the reasoning, and your profile, then respond to you with an explanation. Decisions can be overturned if the review finds an error.",
+              ],
             ].map(([q, a], i) => (
               <AccordionItem key={i} value={`q${i}`}>
-                <AccordionTrigger className="text-left text-base font-medium">{q}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">{a}</AccordionContent>
+                <AccordionTrigger className="text-left text-base font-medium">
+                  {q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {a}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -191,11 +353,21 @@ function Individuals() {
       {/* Final CTA */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">Build your profile. Be found.</h2>
+          <Eyebrow>Get started</Eyebrow>
+          <h2 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight">
+            Build your profile. Be found.
+          </h2>
+          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+            It takes 15 minutes. The right opportunities come to you, on your terms.
+          </p>
           <div className="mt-10">
-            <Button asChild size="lg" className="au-cta-gradient px-8 border-0"><Link to="/signup">Create your profile</Link></Button>
+            <Button asChild size="lg" className="au-cta-gradient px-8 border-0">
+              <Link to="/signup">Create your profile</Link>
+            </Button>
           </div>
-          <p className="mt-5 text-sm text-muted-foreground">No applications. No fees. No surveillance.</p>
+          <p className="mt-5 text-sm text-muted-foreground">
+            No applications. No fees. No surveillance.
+          </p>
         </div>
       </section>
     </PageShell>
