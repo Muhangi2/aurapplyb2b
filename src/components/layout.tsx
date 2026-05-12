@@ -153,16 +153,40 @@ export function Footer() {
 }
 
 export function PageShell({ children }: { children: React.ReactNode }) {
+  const [showPromo, setShowPromo] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setShowPromo(window.localStorage.getItem("au-promo-dismissed") !== "1");
+  }, []);
+
+  const dismissPromo = () => {
+    setShowPromo(false);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("au-promo-dismissed", "1");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="au-promo text-xs md:text-sm">
-        <div className="mx-auto max-w-6xl px-6 py-2.5 flex items-center justify-center gap-3 text-center">
-          <span className="opacity-90">New — Aurapply launches in EU markets.</span>
-          <Link to="/individuals" className="font-medium underline-offset-2 hover:underline">
-            Read more →
-          </Link>
+      {showPromo && (
+        <div className="bg-surface border-b border-border text-xs md:text-sm">
+          <div className="mx-auto max-w-6xl px-6 py-2.5 flex items-center justify-center gap-3 text-center relative">
+            <span className="opacity-90">New. Aurapply launches in EU markets.</span>
+            <Link to="/individuals" className="font-medium underline-offset-2 hover:underline">
+              Read more →
+            </Link>
+            <button
+              type="button"
+              aria-label="Dismiss announcement"
+              onClick={dismissPromo}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-background/60 transition"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <TopNav />
       <main className="flex-1">{children}</main>
       <Footer />
