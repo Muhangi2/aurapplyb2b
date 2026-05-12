@@ -6,7 +6,7 @@ import { PageShell } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { ArrowLeft, Mail } from "lucide-react";
+import { BackIcon, ContactIcon } from "@/components/icons";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/matches/$id")({ component: MatchDetail });
@@ -57,7 +57,7 @@ function MatchDetail() {
     <PageShell>
       <div className="px-6 py-10">
         <div className="mx-auto max-w-4xl">
-          <Link to="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Back to dashboard</Link>
+          <Link to="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><BackIcon size={16} /> Back to dashboard</Link>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
             <div className="space-y-6">
@@ -77,7 +77,7 @@ function MatchDetail() {
 
               {m.status === "reached_out" && m.recruiter_email && (
                 <div className="au-card p-6 border-primary/30">
-                  <div className="flex items-center gap-2 text-primary"><Mail className="h-4 w-4" /><span className="font-medium">Recruiter reached out</span></div>
+                  <div className="flex items-center gap-2 text-primary"><ContactIcon size={16} /><span className="font-medium">Recruiter reached out</span></div>
                   <div className="mt-3 text-sm">
                     <div><span className="text-muted-foreground">From:</span> {m.recruiter_name} &lt;{m.recruiter_email}&gt;</div>
                     <p className="mt-3 leading-relaxed">{m.recruiter_message}</p>
