@@ -120,18 +120,19 @@ export function Footer() {
           <ul className="space-y-2 text-muted-foreground">
             <li><Link to="/individuals" className="hover:text-foreground">For Individuals</Link></li>
             <li><Link to="/businesses" className="hover:text-foreground">For Businesses</Link></li>
+            <li><Link to="/recruiters" className="hover:text-foreground">For Recruiters</Link></li>
             <li><Link to="/businesses" hash="pricing" className="hover:text-foreground">Pricing</Link></li>
-            <li><a href="#" className="hover:text-foreground">Compliance</a></li>
+            <li><Link to="/compliance" className="hover:text-foreground">Compliance</Link></li>
           </ul>
         </div>
         <div className="text-sm">
           <div className="font-medium mb-3 text-foreground">Company</div>
           <ul className="space-y-2 text-muted-foreground">
-            <li><a href="#" className="hover:text-foreground">About</a></li>
-            <li><a href="#" className="hover:text-foreground">Privacy</a></li>
-            <li><a href="#" className="hover:text-foreground">Terms</a></li>
-            <li><a href="#" className="hover:text-foreground">Imprint</a></li>
-            <li><a href="#" className="hover:text-foreground">Contact</a></li>
+            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
+            <li><Link to="/privacy-policy" className="hover:text-foreground">Privacy</Link></li>
+            <li><Link to="/terms" className="hover:text-foreground">Terms</Link></li>
+            <li><Link to="/imprint" className="hover:text-foreground">Imprint</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
           </ul>
         </div>
         <div className="text-sm">
