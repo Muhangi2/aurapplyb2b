@@ -55,71 +55,59 @@ function CandidateNav() {
 }
 
 function PublicNav() {
-  const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const items: { to: string; label: string; match: (p: string) => boolean }[] = [
+    { to: "/about", label: "About", match: (p) => p === "/about" },
+    {
+      to: "/documentation/eu-ai-act-compliance",
+      label: "Compliance",
+      match: (p) => p === "/documentation/eu-ai-act-compliance",
+    },
+    { to: "/documentation", label: "Documentation", match: (p) => p === "/documentation" },
+    { to: "/contact", label: "Contact", match: (p) => p === "/contact" },
+  ];
 
   const linkCls = (active: boolean) =>
-    `px-3 py-1.5 rounded-md text-sm transition ${
-      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+    `px-3 py-1.5 rounded-full text-sm transition-colors ${
+      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-primary"
     }`;
 
-  const productActive =
-    path === "/individuals" || path === "/businesses" || path === "/recruiters";
-
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
+    <header
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrolled ? "py-2" : "py-0"
+      }`}
+    >
+      <nav
+        className={`mx-auto flex items-center justify-between transition-all duration-300 ${
+          scrolled
+            ? "max-w-5xl mx-auto px-5 h-12 au-nav"
+            : "max-w-6xl px-6 h-14 border-b border-border bg-background/85 backdrop-blur"
+        }`}
+      >
         <Logo />
         <div className="hidden md:flex items-center gap-1">
-          <DropdownMenu>
-            <DropdownMenuTrigger className={linkCls(productActive)}>
-              Product
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-56">
-              <DropdownMenuItem onClick={() => nav({ to: "/individuals" })}>
-                For Individuals
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/businesses" })}>
-                For Businesses
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/recruiters" })}>
-                For Recruiters
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Link to="/businesses" hash="pricing" className={linkCls(false)}>
-            Pricing
+          {items.map((item) => (
+            <Link key={item.to} to={item.to} className={linkCls(item.match(path))}>
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            to="/signin"
+            className="ml-2 px-3 py-1.5 rounded-full text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Sign in
           </Link>
-          <Link to="/documentation" className={linkCls(path.startsWith("/documentation"))}>
-            Documentation
-          </Link>
-          <Link to="/compliance" className={linkCls(path === "/compliance")}>
-            Compliance
-          </Link>
-          <Link to="/about" className={linkCls(path === "/about")}>
-            About
-          </Link>
-          <Link to="/contact" className={linkCls(path === "/contact")}>
-            Contact
-          </Link>
-        </div>
-        <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">Sign in</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem onClick={() => nav({ to: "/signin" })}>
-                Sign in as individual
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => nav({ to: "/r/signin" })}>
-                Sign in as business
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Button size="sm" onClick={() => nav({ to: "/signup" })}>
-            Get started
-          </Button>
         </div>
       </nav>
     </header>
