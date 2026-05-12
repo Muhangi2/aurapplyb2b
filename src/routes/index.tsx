@@ -62,13 +62,13 @@ function Landing() {
           <div className="mt-14 grid gap-5 md:grid-cols-2 text-left">
             <AudienceCard
               to="/individuals"
-              icon={User}
+              icon={ProfileIcon}
               title="For Individuals"
               description="Build one profile. Get matched to roles where you actually fit."
             />
             <AudienceCard
               to="/businesses"
-              icon={Building2}
+              icon={CompanyIcon}
               title="For Businesses"
               description="Post a role. Receive eight pre-matched, pre-verified candidates."
             />
