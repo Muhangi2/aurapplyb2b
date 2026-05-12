@@ -18,7 +18,14 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Scale, ShieldCheck, RefreshCw, AlertTriangle, Check } from "lucide-react";
+import {
+  ScaleIcon,
+  ShieldIcon,
+  RegenerateIcon,
+  WarningIcon,
+  CheckmarkIcon,
+  type IconProps,
+} from "@/components/icons";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/businesses")({
