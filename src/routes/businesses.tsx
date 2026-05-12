@@ -60,7 +60,7 @@ function ShortlistMockup() {
                 <span className="text-xs font-mono text-muted-foreground">#{c.id}</span>
                 {c.verified && (
                   <span className="inline-flex items-center gap-1 text-[10px] text-success bg-success/10 rounded-full px-1.5 py-0.5">
-                    <Check className="h-2.5 w-2.5" /> Verified
+                    <CheckmarkIcon size={10} /> Verified
                   </span>
                 )}
               </div>
@@ -187,10 +187,10 @@ function Businesses() {
         <div className="mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">Built for serious hiring teams.</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            <Why icon={Scale} t="Built-in compliance" d="Aurapply is designed around the EU AI Act (Annex III, recruitment) and GDPR. Audit trails, human-in-the-loop, transparent reasoning, candidate rights. The compliance work is already done." />
-            <Why icon={ShieldCheck} t="Pre-verified candidates" d="Identity, education, and employment verified through trusted EU providers before candidates reach you. Less vetting, fewer late-stage surprises, faster time to hire." />
-            <Why icon={RefreshCw} t="Reject and resample, freely" d="If a batch is not the right fit, regenerate with adjusted criteria. No quotas, no extra fees, no algorithmic penalty for being selective. Get the shortlist that actually works." />
-            <Why icon={AlertTriangle} t="Honest matching, not hype" d="Partial matches are flagged clearly. The system tells you what fits and what does not, so you can make decisions faster. No inflated scores, no padded shortlists." />
+            <Why icon={ScaleIcon} t="Built-in compliance" d="Aurapply is designed around the EU AI Act (Annex III, recruitment) and GDPR. Audit trails, human-in-the-loop, transparent reasoning, candidate rights. The compliance work is already done." />
+            <Why icon={ShieldIcon} t="Pre-verified candidates" d="Identity, education, and employment verified through trusted EU providers before candidates reach you. Less vetting, fewer late-stage surprises, faster time to hire." />
+            <Why icon={RegenerateIcon} t="Reject and resample, freely" d="If a batch is not the right fit, regenerate with adjusted criteria. No quotas, no extra fees, no algorithmic penalty for being selective. Get the shortlist that actually works." />
+            <Why icon={WarningIcon} t="Honest matching, not hype" d="Partial matches are flagged clearly. The system tells you what fits and what does not, so you can make decisions faster. No inflated scores, no padded shortlists." />
           </div>
         </div>
       </section>
