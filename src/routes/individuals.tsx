@@ -127,6 +127,9 @@ function Individuals() {
 
       {/* How it works */}
       <section className="px-6 py-20 au-band border-y border-border">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-2xl">
+            Three steps. No more application black holes.
           </h2>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             <Step n={1} t="Build a verified profile." d="Add your experience, skills, languages, and preferences. Verify your identity, education, and work history. Verified profiles get prioritized in shortlists, which means recruiters see you first." />
