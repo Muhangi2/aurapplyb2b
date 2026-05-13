@@ -1,15 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { PageShell } from "@/components/layout";
-import {
-  ProfileIcon,
-  ReasoningIcon,
-  ShieldIcon,
-  ScaleIcon,
-  TeamIcon,
-  LockIcon,
-  AuditTrailIcon,
-} from "@/components/icons";
+import { useEffect, useState } from "react";
+import logoUrl from "@/assets/aurapply-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,301 +22,408 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-/* ─────────────────────────── Section reveal ─────────────────────────── */
-
-function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return (
-    <div
-      ref={ref}
-      className={`transition-opacity duration-[400ms] ease-out ${visible ? "opacity-100" : "opacity-60"} ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
 /* ─────────────────────────── Page ─────────────────────────── */
 
 function Landing() {
   return (
-    <PageShell>
-      {/* ───── Section 1: Hero ───── */}
-      <section className="relative px-6 min-h-[calc(100vh-3.5rem)] flex items-center overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(50% 50% at 50% 45%, color-mix(in oklab, var(--primary) 7%, transparent) 0%, transparent 70%)",
-          }}
-          aria-hidden
-        />
-        <div className="relative mx-auto w-full max-w-[920px] text-center py-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium text-foreground/80 mb-8 relative">
-            <span
-              className="absolute inset-0 rounded-full p-[1px] -z-10"
-              style={{
-                background: "var(--gradient-cta)",
-                WebkitMask:
-                  "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)",
-                WebkitMaskComposite: "xor",
-                maskComposite: "exclude",
-                padding: "1px",
-              }}
-              aria-hidden
-            />
-            <span className="absolute inset-0 rounded-full bg-background -z-20" aria-hidden />
+    <div
+      className="min-h-screen w-full bg-[#02040a] text-slate-200 selection:bg-blue-500/30 selection:text-blue-200"
+      style={{ fontFamily: "Inter, system-ui, sans-serif" }}
+    >
+      <DarkNav />
+
+      {/* ───── Hero ───── */}
+      <main className="relative pt-32 pb-24 px-6 overflow-hidden">
+        {/* Background detail */}
+        <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[520px] bg-blue-600/10 blur-[120px] rounded-full opacity-60" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+              maskImage:
+                "radial-gradient(ellipse at 50% 30%, #000 40%, transparent 80%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse at 50% 30%, #000 40%, transparent 80%)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
             </span>
-            A new way to be hired
+            <span className="text-[11px] font-medium tracking-[0.14em] text-blue-400 uppercase">
+              A new way to be hired
+            </span>
           </div>
 
-          <h1 className="text-[52px] sm:text-7xl md:text-[88px] lg:text-[104px] font-semibold tracking-tight leading-[1.02] text-foreground">
-            The work, not the search, finds you.
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-white mb-6 leading-[1.04]">
+            The work, not the search,
+            <br />
+            <span className="text-slate-500">finds you.</span>
           </h1>
 
-          <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-[680px] mx-auto leading-relaxed">
-            Aurapply is an AI hiring platform where roles find people, and the right
-            conversation begins only when both sides agree to it.
+          {/* Subhead */}
+          <p className="max-w-xl text-base md:text-lg text-slate-400 mb-10 leading-relaxed">
+            Aurapply is an AI hiring platform where roles find people, and the
+            right conversation begins only when both sides agree to it.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
             <Link
               to="/individuals"
-              className="au-cta-gradient inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold"
+              className="px-6 py-2.5 bg-white text-black font-medium text-sm rounded-md hover:bg-slate-200 transition-all shadow-lg shadow-white/5"
             >
               Join the pool
             </Link>
             <Link
               to="/businesses"
-              className="au-cta-gradient inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold"
-              style={{ background: "linear-gradient(120deg,#1E2A5E 0%,#3B82F6 100%)" }}
+              className="px-6 py-2.5 bg-white/5 border border-white/10 text-white font-medium text-sm rounded-md hover:bg-white/10 transition-all"
             >
               Hire from the pool
             </Link>
           </div>
 
-          <p className="mt-5 text-sm text-muted-foreground">
-            Free for individuals. Sales-led for hiring teams.
+          <p className="text-[11px] font-medium text-slate-500 uppercase tracking-[0.18em] mb-16">
+            Free for individuals · Sales-led for hiring teams
           </p>
 
-          <div className="mt-20 flex justify-center" aria-hidden>
-            <div className="relative h-12 w-px overflow-hidden">
-              <span
-                className="absolute inset-x-0 top-0 h-6 w-px bg-gradient-to-b from-transparent via-primary to-transparent"
-                style={{ animation: "scrollHint 2.2s ease-in-out infinite" }}
-              />
-            </div>
-          </div>
+          {/* Product surface hint */}
+          <ProductSurface />
         </div>
+      </main>
 
-        <style>{`
-          @keyframes scrollHint {
-            0% { transform: translateY(-100%); opacity: 0; }
-            40% { opacity: 1; }
-            100% { transform: translateY(200%); opacity: 0; }
-          }
-        `}</style>
-      </section>
+      {/* ───── The model ───── */}
+      <Section eyebrow="The model" title={<>Posted role. Curated match. <span className="text-slate-500">Mutual consent.</span></>}>
+        <div className="mt-14 grid gap-8 md:grid-cols-3 text-left">
+          <ModelStep
+            n="01"
+            title="Roles are posted with structured requirements."
+            body="Hiring teams describe what they need in specific, verifiable terms."
+          />
+          <ModelStep
+            n="02"
+            title="The platform finds the people who fit."
+            body="Matching is initiated by the role. The AI surfaces candidates whose profiles meet the requirements, with full reasoning."
+          />
+          <ModelStep
+            n="03"
+            title="The conversation starts only with consent."
+            body="When a hiring team wants to contact a matched person, that person decides whether the conversation happens."
+          />
+        </div>
+        <p className="mt-14 text-base md:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          No applications. No searching. No conversation begins without both
+          sides agreeing to it.
+        </p>
+      </Section>
 
-      {/* ───── Section 2: The new model ───── */}
-      <Reveal>
-        <section className="au-band px-6 py-24">
-          <div className="mx-auto max-w-[1040px] text-center">
-            <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              THE MODEL
-            </div>
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
-              Posted role. Curated match.<br />Mutual consent.
-            </h2>
+      {/* ───── Why ───── */}
+      <Section eyebrow="Why Aurapply" title={<>Intelligent matching, built honestly.</>}>
+        <div className="mt-14 grid gap-4 md:grid-cols-3 text-left">
+          <FeatureCard
+            label="01 / Reasoning"
+            title="Every match, explained."
+            body="You see the reasoning behind every match. Both sides do."
+          />
+          <FeatureCard
+            label="02 / Consent"
+            title="Consent, built in."
+            body="Your data is shared only when you have approved the contact."
+          />
+          <FeatureCard
+            label="03 / Fairness"
+            title="Tested for fairness."
+            body="The matching engine is bias-tested quarterly. The methodology is published."
+          />
+        </div>
+      </Section>
 
-            <div className="mt-16 grid gap-10 md:grid-cols-3 text-left">
-              <ModelStep
-                n="01"
-                title="Roles are posted with structured requirements."
-                body="Hiring teams describe what they need in specific, verifiable terms."
-              />
-              <ModelStep
-                n="02"
-                title="The platform finds the people who fit."
-                body="Matching is initiated by the role. The AI surfaces the candidates whose profiles meet the requirements, with full reasoning."
-              />
-              <ModelStep
-                n="03"
-                title="The conversation starts only with consent."
-                body="When a hiring team wants to contact a matched person, that person decides whether the conversation happens."
-              />
-            </div>
+      {/* ───── Two paths ───── */}
+      <Section eyebrow="Whichever side you are on" title={<>The platform is open.</>}>
+        <div className="mt-14 grid gap-4 md:grid-cols-2 text-left">
+          <PathCard
+            to="/individuals"
+            tag="For individuals"
+            title="I am looking for work."
+            body="Build a verified profile. Be matched to roles where you fit. Approve every contact."
+            cta="Join the pool"
+          />
+          <PathCard
+            to="/businesses"
+            tag="For hiring teams"
+            title="We are hiring."
+            body="Post a role. Receive a curated shortlist of pre-verified candidates. Pay only when you hire."
+            cta="Start a conversation"
+          />
+        </div>
+      </Section>
 
-            <p className="mt-16 text-base md:text-lg text-muted-foreground max-w-[760px] mx-auto leading-relaxed">
-              No applications. No searching. No conversation begins without both sides
-              agreeing to it.
-            </p>
-          </div>
-        </section>
-      </Reveal>
+      {/* ───── Compliance ───── */}
+      <Section eyebrow="Built in Europe" title={<>Hiring, reimagined for the EU.</>}>
+        <p className="mt-5 text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          GDPR and EU AI Act, by design. Data stays in Europe. Reasoning is
+          logged. Rights are real.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+          <Pill label="GDPR by design" />
+          <Pill label="EU AI Act-ready" />
+          <Pill label="Full audit trail" />
+          <Pill label="Data stays in the EU" />
+        </div>
+        <div className="mt-10">
+          <Link
+            to="/documentation"
+            className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            Read the documentation →
+          </Link>
+        </div>
+      </Section>
 
-      {/* ───── Section 3: Why Aurapply ───── */}
-      <Reveal>
-        <section className="px-6 py-24">
-          <div className="mx-auto max-w-[1080px] text-center">
-            <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              WHY AURAPPLY
-            </div>
-            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
-              Intelligent matching, built honestly.
-            </h2>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-3 text-left">
-              <FeatureCard
-                icon={<ReasoningIcon className="text-primary" size={48} />}
-                title="Every match, explained."
-                body="You see the reasoning behind every match. Both sides do."
-              />
-              <FeatureCard
-                icon={<ShieldIcon className="text-primary" size={48} />}
-                title="Consent built in."
-                body="Your data is shared only when you have approved the contact."
-              />
-              <FeatureCard
-                icon={<ScaleIcon className="text-primary" size={48} />}
-                title="Tested for fairness."
-                body="The matching engine is bias-tested quarterly. The methodology is published."
-              />
-            </div>
-          </div>
-        </section>
-      </Reveal>
-
-      {/* ───── Section 4: Two paths ───── */}
-      <Reveal>
-        <section className="au-band px-6 py-24">
-          <div className="mx-auto max-w-[1080px] text-center">
-            <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              WHICHEVER SIDE YOU ARE ON
-            </div>
-            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
-              The platform is open.
-            </h2>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-2 text-left">
-              <PathCard
-                to="/individuals"
-                icon={<ProfileIcon className="text-primary" size={56} />}
-                title="I am looking for work"
-                body="Build a verified profile. Be matched to roles where you fit. Approve every contact."
-                cta="Join the pool →"
-              />
-              <PathCard
-                to="/businesses"
-                icon={<TeamIcon className="text-primary" size={56} />}
-                title="We are hiring"
-                body="Post a role. Receive a curated shortlist of pre-verified candidates. Pay only when you hire."
-                cta="Start a conversation →"
-              />
-            </div>
-          </div>
-        </section>
-      </Reveal>
-
-      {/* ───── Section 5: Closing ───── */}
-      <Reveal>
-        <section className="px-6 py-24">
-          <div className="mx-auto max-w-[860px] text-center">
-            <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              BUILT IN EUROPE
-            </div>
-            <h2 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
-              Hiring, reimagined for the EU.
-            </h2>
-
-            <p className="mt-5 text-base text-muted-foreground max-w-[640px] mx-auto leading-relaxed">
-              GDPR and EU AI Act, by design. Data stays in Europe. Reasoning is logged.
-              Rights are real.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <CompliancePill icon={<LockIcon size={16} />} label="GDPR by design" />
-              <CompliancePill icon={<ScaleIcon size={16} />} label="EU AI Act-ready" />
-              <CompliancePill icon={<AuditTrailIcon size={16} />} label="Full audit trail" />
-              <CompliancePill icon={<ShieldIcon size={16} />} label="Data stays in the EU" />
-            </div>
-
-            <div className="mt-10">
-              <Link
-                to="/documentation"
-                className="text-sm font-medium text-primary hover:underline underline-offset-4"
-              >
-                Read the documentation →
-              </Link>
-            </div>
-          </div>
-        </section>
-      </Reveal>
-    </PageShell>
+      <DarkFooter />
+    </div>
   );
 }
 
-/* ─────────────────────────── Subcomponents ─────────────────────────── */
+/* ─────────────────────────── Nav ─────────────────────────── */
+
+function DarkNav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300 ${
+        scrolled
+          ? "border-white/5 bg-[#02040a]/85 backdrop-blur-md"
+          : "border-transparent bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logoUrl} alt="" className="h-6 w-6 rounded-sm" />
+          <span className="font-semibold tracking-tight text-white text-sm">
+            Aurapply
+          </span>
+        </Link>
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/documentation/eu-ai-act-compliance">Compliance</NavLink>
+            <NavLink to="/documentation">Documentation</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+          </div>
+          <div className="h-4 w-px bg-white/10 hidden md:block" />
+          <Link
+            to="/signin"
+            className="text-xs font-medium text-white hover:opacity-80 transition-opacity"
+          >
+            Sign in
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
+  return (
+    <Link
+      to={to}
+      className="text-xs font-medium text-slate-400 hover:text-white transition-colors"
+    >
+      {children}
+    </Link>
+  );
+}
+
+/* ─────────────────────────── Section ─────────────────────────── */
+
+function Section({
+  eyebrow,
+  title,
+  children,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="relative px-6 py-24 border-t border-white/5">
+      <div className="max-w-5xl mx-auto text-center">
+        <div className="text-[10px] font-semibold tracking-[0.22em] text-blue-400 uppercase">
+          {eyebrow}
+        </div>
+        <h2 className="mt-4 text-3xl md:text-5xl font-semibold tracking-tight text-white leading-[1.08]">
+          {title}
+        </h2>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── Pieces ─────────────────────────── */
+
+function ProductSurface() {
+  return (
+    <div className="w-full max-w-2xl bg-[#0a0c12] border border-white/10 rounded-xl p-1 shadow-2xl">
+      <div className="bg-[#02040a] rounded-lg border border-white/5 overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-red-500/50" />
+            <div className="w-2 h-2 rounded-full bg-amber-500/50" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500/50" />
+          </div>
+          <div className="text-[10px] font-mono text-slate-500 tracking-widest uppercase">
+            Active matches
+          </div>
+        </div>
+        <div className="p-6 space-y-3">
+          <MatchRow
+            initial="S"
+            initialClass="bg-blue-600/20 border-blue-500/30 text-blue-400"
+            title="Senior Backend Engineer"
+            meta="Matched with a Series B fintech · Dublin"
+            badge={{
+              text: "98% MATCH",
+              cls: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+            }}
+          />
+          <MatchRow
+            initial="L"
+            initialClass="bg-violet-600/20 border-violet-500/30 text-violet-300"
+            title="Product Designer"
+            meta="Matched with a developer-tools company · Remote EU"
+            badge={{
+              text: "PENDING CONSENT",
+              cls: "bg-white/5 text-slate-400 border-white/10",
+            }}
+            dimmed
+          />
+          <MatchRow
+            initial="A"
+            initialClass="bg-emerald-600/20 border-emerald-500/30 text-emerald-300"
+            title="Staff Data Scientist"
+            meta="Matched with a healthtech scale-up · Berlin"
+            badge={{
+              text: "94% MATCH",
+              cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MatchRow({
+  initial,
+  initialClass,
+  title,
+  meta,
+  badge,
+  dimmed = false,
+}: {
+  initial: string;
+  initialClass: string;
+  title: string;
+  meta: string;
+  badge: { text: string; cls: string };
+  dimmed?: boolean;
+}) {
+  return (
+    <div
+      className={`flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] ${
+        dimmed ? "opacity-60" : ""
+      }`}
+    >
+      <div className="flex items-center gap-4 min-w-0">
+        <div
+          className={`w-10 h-10 rounded-md flex items-center justify-center border ${initialClass}`}
+        >
+          <span className="font-bold text-xs">{initial}</span>
+        </div>
+        <div className="text-left min-w-0">
+          <div className="text-sm font-medium text-white truncate">{title}</div>
+          <div className="text-xs text-slate-500 truncate">{meta}</div>
+        </div>
+      </div>
+      <div
+        className={`shrink-0 px-2 py-1 rounded text-[10px] font-bold border ${badge.cls}`}
+      >
+        {badge.text}
+      </div>
+    </div>
+  );
+}
 
 function ModelStep({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div>
-      <div className="text-sm font-semibold tracking-[0.14em] text-primary">{n}</div>
-      <h3 className="mt-3 text-lg md:text-xl font-semibold tracking-tight text-foreground leading-snug">
+    <div className="border-t border-white/10 pt-6">
+      <div
+        className="text-[11px] font-semibold tracking-[0.18em] text-blue-400"
+        style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+      >
+        {n}
+      </div>
+      <h3 className="mt-4 text-lg font-semibold tracking-tight text-white leading-snug">
         {title}
       </h3>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+      <p className="mt-3 text-sm leading-relaxed text-slate-400">{body}</p>
     </div>
   );
 }
 
 function FeatureCard({
-  icon,
+  label,
   title,
   body,
 }: {
-  icon: React.ReactNode;
+  label: string;
   title: string;
   body: string;
 }) {
   return (
-    <div className="group au-card au-card-hover relative overflow-hidden p-7">
-      <span className="au-accent-bar-reveal" aria-hidden />
-      <div className="mb-5">{icon}</div>
-      <h3 className="text-lg font-semibold tracking-tight text-foreground">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+    <div className="group relative p-6 rounded-lg bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.03] transition-colors">
+      <div
+        className="text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase"
+        style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+      >
+        {label}
+      </div>
+      <h3 className="mt-5 text-base font-semibold tracking-tight text-white">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-400">{body}</p>
     </div>
   );
 }
 
 function PathCard({
   to,
-  icon,
+  tag,
   title,
   body,
   cta,
 }: {
   to: string;
-  icon: React.ReactNode;
+  tag: string;
   title: string;
   body: string;
   cta: string;
@@ -333,22 +431,83 @@ function PathCard({
   return (
     <Link
       to={to}
-      className="group au-card au-card-hover relative overflow-hidden p-9 flex flex-col"
+      className="group relative p-8 rounded-xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 hover:bg-white/[0.04] transition-colors flex flex-col"
     >
-      <span className="au-accent-bar-reveal" aria-hidden />
-      <div className="mb-6">{icon}</div>
-      <h3 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h3>
-      <p className="mt-3 text-base leading-relaxed text-muted-foreground">{body}</p>
-      <div className="mt-6 text-sm font-medium text-primary">{cta}</div>
+      <div
+        className="text-[10px] font-semibold tracking-[0.18em] text-blue-400 uppercase"
+        style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+      >
+        {tag}
+      </div>
+      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-slate-400">{body}</p>
+      <div className="mt-6 text-sm font-medium text-white inline-flex items-center gap-1.5">
+        {cta}
+        <span className="transition-transform group-hover:translate-x-0.5">→</span>
+      </div>
     </Link>
   );
 }
 
-function CompliancePill({ icon, label }: { icon: React.ReactNode; label: string }) {
+function Pill({ label }: { label: string }) {
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-surface text-xs font-medium text-foreground/80">
-      <span className="text-primary">{icon}</span>
+    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-slate-300">
+      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
       {label}
     </div>
+  );
+}
+
+/* ─────────────────────────── Footer ─────────────────────────── */
+
+function DarkFooter() {
+  return (
+    <footer className="border-t border-white/5 mt-12">
+      <div className="max-w-6xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-4 text-sm">
+        <div className="md:col-span-2">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoUrl} alt="" className="h-6 w-6 rounded-sm" />
+            <span className="font-semibold tracking-tight text-white">
+              Aurapply
+            </span>
+          </Link>
+          <p className="mt-4 text-slate-500 max-w-sm leading-relaxed">
+            An AI hiring platform where roles find people, and the right
+            conversation begins only when both sides agree to it.
+          </p>
+        </div>
+        <div>
+          <div className="text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase mb-4">
+            Product
+          </div>
+          <ul className="space-y-2.5 text-slate-400">
+            <li><Link to="/individuals" className="hover:text-white transition-colors">For Individuals</Link></li>
+            <li><Link to="/businesses" className="hover:text-white transition-colors">For Hiring Teams</Link></li>
+            <li><Link to="/documentation" className="hover:text-white transition-colors">Documentation</Link></li>
+            <li><Link to="/documentation/eu-ai-act-compliance" className="hover:text-white transition-colors">Compliance</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase mb-4">
+            Company
+          </div>
+          <ul className="space-y-2.5 text-slate-400">
+            <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+            <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+            <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
+            <li><Link to="/terms" className="hover:text-white transition-colors">Terms</Link></li>
+            <li><Link to="/r/signin" className="hover:text-white transition-colors">Hiring team sign-in</Link></li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between gap-4 text-xs text-slate-500">
+          <div>Built in Europe. Data stays in Europe.</div>
+          <div>© {new Date().getFullYear()} Aurapply</div>
+        </div>
+      </div>
+    </footer>
   );
 }
