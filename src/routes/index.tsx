@@ -1,12 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { PageShell } from "@/components/layout";
-import { supabase } from "@/integrations/supabase/client";
 import {
   ProfileIcon,
-  CompanyIcon,
-  LocationIcon,
-  VerifiedIcon,
   ReasoningIcon,
   ShieldIcon,
   ScaleIcon,
@@ -18,16 +14,17 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aurapply — The AI hiring platform Europe trusts" },
+      { title: "Aurapply — The work, not the search, finds you" },
       {
         name: "description",
         content:
-          "Intelligent, transparent matching between people and roles. GDPR and EU AI Act by design.",
+          "Aurapply is an AI hiring platform where roles find people, and the right conversation begins only when both sides agree to it.",
       },
-      { property: "og:title", content: "Aurapply — The AI hiring platform Europe trusts" },
+      { property: "og:title", content: "Aurapply — The work, not the search, finds you" },
       {
         property: "og:description",
-        content: "Intelligent, transparent matching between people and roles.",
+        content:
+          "An AI hiring platform where roles find people, and the right conversation begins only when both sides agree to it.",
       },
     ],
   }),
@@ -64,127 +61,9 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   );
 }
 
-/* ─────────────────────────── Count-up ─────────────────────────── */
-
-function CountUp({
-  value,
-  suffix = "",
-  duration = 800,
-}: {
-  value: number | null;
-  suffix?: string;
-  duration?: number;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(0);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || value == null) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !started) {
-          setStarted(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.4 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [value, started]);
-
-  useEffect(() => {
-    if (!started || value == null) return;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setN(Math.round(eased * value));
-      if (t < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [started, value, duration]);
-
-  if (value == null) {
-    return (
-      <span ref={ref} className="text-base font-medium text-muted-foreground tracking-wide">
-        Launching
-      </span>
-    );
-  }
-  return (
-    <span ref={ref} className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-      {n.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
-/* ─────────────────────────── Live stats hook ─────────────────────────── */
-
-type Stats = {
-  profiles: number | null;
-  sectors: number | null;
-  countries: number | null;
-  verifiedPct: number | null;
-};
-
-function useLiveStats(): Stats {
-  const [stats, setStats] = useState<Stats>({
-    profiles: null,
-    sectors: null,
-    countries: null,
-    verifiedPct: null,
-  });
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        // Profiles count (anon will be limited by RLS — handled below)
-        const { count: profiles } = await supabase
-          .from("profiles")
-          .select("*", { count: "exact", head: true });
-
-        const { count: sectors } = await supabase
-          .from("companies")
-          .select("industry", { count: "exact", head: true });
-
-        // We can't reliably aggregate distinct values via REST. Use null → "Launching"
-        // unless we have a meaningful profile count to derive from.
-        const ready = (profiles ?? 0) > 25;
-
-        if (!cancelled) {
-          setStats({
-            profiles: ready ? profiles : null,
-            sectors: ready ? (sectors ?? null) : null,
-            countries: null,
-            verifiedPct: null,
-          });
-        }
-      } catch {
-        if (!cancelled) {
-          setStats({ profiles: null, sectors: null, countries: null, verifiedPct: null });
-        }
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return stats;
-}
-
 /* ─────────────────────────── Page ─────────────────────────── */
 
 function Landing() {
-  const stats = useLiveStats();
-
   return (
     <PageShell>
       {/* ───── Section 1: Hero ───── */}
@@ -193,11 +72,11 @@ function Landing() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(50% 50% at 50% 45%, color-mix(in oklab, var(--primary) 8%, transparent) 0%, transparent 70%)",
+              "radial-gradient(50% 50% at 50% 45%, color-mix(in oklab, var(--primary) 7%, transparent) 0%, transparent 70%)",
           }}
           aria-hidden
         />
-        <div className="relative mx-auto w-full max-w-[880px] text-center py-20">
+        <div className="relative mx-auto w-full max-w-[920px] text-center py-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium text-foreground/80 mb-8 relative">
             <span
               className="absolute inset-0 rounded-full p-[1px] -z-10"
@@ -216,16 +95,16 @@ function Landing() {
               <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            AI matching, live across Europe
+            A new way to be hired
           </div>
 
-          <h1 className="text-[56px] sm:text-7xl md:text-[88px] font-semibold tracking-tight leading-[1.02] text-foreground">
-            The AI hiring platform<br />
-            <span className="au-gradient-text">Europe trusts.</span>
+          <h1 className="text-[52px] sm:text-7xl md:text-[88px] lg:text-[104px] font-semibold tracking-tight leading-[1.02] text-foreground">
+            The work, not the search, finds you.
           </h1>
 
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Intelligent, transparent matching between people and roles.
+          <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-[680px] mx-auto leading-relaxed">
+            Aurapply is an AI hiring platform where roles find people, and the right
+            conversation begins only when both sides agree to it.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -267,30 +146,44 @@ function Landing() {
         `}</style>
       </section>
 
-      {/* ───── Section 2: Live signal ───── */}
+      {/* ───── Section 2: The new model ───── */}
       <Reveal>
-        <section className="au-band px-6 py-20">
-          <div className="mx-auto max-w-[960px] text-center">
+        <section className="au-band px-6 py-24">
+          <div className="mx-auto max-w-[1040px] text-center">
             <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              INSIDE AURAPPLY
+              THE MODEL
             </div>
-            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
-              A growing pool of European talent.
+            <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
+              Posted role. Curated match.<br />Mutual consent.
             </h2>
 
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard icon={<ProfileIcon className="text-primary" size={28} />} value={stats.profiles} label="Profiles in the pool" />
-              <StatCard icon={<CompanyIcon className="text-primary" size={28} />} value={stats.sectors} label="Sectors represented" />
-              <StatCard icon={<LocationIcon className="text-primary" size={28} />} value={stats.countries} label="Countries served" />
-              <StatCard icon={<VerifiedIcon className="text-primary" size={28} accentDot={false} />} value={stats.verifiedPct} suffix="%" label="Verified profiles" />
+            <div className="mt-16 grid gap-10 md:grid-cols-3 text-left">
+              <ModelStep
+                n="01"
+                title="Roles are posted with structured requirements."
+                body="Hiring teams describe what they need in specific, verifiable terms."
+              />
+              <ModelStep
+                n="02"
+                title="The platform finds the people who fit."
+                body="Matching is initiated by the role. The AI surfaces the candidates whose profiles meet the requirements, with full reasoning."
+              />
+              <ModelStep
+                n="03"
+                title="The conversation starts only with consent."
+                body="When a hiring team wants to contact a matched person, that person decides whether the conversation happens."
+              />
             </div>
 
-            <p className="mt-10 text-sm text-muted-foreground">We do not inflate.</p>
+            <p className="mt-16 text-base md:text-lg text-muted-foreground max-w-[760px] mx-auto leading-relaxed">
+              No applications. No searching. No conversation begins without both sides
+              agreeing to it.
+            </p>
           </div>
         </section>
       </Reveal>
 
-      {/* ───── Section 3: What makes Aurapply different ───── */}
+      {/* ───── Section 3: Why Aurapply ───── */}
       <Reveal>
         <section className="px-6 py-24">
           <div className="mx-auto max-w-[1080px] text-center">
@@ -298,24 +191,24 @@ function Landing() {
               WHY AURAPPLY
             </div>
             <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
-              AI matching, without the AI nonsense.
+              Intelligent matching, built honestly.
             </h2>
 
             <div className="mt-14 grid gap-6 md:grid-cols-3 text-left">
               <FeatureCard
                 icon={<ReasoningIcon className="text-primary" size={48} />}
                 title="Every match, explained."
-                body="You see the reasoning. Always."
+                body="You see the reasoning behind every match. Both sides do."
               />
               <FeatureCard
                 icon={<ShieldIcon className="text-primary" size={48} />}
                 title="Consent built in."
-                body="No data shared without your active approval."
+                body="Your data is shared only when you have approved the contact."
               />
               <FeatureCard
                 icon={<ScaleIcon className="text-primary" size={48} />}
                 title="Tested for fairness."
-                body="Quarterly bias testing, published methodology."
+                body="The matching engine is bias-tested quarterly. The methodology is published."
               />
             </div>
           </div>
@@ -353,16 +246,21 @@ function Landing() {
         </section>
       </Reveal>
 
-      {/* ───── Section 5: Compliance closing ───── */}
+      {/* ───── Section 5: Closing ───── */}
       <Reveal>
         <section className="px-6 py-24">
           <div className="mx-auto max-w-[860px] text-center">
             <div className="text-xs font-semibold tracking-[0.18em] text-muted-foreground">
-              BUILT FOR EUROPE
+              BUILT IN EUROPE
             </div>
             <h2 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight">
-              GDPR and EU AI Act, by design.
+              Hiring, reimagined for the EU.
             </h2>
+
+            <p className="mt-5 text-base text-muted-foreground max-w-[640px] mx-auto leading-relaxed">
+              GDPR and EU AI Act, by design. Data stays in Europe. Reasoning is logged.
+              Rights are real.
+            </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <CompliancePill icon={<LockIcon size={16} />} label="GDPR by design" />
@@ -388,24 +286,14 @@ function Landing() {
 
 /* ─────────────────────────── Subcomponents ─────────────────────────── */
 
-function StatCard({
-  icon,
-  value,
-  suffix,
-  label,
-}: {
-  icon: React.ReactNode;
-  value: number | null;
-  suffix?: string;
-  label: string;
-}) {
+function ModelStep({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="au-card p-6 text-left">
-      <div className="mb-4">{icon}</div>
-      <div className="min-h-[3rem] flex items-end">
-        <CountUp value={value} suffix={suffix} />
-      </div>
-      <div className="mt-2 text-sm text-muted-foreground">{label}</div>
+    <div>
+      <div className="text-sm font-semibold tracking-[0.14em] text-primary">{n}</div>
+      <h3 className="mt-3 text-lg md:text-xl font-semibold tracking-tight text-foreground leading-snug">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }
