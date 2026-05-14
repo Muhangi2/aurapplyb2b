@@ -270,10 +270,8 @@ function FooterCol({ heading, links }: { heading: string; links: FooterLink[] })
         {links.map((l) => (
           <li key={l.label}>
             <Link
-              // @ts-expect-error - dynamic
-              to={l.to}
-              // @ts-expect-error
-              params={l.params}
+              to={l.to as any}
+              params={l.params as any}
               className="text-sm text-slate-600 hover:text-slate-900 transition-colors"
             >
               {l.label}
