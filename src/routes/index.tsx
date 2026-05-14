@@ -81,10 +81,8 @@ function FloatingNav() {
             ) : (
               <Link
                 key={item.label}
-                // @ts-expect-error - dynamic to + params handled per item
-                to={item.to}
-                // @ts-expect-error
-                params={item.params}
+                to={item.to as any}
+                params={item.params as any}
                 className="hidden sm:inline-flex text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2 rounded-full transition-colors"
               >
                 {item.label}
