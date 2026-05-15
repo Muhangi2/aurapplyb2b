@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { X } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { RecruiterNav } from "@/components/recruiter-layout";
-import logoUrl from "@/assets/aurapply-logo.png";
+export const pageContainer =
+  "mx-auto w-full max-w-[1400px] px-6 sm:px-8 lg:px-12";
 
-function Logo() {
+function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2">
-      <img src={logoUrl} alt="Aurapply" className="h-7 w-7" />
-      <span className="font-semibold tracking-tight text-foreground">Aurapply</span>
+    <Link
+      to="/"
+      className={`font-medium tracking-tight text-foreground ${compact ? "text-sm" : "text-sm"}`}
+    >
+      Appointed
     </Link>
   );
 }
@@ -20,18 +21,26 @@ function CandidateNav() {
   const nav = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const linkCls = (href: string) =>
-    `px-3 py-1.5 rounded-md text-sm transition ${
-      path === href ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+    `px-2.5 py-1 text-sm transition-colors ${
+      path === href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
     }`;
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-14">
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
+      <nav className="mx-auto flex h-12 w-full max-w-[1400px] items-center justify-between px-6 sm:px-8 lg:px-12">
         <Logo />
-        <div className="hidden md:flex items-center gap-1">
-          <Link to="/dashboard" className={linkCls("/dashboard")}>Dashboard</Link>
-          <Link to="/profile" className={linkCls("/profile")}>Profile</Link>
-          <Link to="/privacy" className={linkCls("/privacy")}>Privacy</Link>
-          <Link to="/settings" className={linkCls("/settings")}>Settings</Link>
+        <div className="hidden items-center gap-0.5 md:flex">
+          <Link to="/dashboard" className={linkCls("/dashboard")}>
+            Dashboard
+          </Link>
+          <Link to="/profile" className={linkCls("/profile")}>
+            Profile
+          </Link>
+          <Link to="/privacy" className={linkCls("/privacy")}>
+            Privacy
+          </Link>
+          <Link to="/settings" className={linkCls("/settings")}>
+            Settings
+          </Link>
         </div>
         <Button
           variant="ghost"
@@ -50,15 +59,6 @@ function CandidateNav() {
 
 function PublicNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const items: { to: string; label: string; match: (p: string) => boolean }[] = [
     { to: "/about", label: "About", match: (p) => p === "/about" },
@@ -72,33 +72,34 @@ function PublicNav() {
   ];
 
   const linkCls = (active: boolean) =>
-    `px-3 py-1.5 rounded-full text-sm transition-colors ${
-      active ? "text-foreground font-medium" : "text-muted-foreground hover:text-primary"
+    `px-2.5 py-1 text-sm transition-colors ${
+      active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
     }`;
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
-        scrolled ? "py-2" : "py-0"
-      }`}
-    >
-      <nav
-        className={`mx-auto flex items-center justify-between transition-all duration-300 ${
-          scrolled
-            ? "max-w-5xl mx-auto px-5 h-12 au-nav"
-            : "max-w-6xl px-6 h-14 border-b border-border bg-background/85 backdrop-blur"
-        }`}
-      >
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
+      <nav className="mx-auto flex h-12 w-full max-w-[1400px] items-center justify-between px-6 sm:px-8 lg:px-12">
         <Logo />
-        <div className="hidden md:flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
           {items.map((item) => (
-            <Link key={item.to} to={item.to} className={linkCls(item.match(path))}>
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`hidden sm:inline-flex ${linkCls(item.match(path))}`}
+            >
               {item.label}
             </Link>
           ))}
           <Link
+            to="/signup"
+            search={{ type: "candidate" }}
+            className="hidden px-2.5 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
+          >
+            Create profile
+          </Link>
+          <Link
             to="/signin"
-            className="ml-2 px-3 py-1.5 rounded-full text-sm font-medium text-foreground hover:text-primary transition-colors"
+            className="ml-1 px-2.5 py-1 text-sm text-foreground transition-colors hover:text-primary"
           >
             Sign in
           </Link>
@@ -117,35 +118,98 @@ export function TopNav() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 bg-surface-alt">
-      <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-2">
-        <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Product</div>
-          <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/individuals" className="hover:text-primary transition-colors">For Individuals</Link></li>
-            <li><Link to="/businesses" className="hover:text-primary transition-colors">For Hiring Teams</Link></li>
-            <li><Link to="/documentation" className="hover:text-primary transition-colors">Documentation</Link></li>
-            <li><Link to="/documentation/how-matching-works" className="hover:text-primary transition-colors">How matching works</Link></li>
+    <footer className="mt-auto border-t border-border bg-background">
+      <div className="border-b border-border px-6 py-12 text-center sm:px-8 lg:px-12">
+        <p className="au-eyebrow text-primary">For hiring teams</p>
+        <p className="mx-auto mt-3 max-w-2xl text-sm font-medium text-foreground">
+          Curated shortlists, pre-verified candidates.
+        </p>
+        <div className="mt-5">
+          <Button asChild>
+            <Link to="/businesses">Register your company</Link>
+          </Button>
+        </div>
+      </div>
+
+      <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-6 py-12 sm:grid-cols-2 sm:px-8 lg:px-12">
+        <div>
+          <div className="text-xs font-medium text-foreground">Product</div>
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <li>
+              <Link to="/individuals" className="transition-colors hover:text-foreground">
+                For Individuals
+              </Link>
+            </li>
+            <li>
+              <Link to="/businesses" className="transition-colors hover:text-foreground">
+                For Hiring Teams
+              </Link>
+            </li>
+            <li>
+              <Link to="/documentation" className="transition-colors hover:text-foreground">
+                Documentation
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/documentation/how-matching-works"
+                className="transition-colors hover:text-foreground"
+              >
+                How matching works
+              </Link>
+            </li>
           </ul>
         </div>
-        <div className="text-sm">
-          <div className="font-medium mb-3 text-foreground">Company</div>
-          <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/about" className="hover:text-primary transition-colors">About</Link></li>
-            <li><Link to="/documentation/eu-ai-act-compliance" className="hover:text-primary transition-colors">Compliance</Link></li>
-            <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link></li>
-            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms</Link></li>
-            <li><Link to="/imprint" className="hover:text-primary transition-colors">Imprint</Link></li>
-            <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
-            <li><Link to="/r/signin" className="hover:text-primary transition-colors">Hiring team sign-in</Link></li>
+        <div>
+          <div className="text-xs font-medium text-foreground">Company</div>
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <li>
+              <Link to="/about" className="transition-colors hover:text-foreground">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/documentation/eu-ai-act-compliance"
+                className="transition-colors hover:text-foreground"
+              >
+                Compliance
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy" className="transition-colors hover:text-foreground">
+                Privacy
+              </Link>
+            </li>
+            <li>
+              <Link to="/terms" className="transition-colors hover:text-foreground">
+                Terms
+              </Link>
+            </li>
+            <li>
+              <Link to="/imprint" className="transition-colors hover:text-foreground">
+                Imprint
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="transition-colors hover:text-foreground">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/r/signin" className="transition-colors hover:text-foreground">
+                Hiring team sign-in
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
+
       <div className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between gap-4 text-xs text-muted-foreground">
-          <Logo />
-          <div className="hidden sm:block">Built in Europe. Data stays in Europe.</div>
-          <div>© {new Date().getFullYear()} Aurapply</div>
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center justify-between gap-3 px-6 py-5 text-xs text-muted-foreground sm:flex-row sm:px-8 lg:px-12">
+          <Logo compact />
+          <span className="text-center">Built in Europe. Data stays in Europe.</span>
+          <span>© {new Date().getFullYear()} Appointed</span>
         </div>
       </div>
     </footer>
@@ -153,40 +217,8 @@ export function Footer() {
 }
 
 export function PageShell({ children }: { children: React.ReactNode }) {
-  const [showPromo, setShowPromo] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setShowPromo(window.localStorage.getItem("au-promo-dismissed") !== "1");
-  }, []);
-
-  const dismissPromo = () => {
-    setShowPromo(false);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("au-promo-dismissed", "1");
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {showPromo && (
-        <div className="au-promo text-xs md:text-sm">
-          <div className="mx-auto max-w-6xl px-6 py-2.5 flex items-center justify-center gap-3 text-center relative">
-            <span className="opacity-90">New. Aurapply launches in EU markets.</span>
-            <Link to="/about" className="font-medium underline-offset-2 hover:underline">
-              Read more →
-            </Link>
-            <button
-              type="button"
-              aria-label="Dismiss announcement"
-              onClick={dismissPromo}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-background/20 transition"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <TopNav />
       <main className="flex-1">{children}</main>
       <Footer />

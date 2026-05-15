@@ -1,5 +1,5 @@
 ## Goal
-Convert the recruiter side of Aurapply into a sales-gated experience while leaving the candidate flow untouched.
+Convert the recruiter side of Appointed into a sales-gated experience while leaving the candidate flow untouched.
 
 ## Scope of changes
 

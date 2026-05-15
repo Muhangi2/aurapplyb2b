@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout";
+import { PageShell, pageContainer } from "@/components/layout";
 
 export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "Imprint — Aurapply" },
-      { name: "description", content: "Legal information for Aurapply OÜ." },
-      { property: "og:title", content: "Imprint — Aurapply" },
-      { property: "og:description", content: "Legal information for Aurapply OÜ." },
+      { title: "Imprint — Appointed" },
+      { name: "description", content: "Legal information for Appointed OÜ." },
+      { property: "og:title", content: "Imprint — Appointed" },
+      { property: "og:description", content: "Legal information for Appointed OÜ." },
     ],
   }),
   component: ImprintPage,
@@ -16,14 +16,14 @@ export const Route = createFileRoute("/imprint")({
 function ImprintPage() {
   return (
     <PageShell>
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-2xl">
-          <h1 className="text-4xl font-semibold tracking-tight">Imprint</h1>
+      <section className="py-20">
+        <div className={`${pageContainer} max-w-2xl`}>
+          <h1 className="au-page-title">Imprint</h1>
           <p className="mt-2 text-sm text-muted-foreground">Information pursuant to applicable EU and national disclosure rules.</p>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             <Card title="Company">
-              <p>Aurapply OÜ</p>
+              <p>Appointed OÜ</p>
               <p>Tartu mnt 67/1-13b</p>
               <p>10115 Tallinn, Estonia</p>
             </Card>
@@ -33,7 +33,7 @@ function ImprintPage() {
               <p>Managing director: J. Laine</p>
             </Card>
             <Card title="Contact">
-              <p>Email: <a className="text-primary hover:underline" href="mailto:hello@aurapply.com">hello@aurapply.com</a></p>
+              <p>Email: <a className="text-primary hover:underline" href="mailto:hello@appointed.com">hello@appointed.com</a></p>
               <p>Phone: +372 600 1234</p>
             </Card>
             <Card title="Supervisory authority">

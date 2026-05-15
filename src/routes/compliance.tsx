@@ -1,14 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout";
+import { PageShell, pageContainer } from "@/components/layout";
+import { MarketingHero, ProductDemo } from "@/components/product-demo";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/compliance")({
   head: () => ({
     meta: [
       { title: "Compliance — GDPR & EU AI Act-ready hiring" },
-      { name: "description", content: "How Aurapply meets the requirements of the GDPR, the EU AI Act, and EU non-discrimination rules in hiring." },
-      { property: "og:title", content: "Compliance — Aurapply" },
-      { property: "og:description", content: "GDPR-native, EU AI Act-ready, audit-friendly by design." },
+      {
+        name: "description",
+        content:
+          "How Appointed meets the requirements of the GDPR, the EU AI Act, and EU non-discrimination rules in hiring.",
+      },
+      { property: "og:title", content: "Compliance — Appointed" },
+      {
+        property: "og:description",
+        content: "GDPR-native, EU AI Act-ready, audit-friendly by design.",
+      },
     ],
   }),
   component: CompliancePage,
@@ -28,7 +36,7 @@ const PILLARS = [
   {
     tag: "Non-discrimination",
     title: "Bias monitored, not assumed away",
-    body: "We don&apos;t use protected attributes as match features. We audit outcome distributions and publish disparity metrics to recruiter customers on request.",
+    body: "We don't use protected attributes as match features. We audit outcome distributions and publish disparity metrics to recruiter customers on request.",
   },
   {
     tag: "Security",
@@ -47,26 +55,33 @@ const CERTS = [
 function CompliancePage() {
   return (
     <PageShell>
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-coral to-violet" />
-            Compliance
-          </div>
-          <h1 className="mt-5 text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
-            <span className="au-gradient-text">Built for the rules</span><br />
-            <span className="text-foreground">European hiring expects.</span>
-          </h1>
-          <p className="mt-5 max-w-2xl text-muted-foreground leading-relaxed">
-            Aurapply is engineered around the GDPR, the EU AI Act, and EU non-discrimination law. Compliance isn&apos;t a checkbox at the end — it shapes the data model.
-          </p>
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className={pageContainer}>
+          <MarketingHero
+            eyebrow="Compliance"
+            title={
+              <>
+                Built for the rules
+                <br />
+                European hiring expects.
+              </>
+            }
+            lead="Appointed is engineered around the GDPR, the EU AI Act, and EU non-discrimination law. Compliance shapes the data model — not a checkbox at the end."
+            demo={<ProductDemo variant="scoring" />}
+          />
+        </div>
+      </section>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+      <section className="au-band border-y border-border py-16 md:py-20">
+        <div className={pageContainer}>
+          <div className="grid gap-5 md:grid-cols-2">
             {PILLARS.map((p) => (
               <div key={p.tag} className="au-card p-6">
-                <div className="text-xs font-semibold uppercase tracking-wider text-primary">{p.tag}</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+                  {p.tag}
+                </div>
                 <div className="mt-2 text-lg font-semibold tracking-tight">{p.title}</div>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: p.body }} />
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
               </div>
             ))}
           </div>
@@ -75,7 +90,10 @@ function CompliancePage() {
             <div className="text-sm font-semibold tracking-tight">Certifications &amp; documents</div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               {CERTS.map((c) => (
-                <div key={c.label} className="flex items-center justify-between border-b border-border py-3 last:border-0 sm:border-0 sm:py-0">
+                <div
+                  key={c.label}
+                  className="flex items-center justify-between border-b border-border py-3 last:border-0 sm:border-0 sm:py-0"
+                >
                   <div className="text-sm font-medium">{c.label}</div>
                   <div className="text-xs text-muted-foreground">{c.note}</div>
                 </div>
@@ -84,8 +102,12 @@ function CompliancePage() {
           </div>
 
           <div className="mt-12 flex flex-wrap items-center gap-3">
-            <Button asChild><Link to="/contact">Request our DPA</Link></Button>
-            <Button asChild variant="outline"><Link to="/privacy-policy">Read the privacy policy</Link></Button>
+            <Button asChild>
+              <Link to="/contact">Request our DPA</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/privacy-policy">Read the privacy policy</Link>
+            </Button>
           </div>
         </div>
       </section>

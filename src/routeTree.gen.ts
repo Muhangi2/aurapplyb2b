@@ -40,6 +40,7 @@ import { Route as RBillingRouteImport } from './routes/r.billing'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as DocumentationSlugRouteImport } from './routes/documentation_.$slug'
 import { Route as BusinessesContactRouteImport } from './routes/businesses_.contact'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as RJobsNewRouteImport } from './routes/r.jobs.new'
 import { Route as RJobsIdRouteImport } from './routes/r.jobs.$id'
 import { Route as BusinessesContactSentRouteImport } from './routes/businesses_.contact_.sent'
@@ -199,6 +200,11 @@ const BusinessesContactRoute = BusinessesContactRouteImport.update({
   path: '/businesses/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RJobsNewRoute = RJobsNewRouteImport.update({
   id: '/r/jobs/new',
   path: '/r/jobs/new',
@@ -234,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/businesses/contact': typeof BusinessesContactRoute
   '/documentation/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -270,6 +277,7 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/businesses/contact': typeof BusinessesContactRoute
   '/documentation/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -307,6 +315,7 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/businesses_/contact': typeof BusinessesContactRoute
   '/documentation_/$slug': typeof DocumentationSlugRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -345,6 +354,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/auth/callback'
     | '/businesses/contact'
     | '/documentation/$slug'
     | '/matches/$id'
@@ -381,6 +391,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/auth/callback'
     | '/businesses/contact'
     | '/documentation/$slug'
     | '/matches/$id'
@@ -417,6 +428,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/signup'
     | '/terms'
+    | '/auth/callback'
     | '/businesses_/contact'
     | '/documentation_/$slug'
     | '/matches/$id'
@@ -454,6 +466,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   BusinessesContactRoute: typeof BusinessesContactRoute
   DocumentationSlugRoute: typeof DocumentationSlugRoute
   MatchesIdRoute: typeof MatchesIdRoute
@@ -691,6 +704,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessesContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/r/jobs/new': {
       id: '/r/jobs/new'
       path: '/r/jobs/new'
@@ -734,6 +754,7 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   BusinessesContactRoute: BusinessesContactRoute,
   DocumentationSlugRoute: DocumentationSlugRoute,
   MatchesIdRoute: MatchesIdRoute,
@@ -754,3 +775,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

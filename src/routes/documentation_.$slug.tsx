@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout";
+import { PageShell, pageContainer } from "@/components/layout";
 import { getDoc, DOCS, type Block } from "@/lib/documentation-content";
-import { BackIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/documentation_/$slug")({
   loader: ({ params }) => {
@@ -12,7 +11,7 @@ export const Route = createFileRoute("/documentation_/$slug")({
   },
   head: ({ loaderData }) => {
     const doc = loaderData?.doc;
-    const title = doc ? `${doc.title} — Documentation — Aurapply` : "Documentation — Aurapply";
+    const title = doc ? `${doc.title} — Documentation — Appointed` : "Documentation — Appointed";
     const description = doc?.subtitle ?? "";
     return {
       meta: [
@@ -25,7 +24,7 @@ export const Route = createFileRoute("/documentation_/$slug")({
   },
   notFoundComponent: () => (
     <PageShell>
-      <div className="mx-auto max-w-[720px] px-6 py-32 text-center">
+      <div className={`${pageContainer} py-32 text-center`}>
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
           Document not found.
         </h1>
@@ -43,7 +42,7 @@ export const Route = createFileRoute("/documentation_/$slug")({
   ),
   errorComponent: ({ error }) => (
     <PageShell>
-      <div className="mx-auto max-w-[720px] px-6 py-32 text-center">
+      <div className={`${pageContainer} py-32 text-center`}>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
           Something went wrong.
         </h1>
@@ -118,7 +117,7 @@ function DocumentPage() {
   return (
     <PageShell>
       <article className="bg-background">
-        <div className="mx-auto max-w-[720px] px-6 pt-12 pb-20 md:pt-16">
+        <div className={`${pageContainer} max-w-3xl pt-12 pb-20 md:pt-16`}>
           {/* Breadcrumb */}
           <nav className="text-xs text-muted-foreground">
             <Link to="/documentation" className="hover:text-foreground transition">
@@ -130,7 +129,7 @@ function DocumentPage() {
 
           {/* Title block */}
           <header className="mt-6 pb-8 border-b border-border">
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.1] text-foreground">
+            <h1 className="au-page-title">
               {doc.title}
             </h1>
             <p className="mt-3 text-base text-muted-foreground leading-relaxed">
@@ -222,8 +221,7 @@ function DocumentPage() {
               to="/documentation"
               className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition"
             >
-              <BackIcon size={14} />
-              All documentation
+              ← All documentation
             </Link>
           </div>
         </div>

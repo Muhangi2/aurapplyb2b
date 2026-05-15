@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout";
+import { PageShell, pageContainer } from "@/components/layout";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Aurapply" },
-      { name: "description", content: "How Aurapply collects, processes, and protects personal data under the GDPR." },
-      { property: "og:title", content: "Privacy Policy — Aurapply" },
-      { property: "og:description", content: "GDPR-native privacy policy for Aurapply." },
+      { title: "Privacy Policy — Appointed" },
+      { name: "description", content: "How Appointed collects, processes, and protects personal data under the GDPR." },
+      { property: "og:title", content: "Privacy Policy — Appointed" },
+      { property: "og:description", content: "GDPR-native privacy policy for Appointed." },
     ],
   }),
   component: PrivacyPolicyPage,
@@ -16,14 +16,14 @@ export const Route = createFileRoute("/privacy-policy")({
 function PrivacyPolicyPage() {
   return (
     <PageShell>
-      <article className="px-6 py-20">
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-4xl font-semibold tracking-tight">Privacy Policy</h1>
+      <article className="py-20">
+        <div className={`${pageContainer} max-w-3xl`}>
+          <h1 className="au-page-title">Privacy Policy</h1>
           <p className="mt-2 text-sm text-muted-foreground">Last updated: 12 May 2026</p>
 
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-muted-foreground">
             <Section title="Controller">
-              Aurapply OÜ acts as the data controller for personal data submitted by individual users and as a data processor for personal data handled on behalf of recruiter customers.
+              Appointed OÜ acts as the data controller for personal data submitted by individual users and as a data processor for personal data handled on behalf of recruiter customers.
             </Section>
             <Section title="What we collect">
               <ul className="mt-2 list-disc pl-5 space-y-1">
@@ -56,7 +56,7 @@ function PrivacyPolicyPage() {
               Personal data is hosted within the EU. Where a transfer outside the EEA is unavoidable, we rely on Standard Contractual Clauses.
             </Section>
             <Section title="Contact">
-              For privacy questions or to exercise any right, write to <a className="text-primary hover:underline" href="mailto:privacy@aurapply.com">privacy@aurapply.com</a>.
+              For privacy questions or to exercise any right, write to <a className="text-primary hover:underline" href="mailto:privacy@appointed.com">privacy@appointed.com</a>.
             </Section>
           </div>
         </div>

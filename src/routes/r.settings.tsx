@@ -41,7 +41,7 @@ function RecruiterSettings() {
     const blob = new Blob([JSON.stringify({ jobs: jobs.data, matches: matches.data, actions: actions.data }, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "aurapply-recruiter-data.json";
+    a.download = "appointed-recruiter-data.json";
     a.click();
   }
 

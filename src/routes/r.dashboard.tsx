@@ -120,7 +120,7 @@ function RecruiterDashboard() {
                 <div>
                   <div className="text-xs font-semibold tracking-[0.18em] text-primary">WELCOME</div>
                   <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                    Welcome to Aurapply{firstName ? `, ${firstName}` : ""}.
+                    Welcome to Appointed{firstName ? `, ${firstName}` : ""}.
                   </h2>
                   <p className="mt-2 text-muted-foreground max-w-xl">
                     Your account is active. Your point of contact is here to help you get set up.
@@ -159,8 +159,8 @@ function RecruiterDashboard() {
 
               <p className="mt-7 text-sm text-muted-foreground">
                 Need help? Your point of contact is reachable at{" "}
-                <a href="mailto:partners@aurapply.com" className="text-primary hover:underline">
-                  partners@aurapply.com
+                <a href="mailto:partners@appointed.com" className="text-primary hover:underline">
+                  partners@appointed.com
                 </a>
                 . We respond within a few hours during business days.
               </p>

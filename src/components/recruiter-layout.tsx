@@ -1,15 +1,10 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import logoUrl from "@/assets/aurapply-logo.png";
-
 function Logo() {
   return (
-    <Link to="/r/dashboard" className="flex items-center gap-2">
-      <img src={logoUrl} alt="Aurapply" className="h-7 w-7" />
-      <span className="font-semibold tracking-tight text-foreground">
-        Aurapply <span className="text-muted-foreground font-normal">/ Recruiter</span>
-      </span>
+    <Link to="/r/dashboard" className="text-sm font-medium tracking-tight text-foreground">
+      Appointed <span className="font-normal text-muted-foreground">/ Recruiter</span>
     </Link>
   );
 }
@@ -30,15 +25,15 @@ export function RecruiterNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   const linkCls = (href: string) =>
-    `px-3 py-1.5 rounded-full text-sm transition ${
+    `px-2.5 py-1 text-sm transition-colors ${
       path === href || path.startsWith(href + "/")
-        ? "text-foreground bg-secondary"
+        ? "text-foreground"
         : "text-muted-foreground hover:text-foreground"
     }`;
 
   return (
-    <div className="sticky top-4 z-40 px-4">
-      <nav className="au-nav mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
+      <nav className="mx-auto flex h-12 w-full max-w-[1400px] items-center justify-between px-6 sm:px-8 lg:px-12">
         <Logo />
         <div className="hidden md:flex items-center gap-1">
           {NAV.map((n) => (
@@ -60,7 +55,7 @@ export function RecruiterNav() {
           </Button>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }
 

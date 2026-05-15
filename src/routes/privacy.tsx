@@ -11,7 +11,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/privacy")({ component: Privacy });
 
 const CONSENT_LABELS: Record<string, { title: string; desc: string }> = {
-  terms_privacy: { title: "Terms & Privacy", desc: "Required to use Aurapply." },
+  terms_privacy: { title: "Terms & Privacy", desc: "Required to use Appointed." },
   ai_matching: { title: "AI-based matching", desc: "Allow our AI to analyse your profile and surface relevant roles." },
   product_updates: { title: "Product updates", desc: "Receive occasional product news. Optional." },
   data_sharing: { title: "Data sharing with recruiters", desc: "Allow matched recruiters to view your full profile." },

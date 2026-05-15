@@ -43,7 +43,7 @@ const DOCS: Doc[] = [
   },
   {
     title: "AI Act deployer guidance",
-    desc: "Plain-language summary of your obligations as a deployer, mapped to Aurapply's controls.",
+    desc: "Plain-language summary of your obligations as a deployer, mapped to Appointed's controls.",
     updated: "2026-03-20",
     size: "PDF · 760 KB",
   },
@@ -78,7 +78,7 @@ function RecruiterCompliance() {
               Documentation and assurance for your team.
             </h1>
             <p className="mt-3 text-muted-foreground leading-relaxed max-w-2xl">
-              Aurapply is built around the EU AI Act's high-risk requirements and the GDPR. The
+              Appointed is built around the EU AI Act's high-risk requirements and the GDPR. The
               documents below cover everything your procurement, legal, and compliance teams need
               for vendor due diligence, DPIAs, and ongoing oversight. They are refreshed on a
               regular cadence; see the update timestamps on each document.
@@ -155,8 +155,8 @@ function RecruiterCompliance() {
               <h3 className="font-semibold">Questions about compliance?</h3>
               <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                 Contact your point of contact or our DPO directly at{" "}
-                <a href="mailto:dpo@aurapply.com" className="text-primary hover:underline">
-                  dpo@aurapply.com
+                <a href="mailto:dpo@appointed.com" className="text-primary hover:underline">
+                  dpo@appointed.com
                 </a>.
               </p>
             </div>

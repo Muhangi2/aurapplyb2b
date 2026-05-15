@@ -9,7 +9,7 @@ export const Route = createFileRoute("/businesses_/contact_/sent")({
   validateSearch: (s) => search.parse(s),
   head: () => ({
     meta: [
-      { title: "Message sent — Aurapply" },
+      { title: "Message sent — Appointed" },
       { name: "robots", content: "noindex" },
     ],
   }),

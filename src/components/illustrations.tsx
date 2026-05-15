@@ -1,5 +1,5 @@
 /**
- * Aurapply illustrations.
+ * Appointed illustrations.
  *
  * Built entirely from inline SVG in brand colors. No stock photography,
  * no AI faces, no 3D scenes. Each piece falls into one of three roles:

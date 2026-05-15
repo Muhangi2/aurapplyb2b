@@ -15,23 +15,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aurapply — Stop applying. Start being matched." },
+      { title: "Appointed — Stop searching. Let the work find you." },
       {
         name: "description",
         content:
           "Build your professional profile once. AI matches you to relevant European jobs and recruiters reach out directly. EU-compliant and candidate-first.",
       },
-      { property: "og:title", content: "Aurapply — Stop applying. Start being matched." },
+      { property: "og:title", content: "Appointed — Stop searching. Let the work find you." },
       {
         property: "og:description",
         content:
           "Build your profile once and let recruiters come to you. EU-compliant AI matching, transparent and candidate-first.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Aurapply — Stop applying. Start being matched." },
-      { name: "description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
-      { property: "og:description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
-      { name: "twitter:description", content: "Aurapply Connect is an EU-compliant platform for job seekers to be matched with employers." },
+      { name: "twitter:title", content: "Appointed — Stop searching. Let the work find you." },
+      { name: "description", content: "Appointed is the AI hiring platform where roles come to you." },
+      { property: "og:description", content: "Appointed is the AI hiring platform where roles come to you." },
+      { name: "twitter:description", content: "Appointed is the AI hiring platform where roles come to you." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0b8ec3a0-240d-44fa-abe5-8577af14c5a3/id-preview-1a97ad06--92bc7cb2-7ddc-4bfc-a30c-f43f1905d26f.lovable.app-1778545583667.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0b8ec3a0-240d-44fa-abe5-8577af14c5a3/id-preview-1a97ad06--92bc7cb2-7ddc-4bfc-a30c-f43f1905d26f.lovable.app-1778545583667.png" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,7 +51,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: () => (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-6xl font-bold">404</h1>
+        <h1 className="text-2xl font-medium">404</h1>
         <p className="mt-3 text-muted-foreground">This page does not exist.</p>
         <a href="/" className="mt-6 inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground">
           Back to home

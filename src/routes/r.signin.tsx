@@ -35,7 +35,7 @@ function BusinessSignIn() {
       <div className="px-6 py-16">
         <div className="mx-auto max-w-md">
           <h1 className="text-3xl font-semibold tracking-tight text-center">Sign in to your team</h1>
-          <p className="mt-2 text-center text-sm text-muted-foreground">For businesses hiring on Aurapply.</p>
+          <p className="mt-2 text-center text-sm text-muted-foreground">For businesses hiring on Appointed.</p>
           <div className="au-card p-6 mt-8 space-y-4">
             <form onSubmit={submit} className="space-y-4">
               <div>
@@ -50,7 +50,7 @@ function BusinessSignIn() {
             </form>
           </div>
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            New to Aurapply? <Link to="/businesses/contact" className="text-primary hover:underline">Start a conversation</Link>
+            New to Appointed? <Link to="/businesses/contact" className="text-primary hover:underline">Start a conversation</Link>
           </p>
           <p className="mt-3 text-center text-xs text-muted-foreground">
             Looking for an individual account? <Link to="/signin" className="text-primary hover:underline">Sign in here</Link>

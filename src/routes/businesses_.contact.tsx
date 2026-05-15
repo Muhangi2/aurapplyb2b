@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { PageShell } from "@/components/layout";
+import { PageShell, pageContainer } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,13 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LockIcon, ScheduleIcon, ScaleIcon } from "@/components/icons";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/businesses_/contact")({
   head: () => ({
     meta: [
-      { title: "Start a conversation — Aurapply" },
+      { title: "Start a conversation — Appointed" },
       {
         name: "description",
         content: "Tell us briefly about your team. We will be in touch within one business day.",
@@ -75,16 +74,11 @@ function Field({
   );
 }
 
-function ReassureLine({
-  Icon, children,
-}: { Icon: React.ComponentType<{ size?: number; className?: string }>; children: React.ReactNode }) {
+function ReassureLine({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex gap-3 items-start">
-      <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary shrink-0">
-        <Icon size={18} />
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed pt-1.5">{children}</p>
-    </div>
+    <p className="text-sm text-muted-foreground leading-relaxed border-l-2 border-border pl-4">
+      {children}
+    </p>
   );
 }
 
@@ -143,25 +137,21 @@ function BusinessesContact() {
 
   return (
     <PageShell>
-      <section className="mx-auto max-w-6xl px-6 py-16 grid gap-12 md:grid-cols-[2fr_3fr] md:items-start">
+      <section className={`${pageContainer} py-16 grid gap-12 md:grid-cols-[2fr_3fr] md:items-start`}>
         <div className="md:sticky md:top-28">
           <div className="text-[11px] font-semibold tracking-[0.22em] text-primary">GET IN TOUCH</div>
-          <h1 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+          <h1 className="au-page-title mt-3">
             Start a conversation.
           </h1>
           <p className="mt-4 text-muted-foreground leading-relaxed">
             Tell us briefly about your team. We will be in touch within one business day.
           </p>
           <div className="mt-8 space-y-4">
-            <ReassureLine Icon={LockIcon}>
+            <ReassureLine>
               Your details stay in the EU and are used only for this conversation.
             </ReassureLine>
-            <ReassureLine Icon={ScheduleIcon}>
-              We respond within one business day.
-            </ReassureLine>
-            <ReassureLine Icon={ScaleIcon}>
-              Initial calls are 30 minutes.
-            </ReassureLine>
+            <ReassureLine>We respond within one business day.</ReassureLine>
+            <ReassureLine>Initial calls are 30 minutes.</ReassureLine>
           </div>
         </div>
 
